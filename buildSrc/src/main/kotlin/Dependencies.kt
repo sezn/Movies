@@ -15,6 +15,8 @@ object Dependencies {
     const val okhttp_interceptor = "com.squareup.okhttp3:logging-interceptor:4.9.3"
     const val gson = "com.squareup.retrofit2:converter-gson:2.9.0"
 
+    const val landscapist = "com.github.skydoves:landscapist-glide:1.5.3"
+
     const val firebase_bom = "com.google.firebase:firebase-bom:30.3.2"
     const val firebase_analytics = "com.google.firebase:firebase-analytics-ktx"
 

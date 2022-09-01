@@ -61,6 +61,8 @@ dependencies {
     implementation(platform(Dependencies.firebase_bom))
     implementation(Dependencies.firebase_analytics)
 
+    implementation(Dependencies.landscapist)
+
     testImplementation(Dependencies.test_junit)
     androidTestImplementation(Dependencies.test_junit_ext)
     androidTestImplementation(Dependencies.test_expresso)
