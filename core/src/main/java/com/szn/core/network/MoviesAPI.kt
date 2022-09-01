@@ -19,5 +19,5 @@ interface API{
     @GET("3/trending/{media_type}/{time_window}")
     suspend fun getTrendings(@Path("media_type") type: String,
                              @Path("time_window") time: String,
-                             @Query("page") page: Int?): Movies
+                             @Query("page") page: Int? = 1): Movies
 }

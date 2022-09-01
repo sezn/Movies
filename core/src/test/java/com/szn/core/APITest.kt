@@ -1,13 +1,12 @@
 package com.szn.core
 
 import com.szn.core.network.API
-import com.szn.core.network.MoviesClient
+import com.szn.core.network.model.MEDIA_TYPE
+import com.szn.core.network.model.TIME_TYPE
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
-import org.junit.Test
-
-import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Test
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -41,9 +40,17 @@ class APITest {
     }
 
     @Test
-    fun testMoviesAPI(){
+    fun testGetMovies(){
         runBlocking {
             val movies = service.getMovies(null)
+            assert(movies.results.isNotEmpty())
+        }
+    }
+
+    @Test
+    fun testGetTrendings(){
+        runBlocking {
+            val movies = service.getTrendings(MEDIA_TYPE.movie.name, TIME_TYPE.day.name)
             assert(movies.results.isNotEmpty())
         }
     }

@@ -16,3 +16,14 @@ data class Movie(
     val vote_average: Double?,
     val vote_count: Int
 )
+
+enum class TIME_TYPE{
+    day,
+    week
+}
+enum class MEDIA_TYPE{
+    all,
+    movie,
+    tv,
+    person
+}
