@@ -47,16 +47,20 @@ dependencies {
 
     // Hilt for DI
     implementation(Dependencies.hilt)
-    kapt(Dependencies.hiltCompiler)
     implementation(Dependencies.hiltCompose)
+    kapt(Dependencies.hiltCompiler)
     kapt(Dependencies.hiltAndroidXCompiler)
 
     // Jetpack Compose
+    implementation(Dependencies.compose_foundation)
+    implementation(Dependencies.compose_ui)
+    implementation(Dependencies.compose_tooling)
 
-    implementation(platform("com.google.firebase:firebase-bom:30.3.2"))
-    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation(platform(Dependencies.firebase_bom))
+    implementation(Dependencies.firebase_analytics)
 
     testImplementation(Dependencies.test_junit)
     androidTestImplementation(Dependencies.test_junit_ext)
     androidTestImplementation(Dependencies.test_expresso)
+    androidTestImplementation(Dependencies.test_compose)
 }

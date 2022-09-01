@@ -12,6 +12,8 @@ object Dependencies {
     const val okhttp_interceptor = "com.squareup.okhttp3:logging-interceptor:4.9.3"
     const val gson = "com.squareup.retrofit2:converter-gson:2.9.0"
 
+    const val firebase_bom = "com.google.firebase:firebase-bom:30.3.2"
+    const val firebase_analytics = "com.google.firebase:firebase-analytics-ktx"
 
     const val compose_ui = "androidx.compose.ui:ui:1.2.1"
     const val compose_tooling = "androidx.compose.ui:ui-tooling:1.2.1"
@@ -21,4 +23,6 @@ object Dependencies {
     const val test_junit = "junit:junit:4.13.2"
     const val test_junit_ext = "androidx.test.ext:junit:1.1.3"
     const val test_expresso = "androidx.test.espresso:espresso-core:3.4.0"
+    const val test_compose = "androidx.compose.ui:ui-test-junit4:1.2.1"
+
 }

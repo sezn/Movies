@@ -53,11 +53,13 @@ dependencies {
  *
  * if you want to test, you have just to create a  api.properties file with
  * api_key="YOUR_API_KEY"
+ *
+ * Or set it in local.properties and change FILENAME
  */
 fun getApiKey(): String {
     val items = HashMap<String, String>()
-
-    val fl = rootProject.file("api.properties")
+    val FILE_NAME = "api.properties"
+    val fl = rootProject.file(FILE_NAME)
 
     if(fl.exists()){
         fl.forEachLine {
