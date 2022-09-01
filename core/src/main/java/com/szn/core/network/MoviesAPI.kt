@@ -13,8 +13,9 @@ interface API{
                           @Query("page") page: Int? = 1): Movies
 
     /**
-     * media_type: all, movie, tv, person
-     * time_window: day, week
+     * Note: not working on 4..
+     * @param media_type: all, movie, tv, person
+     * @param time_window: day, week
      */
     @GET("3/trending/{media_type}/{time_window}")
     suspend fun getTrendings(@Path("media_type") type: String,

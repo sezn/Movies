@@ -25,14 +25,13 @@ class APITest {
             .baseUrl(BuildConfig.MOVIES_BASE_URL)
             .client(OkHttpClient.Builder()
                 .addInterceptor{chain ->
-                    val original = chain.request()
-                    val url = original.url.newBuilder()
+                    // Request customization: add addQueryParameter as in header is not working
+                    // TODO: see why not working in headers..
+                    val url = chain.request().url.newBuilder()
                         .addQueryParameter("api_key", BuildConfig.API_KEY)
                         .build()
-                    // Request customization: add request headers
-                    val requestBuilder = original.newBuilder()
-                        .url(url)
-                    chain.proceed(requestBuilder.build())
+                    chain.proceed(chain.request().newBuilder()
+                        .url(url).build())
                 }.build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
