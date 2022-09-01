@@ -59,10 +59,13 @@ fun getApiKey(): String {
 
     val fl = rootProject.file("api.properties")
 
-    (fl.exists())?.let {
+    if(fl.exists()){
         fl.forEachLine {
             items[it.split("=")[0]] = it.split("=")[1]
         }
+    } else {
+        // Defined api_key in Gitlab variables
+        return System.getenv("api_key")
     }
 
     return items["api_key"]!!
