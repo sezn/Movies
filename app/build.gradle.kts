@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -6,7 +8,6 @@ plugins {
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs")
     id("dagger.hilt.android.plugin")
-//    id("com.google.gms.google-services")
 }
 
 android {
@@ -33,7 +34,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.0-rc01"
+        kotlinCompilerExtensionVersion = Versions.KOTLIN_COMPILER
     }
     buildFeatures {
         viewBinding = true
