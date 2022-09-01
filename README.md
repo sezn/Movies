@@ -3,19 +3,19 @@ Display a list of Videos using themoviedb.org API
 
 ## Features
 # Home
-Display lists of Movies
-API is paginated, so will use a DataSource
+* Display lists of Movies
+* API is paginated, so will use a DataSource
 
 # Detail
-Display Details of Movie
+Display Details of a Movie
 
 # Account
 ## Create Account
 
 ## Architecture:
-+MVVM Architecture
-+DI by Hilt
-+Jetpack Compose
+* MVVM Architecture
+* DI by Hilt
+* Jetpack Compose
 
 ## Libraries:
 ### DI:
