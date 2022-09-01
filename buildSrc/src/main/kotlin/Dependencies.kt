@@ -8,6 +8,9 @@ object Dependencies {
     const val hiltViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.HILT_ANDROID}"
     const val hiltAndroidXCompiler = "androidx.hilt:hilt-compiler:${Versions.HILT_NAVIGATION}"
     const val hiltCompose = "androidx.hilt:hilt-navigation-compose:1.0.0"
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.RETROFIT}"
+    const val okhttp_interceptor = "com.squareup.okhttp3:logging-interceptor:4.9.3"
+    const val gson = "com.squareup.retrofit2:converter-gson:2.9.0"
 
 
     const val test_junit = "junit:junit:4.13.2"
