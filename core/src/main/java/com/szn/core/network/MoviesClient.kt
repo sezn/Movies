@@ -22,7 +22,7 @@ class MoviesClient {
         HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
     }
 
-    private val httpClient: OkHttpClient by lazy {
+    val httpClient: OkHttpClient by lazy {
         httpInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
         OkHttpClient.Builder()
