@@ -1,13 +1,11 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-android")
-    id("kotlin-kapt")
-    id("kotlin-parcelize")
-    id("androidx.navigation.safeargs")
-    id("dagger.hilt.android.plugin")
+    id(Plugins.androidApplication)
+    id(Plugins.jet_android)
+    id(Plugins.kotlinAndroid)
+    id(Plugins.kotlinKapt)
+    id(Plugins.kotlinParcelize)
+    id(Plugins.safe_args)
+    id(Plugins.androidHilt)
 }
 
 android {
