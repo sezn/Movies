@@ -13,9 +13,9 @@ Display Details of Movie
 ## Create Account
 
 ## Architecture:
-MVVM Architecture
-DI by Hilt
-Jetpack Compose
++MVVM Architecture
++DI by Hilt
++Jetpack Compose
 
 ## Libraries:
 ### DI:
