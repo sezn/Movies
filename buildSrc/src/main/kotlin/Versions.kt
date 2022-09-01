@@ -10,7 +10,6 @@ object Versions {
     const val LIFECYCLE = "2.5.0"
     const val ROOM = "2.4.3"
     const val NAV = "2.5.0"
-    const val MATERIAL3 = "1.0.0-alpha14"
     const val HILT = "2.43.2"
     const val HILT_ANDROID = "2.43.2"
     const val HILT_NAVIGATION = "1.0.0"
