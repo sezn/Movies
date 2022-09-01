@@ -19,6 +19,8 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        buildConfigField("String", "API_KEY", getApiKey())
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -55,4 +57,19 @@ dependencies {
     testImplementation(Dependencies.test_junit)
     androidTestImplementation(Dependencies.test_junit_ext)
     androidTestImplementation(Dependencies.test_expresso)
+}
+
+
+fun getApiKey(): String {
+    val items = HashMap<String, String>()
+
+    val fl = rootProject.file("api.properties")
+
+    (fl.exists())?.let {
+        fl.forEachLine {
+            items[it.split("=")[0]] = it.split("=")[1]
+        }
+    }
+
+    return items["api_key"]!!
 }
