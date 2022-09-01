@@ -20,6 +20,8 @@ class MoviesViewModel @Inject constructor(private val moviesApi: API): ViewModel
     private suspend fun getMovies() {
         val movies = moviesApi.getMovies(null)
         Log.w(TAG, "getMovies ${movies.results.size}")
+//        val movie = movies.results[0].poster_path
+
     }
 
     companion object {

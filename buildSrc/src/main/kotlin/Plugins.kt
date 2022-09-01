@@ -8,4 +8,5 @@ object Plugins {
     const val kotlinParcelize = "kotlin-parcelize"
     const val jet_android = "org.jetbrains.kotlin.android"
     const val safe_args = "androidx.navigation.safeargs"
+    const val google_services = "com.google.gms.google-services"
 }

@@ -5,6 +5,7 @@ plugins {
     id(Plugins.kotlinKapt)
     id(Plugins.safe_args)
     id(Plugins.androidHilt)
+    id(Plugins.google_services)
 }
 
 android {
@@ -49,6 +50,11 @@ dependencies {
     kapt(Dependencies.hiltCompiler)
     implementation(Dependencies.hiltCompose)
     kapt(Dependencies.hiltAndroidXCompiler)
+
+    // Jetpack Compose
+
+    implementation(platform("com.google.firebase:firebase-bom:30.3.2"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
 
     testImplementation(Dependencies.test_junit)
     androidTestImplementation(Dependencies.test_junit_ext)
