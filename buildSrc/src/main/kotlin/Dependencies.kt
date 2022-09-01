@@ -3,6 +3,9 @@ object Dependencies {
     const val android_core = "androidx.core:core-ktx:1.7.0"
     const val app_compat = "androidx.appcompat:appcompat:1.6.0-beta01"
     const val material = "com.google.android.material:material:1.6.1"
+    const val material3 = "androidx.compose.material3:material3:${Versions.MATERIAL3}"
+    const val material_compose ="androidx.compose.material:material:${Versions.COMPOSE}"
+
     const val hilt = "com.google.dagger:hilt-android:${Versions.HILT}"
     const val hiltCompiler = "com.google.dagger:hilt-compiler:${Versions.HILT}"
     const val hiltViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.HILT_ANDROID}"

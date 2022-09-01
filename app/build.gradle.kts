@@ -44,6 +44,8 @@ dependencies {
     implementation(Dependencies.android_core)
     implementation(Dependencies.app_compat)
     implementation(Dependencies.material)
+//    implementation(Dependencies.material3)
+    implementation(Dependencies.material_compose)
 
     // Hilt for DI
     implementation(Dependencies.hilt)

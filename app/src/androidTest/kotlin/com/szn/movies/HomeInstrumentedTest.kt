@@ -24,6 +24,9 @@ class HomeInstrumentedTest {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<MainActivity>()
 
+    /**
+     * Test fails.. Normal, need to implement..
+     */
     @Test
     fun app_launches() {
         composeTestRule.onNodeWithTag("App").assertIsDisplayed()
