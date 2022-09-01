@@ -59,7 +59,13 @@ dependencies {
     androidTestImplementation(Dependencies.test_expresso)
 }
 
-
+/**
+ * from https://stackoverflow.com/questions/59052655/kotlin-dsl-retrieving-keys-from-other-file
+ * api.properties is ignored for git
+ *
+ * if you want to test, you have just to create a  api.properties file with
+ * api_key="YOUR_API_KEY"
+ */
 fun getApiKey(): String {
     val items = HashMap<String, String>()
 
