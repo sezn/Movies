@@ -11,6 +11,7 @@ Display Details of a Movie
 
 # Account
 ## Create Account
+* should be a feature, maybe a module independant from Home
 
 ## Architecture:
 * MVVM Architecture
