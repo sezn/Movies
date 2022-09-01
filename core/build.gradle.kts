@@ -36,7 +36,6 @@ dependencies {
     // Hilt for DI
     implementation(Dependencies.hilt)
     kapt(Dependencies.hiltCompiler)
-    implementation(Dependencies.hiltCompose)
     kapt(Dependencies.hiltAndroidXCompiler)
 
     implementation(Dependencies.retrofit)
