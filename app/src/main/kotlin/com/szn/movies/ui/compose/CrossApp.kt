@@ -26,7 +26,6 @@ fun CrossApp() {
     navController.addOnDestinationChangedListener { controller, _, _ ->
         setCanPop(controller.previousBackStackEntry != null)
     }
-    var title = mutableStateOf(stringResource(id = R.string.app_name))
     Log.w(TAG, "compose ${navController.currentDestination?.route}")
 
     AppTheme {
