@@ -14,7 +14,8 @@ Display Details of a Movie
 * should be a feature, maybe a module independant from Home
 
 ## Architecture:
-* MVVM Architecture
+* ui layer, domain layer, data layer
+* MVVM for UI
 * DI by Hilt
 * Jetpack Compose
 

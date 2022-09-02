@@ -24,6 +24,7 @@ android {
 
 dependencies {
     implementation(Dependencies.android_core)
+    implementation(Dependencies.coroutines)
     testImplementation(Dependencies.test_junit)
     androidTestImplementation(Dependencies.test_junit_ext)
 }

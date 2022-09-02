@@ -6,6 +6,7 @@ object Dependencies {
     const val material3 = "androidx.compose.material3:material3:${Versions.MATERIAL3}"
     const val material_compose ="androidx.compose.material:material:${Versions.COMPOSE}"
     const val view_model ="androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    const val coroutines ="org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.COROUTINES}"
 
     const val hilt = "com.google.dagger:hilt-android:${Versions.HILT}"
     const val hiltCompiler = "com.google.dagger:hilt-compiler:${Versions.HILT}"
