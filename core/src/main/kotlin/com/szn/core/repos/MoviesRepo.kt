@@ -6,6 +6,7 @@ import com.szn.core.network.model.TIME_TYPE
 import com.szn.movies.domain.MoviesRepository
 import com.szn.movies.domain.model.Video
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class MoviesRepo(private val api: API): MoviesRepository {
 
@@ -19,7 +20,11 @@ class MoviesRepo(private val api: API): MoviesRepository {
         TODO("...")
     }
 
-    override suspend fun getPopulars(): Flow<List<Video>> {
-        TODO("Not yet implemented")
+    override suspend fun getPopulars(): Flow<List<Video>> = flow {
+//        TODO: Convert from Movie to Video
+        val movies = api.getMovies(null)
+        val videos = mutableListOf<Video>()
+
+        emit(videos)
     }
 }
