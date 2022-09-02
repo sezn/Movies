@@ -1,11 +1,18 @@
 package com.szn.core.network.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.szn.core.db.MovieConverter
+
+@Entity
+@TypeConverters(MovieConverter::class)
 data class Movie(
-    val id: Int,
+    @PrimaryKey val id: Int,
     val title: String,
     val adult: Boolean = false,
     val backdrop_path: String?,
-    val genre_ids: List<Int>,
+    val genre_ids: List<Int>?,
     val original_language: String?,
     val original_title: String?,
     val overview: String?,
@@ -15,7 +22,16 @@ data class Movie(
     val video: Boolean?,
     val vote_average: Double?,
     val vote_count: Int
-)
+) {
+
+    constructor(id: Int, title: String, poster_path: String): this(id, title, false,null,null, null, null, null, null, poster_path, null, null, null, 0)
+
+    fun getImage(): String {
+        return poster_path.toString()
+    }
+}
+
+val fakeMovie = Movie(0, "Toto", "https://image.tmdb.org/t/p/w500/qsGrZgwOs8B6Jqen0ECBJ6UgfEG.jpg")
 
 enum class TIME_TYPE{
     day,

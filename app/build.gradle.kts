@@ -1,10 +1,11 @@
 plugins {
     id(Plugins.androidApplication)
-    id(Plugins.jet_android)
+    id(Plugins.jetAndroid)
     id(Plugins.kotlinAndroid)
     id(Plugins.kotlinKapt)
-    id(Plugins.safe_args)
+    id(Plugins.safeArgs)
     id(Plugins.androidHilt)
+    id(Plugins.googleServices)
 }
 
 android {
@@ -18,6 +19,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
 
     compileOptions {
@@ -29,28 +34,44 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.KOTLIN_COMPILER
+        kotlinCompilerExtensionVersion = Versions.COMPOSE
     }
     buildFeatures {
-        viewBinding = true
         compose = true
     }
 
 }
 
 dependencies {
-    implementation(project(":core"))
+    implementation(project(":domain"))
+    implementation(project(":core")) // TODO: see if can remove this dep?
     implementation(Dependencies.android_core)
-    implementation(Dependencies.app_compat)
+    implementation(Dependencies.activity_compose)
     implementation(Dependencies.material)
+//    implementation(Dependencies.material3)
+    implementation(Dependencies.material_compose)
+    implementation(Dependencies.view_model)
 
     // Hilt for DI
     implementation(Dependencies.hilt)
-    kapt(Dependencies.hiltCompiler)
     implementation(Dependencies.hiltCompose)
+    kapt(Dependencies.hiltCompiler)
     kapt(Dependencies.hiltAndroidXCompiler)
+
+    // Jetpack Compose
+    implementation(Dependencies.compose_foundation)
+    implementation(Dependencies.compose_ui)
+
+    implementation(platform(Dependencies.firebase_bom))
+    implementation(Dependencies.firebase_analytics)
+
+    implementation(Dependencies.landscapist)
 
     testImplementation(Dependencies.test_junit)
     androidTestImplementation(Dependencies.test_junit_ext)
     androidTestImplementation(Dependencies.test_expresso)
+    androidTestImplementation(Dependencies.test_compose)
+
+    debugImplementation(Dependencies.compose_tooling)
+    implementation(Dependencies.tooling_preview)
 }

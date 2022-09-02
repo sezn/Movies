@@ -1,23 +1,17 @@
 package com.szn.movies.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import com.szn.movies.R
-import com.szn.movies.viewmodel.MoviesViewModel
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
+import com.szn.movies.ui.compose.CrossApp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity: AppCompatActivity() {
-
-    private val vm by viewModels<MoviesViewModel>()
+class MainActivity: ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        vm.let {
-
-        }
+        setContent{ CrossApp() }
     }
 }

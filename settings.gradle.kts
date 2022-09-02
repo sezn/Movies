@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "MoviesDb"
-include(":app", ":core")
+include(":app", ":domain", ":core")
