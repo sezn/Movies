@@ -1,7 +1,6 @@
-package com.szn.movies.ui
+package com.szn.movies.ui.compose
 
 import android.util.Log
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -48,12 +47,15 @@ fun NavigationHost(navController: NavHostController){
         startDestination = NavRoutes.Home.route
     ) {
 
+        composable(NavRoutes.Splash.route) {
+            SplashView(navController)
+        }
+
         composable(NavRoutes.Home.route) {
-//            MoviesView(navController)
+            HomeView(navController)
         }
 
     }
 
 }
-
 

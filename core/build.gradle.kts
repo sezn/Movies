@@ -1,6 +1,6 @@
 plugins {
     id(Plugins.androidLibrary)
-    id(Plugins.jet_android)
+    id(Plugins.jetAndroid)
     id(Plugins.kotlinKapt)
     id(Plugins.androidHilt)
     id(Plugins.kotlinParcelize)
