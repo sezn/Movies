@@ -30,6 +30,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain"))
     implementation(Dependencies.android_core)
     testImplementation(Dependencies.test_junit)
 
