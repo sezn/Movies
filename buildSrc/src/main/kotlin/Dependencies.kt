@@ -17,6 +17,11 @@ object Dependencies {
     const val okhttp_interceptor = "com.squareup.okhttp3:logging-interceptor:4.9.3"
     const val gson = "com.squareup.retrofit2:converter-gson:2.9.0"
 
+    const val room_runtime = "androidx.room:room-runtime:${Versions.ROOM}"
+    const val room_compiler = "androidx.room:room-compiler:${Versions.ROOM}"
+    const val room_ktx = "androidx.room:room-ktx:${Versions.ROOM}"
+    const val room_testing = "androidx.room:room-testing:${Versions.ROOM}"
+
     const val landscapist = "com.github.skydoves:landscapist-glide:1.5.3"
 
     const val firebase_bom = "com.google.firebase:firebase-bom:30.3.2"

@@ -1,7 +1,14 @@
 package com.szn.core.network.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.szn.core.db.MovieConverter
+
+@Entity
+@TypeConverters(MovieConverter::class)
 data class Movie(
-    val id: Int,
+    @PrimaryKey val id: Int,
     val title: String,
     val adult: Boolean = false,
     val backdrop_path: String?,

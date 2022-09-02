@@ -43,6 +43,12 @@ dependencies {
     implementation(Dependencies.okhttp_interceptor)
     implementation(Dependencies.gson)
 
+    implementation(Dependencies.room_runtime)
+    implementation(Dependencies.room_ktx)
+    kapt(Dependencies.room_compiler)
+    testImplementation(Dependencies.room_testing)
+
+
     androidTestImplementation(Dependencies.test_junit_ext)
     androidTestImplementation(Dependencies.test_expresso)
 }
