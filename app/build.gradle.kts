@@ -61,6 +61,9 @@ dependencies {
     // Jetpack Compose
     implementation(Dependencies.compose_foundation)
     implementation(Dependencies.compose_ui)
+    implementation(Dependencies.compose_navigation)
+    // Helpers for Compose (TODO: take care!)
+    implementation(Dependencies.appcompanist_navigation)
 
     implementation(platform(Dependencies.firebase_bom))
     implementation(Dependencies.firebase_analytics)

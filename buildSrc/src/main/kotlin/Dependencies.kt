@@ -32,6 +32,8 @@ object Dependencies {
     const val tooling_preview = "androidx.compose.ui:ui-tooling-preview:${Versions.COMPOSE}"
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
     const val compose_foundation = "androidx.compose.foundation:foundation:${Versions.COMPOSE}"
+    const val compose_navigation = "androidx.navigation:navigation-compose:2.5.1"
+    const val appcompanist_navigation = "com.google.accompanist:accompanist-navigation-animation:${Versions.APP_COMPANIST}"
 
     const val test_junit = "junit:junit:4.13.2"
     const val test_junit_ext = "androidx.test.ext:junit:1.1.3"

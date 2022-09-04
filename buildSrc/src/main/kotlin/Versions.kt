@@ -17,4 +17,5 @@ object Versions {
     const val HILT_ANDROID = "2.43.2"
     const val HILT_NAVIGATION = "1.0.0"
     const val KOTLIN_COMPILER = "1.3.0-rc01"
+    const val APP_COMPANIST = "0.26.2-beta"
 }
