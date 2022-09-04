@@ -1,5 +1,7 @@
 package com.szn.movies.domain.model
 
+import com.szn.movies.domain.BuildConfig
+
 data class Video(
     val id: Int,
     val title: String,
@@ -16,7 +18,11 @@ data class Video(
     val vote_average: Double?,
     val vote_count: Int
 ) {
+    constructor(id: Int, title: String, poster_path: String): this(id, title, false,null,null, null, null, null, null, poster_path, null, null, null, 0)
+
     fun getImage(): String? {
-        return poster_path
+        return BuildConfig.IMAGE_BASE + poster_path
     }
 }
+
+val fakeMovie = Video(0, "Toto", "https://image.tmdb.org/t/p/w500/qsGrZgwOs8B6Jqen0ECBJ6UgfEG.jpg")

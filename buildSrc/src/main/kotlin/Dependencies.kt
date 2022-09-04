@@ -35,6 +35,8 @@ object Dependencies {
     const val compose_navigation = "androidx.navigation:navigation-compose:2.5.1"
     const val appcompanist_navigation = "com.google.accompanist:accompanist-navigation-animation:${Versions.APP_COMPANIST}"
 
+    const val compose_paging = "androidx.paging:paging-compose:1.0.0-alpha16"
+
     const val test_junit = "junit:junit:4.13.2"
     const val test_junit_ext = "androidx.test.ext:junit:1.1.3"
     const val test_expresso = "androidx.test.espresso:espresso-core:3.4.0"

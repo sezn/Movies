@@ -48,7 +48,7 @@ fun NavigationHost(navController: NavHostController){
 
     AnimatedNavHost(
         navController = navController,
-        startDestination = NavRoutes.Splash.route
+        startDestination = NavRoutes.Home.route
     ) {
 
         composable(NavRoutes.Splash.route,

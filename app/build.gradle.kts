@@ -70,6 +70,11 @@ dependencies {
 
     implementation(Dependencies.landscapist)
 
+    // TODO: voir ou le mettre
+    // There is paging-common, which is a pure kotlin library that contains PagingSource and RemoteMediator among others.
+    // That means that you can use paging-common in a pure kotlin module and in your repositories just fine, there is no android specific code in there
+    implementation(Dependencies.compose_paging)
+
     testImplementation(Dependencies.test_junit)
     androidTestImplementation(Dependencies.test_junit_ext)
     androidTestImplementation(Dependencies.test_expresso)

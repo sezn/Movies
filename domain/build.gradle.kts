@@ -11,6 +11,8 @@ android {
         targetSdk = Versions.ANDROID
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "IMAGE_BASE", "\"https://image.tmdb.org/t/p/w500\"")
     }
 
     compileOptions {

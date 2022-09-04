@@ -48,7 +48,6 @@ dependencies {
     kapt(Dependencies.room_compiler)
     testImplementation(Dependencies.room_testing)
 
-
     androidTestImplementation(Dependencies.test_junit_ext)
     androidTestImplementation(Dependencies.test_expresso)
 }
