@@ -64,6 +64,7 @@ dependencies {
     implementation(Dependencies.compose_navigation)
     // Helpers for Compose (TODO: take care!)
     implementation(Dependencies.appcompanist_navigation)
+    implementation(Dependencies.appcompanist_pager)
 
     implementation(platform(Dependencies.firebase_bom))
     implementation(Dependencies.firebase_analytics)

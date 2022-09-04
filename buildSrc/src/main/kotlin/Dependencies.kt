@@ -34,6 +34,7 @@ object Dependencies {
     const val compose_foundation = "androidx.compose.foundation:foundation:${Versions.COMPOSE}"
     const val compose_navigation = "androidx.navigation:navigation-compose:2.5.1"
     const val appcompanist_navigation = "com.google.accompanist:accompanist-navigation-animation:${Versions.APP_COMPANIST}"
+    const val appcompanist_pager = "com.google.accompanist:accompanist-pager:${Versions.APP_COMPANIST}"
 
     const val compose_paging = "androidx.paging:paging-compose:1.0.0-alpha16"
 

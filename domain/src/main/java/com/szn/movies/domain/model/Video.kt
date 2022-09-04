@@ -18,11 +18,16 @@ data class Video(
     val vote_average: Double?,
     val vote_count: Int
 ) {
-    constructor(id: Int, title: String, poster_path: String): this(id, title, false,null,null, null, null, null, null, poster_path, null, null, null, 0)
+    constructor(id: Int, title: String, poster_path: String, back_path: String): this(id, title, false, back_path,null, null, null, null, null, poster_path, null, null, null, 0)
 
     fun getImage(): String? {
         return BuildConfig.IMAGE_BASE + poster_path
     }
+
+    fun getBackImage(): String? {
+        return BuildConfig.IMAGE_BASE + backdrop_path
+    }
+
 }
 
-val fakeMovie = Video(0, "Toto", "https://image.tmdb.org/t/p/w500/qsGrZgwOs8B6Jqen0ECBJ6UgfEG.jpg")
+val fakeMovie = Video(0, "Toto", "https://image.tmdb.org/t/p/w500/qsGrZgwOs8B6Jqen0ECBJ6UgfEG.jpg", "https://image.tmdb.org/t/p/w500/nmGWzTLMXy9x7mKd8NKPLmHtWGa.jpg")

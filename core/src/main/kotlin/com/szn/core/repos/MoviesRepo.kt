@@ -20,18 +20,40 @@ class MoviesRepo @Inject constructor(private val api: API): MoviesRepository {
         val playlist = Playlist("Trendings", videos)
 
         resp.results.map {
-            val video = Video(it.id, it.title, it.poster_path!!)
+            val video = Video(it.id, it.title, it.poster_path!!, it.backdrop_path.toString())
             videos.add(video)
         }
+        return playlist
+    }
 
+    override suspend fun getMovies(what: String, page: Int): Playlist {
+        val resp = api.getMovies(null)
+        val videos = mutableListOf<Video>()
+        val playlist = Playlist("Trendings", videos)
+        resp.results.map {
+            val video = Video(it.id, it.title, it.poster_path.toString(), it.backdrop_path.toString())
+            videos.add(video)
+        }
         return playlist
     }
 
     override suspend fun getPopulars(): Flow<List<Video>> = flow {
-//        TODO: Convert from Movie to Video
-        val movies = api.getMovies(null)
+        val resp = api.getMovies(null)
         val videos = mutableListOf<Video>()
+        resp.results.map {
+            val video = Video(it.id, it.title, it.poster_path.toString(), it.backdrop_path.toString())
+            videos.add(video)
+        }
+        emit(videos)
+    }
 
+    suspend fun getMostRated(): Flow<List<Video>> = flow{
+        val resp = api.getMovies("sort_by=vote_average.desc")
+        val videos = mutableListOf<Video>()
+        resp.results.map {
+            val video = Video(it.id, it.title, it.poster_path.toString(), it.backdrop_path.toString())
+            videos.add(video)
+        }
         emit(videos)
     }
 }

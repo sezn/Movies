@@ -1,27 +1,33 @@
 package com.szn.movies.ui.compose
 
-import android.content.res.Configuration
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.itemsIndexed
 import com.szn.movies.domain.model.Playlist
 import com.szn.movies.domain.model.fakeMovie
 import com.szn.movies.ui.theme.AppTheme
+import com.szn.movies.viewmodel.MoviesViewModel
 
 @Composable
-fun PlaylistView(playlist: Playlist, navController: NavHostController) {
+fun PlaylistView(playlist: Playlist, navController: NavHostController,
+                 moviesViewModel: MoviesViewModel = hiltViewModel()) {
+    Log.w("PlaylistView", "${playlist.title} ${playlist.movies.size}")
+
+    val videos = moviesViewModel.ratedMovies.collectAsLazyPagingItems()
     Column {
         Text(text = playlist.title,
             style = MaterialTheme.typography.h5,
@@ -29,16 +35,17 @@ fun PlaylistView(playlist: Playlist, navController: NavHostController) {
             modifier = Modifier.padding(8.dp))
 
         LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-
-            itemsIndexed(playlist.movies){ index, item ->
-                VideoCard(movie = item) {
-                    Log.w("PlaylistView", "click on ${it.title} ${it.id}")
-                    navController.currentBackStackEntry!!.savedStateHandle.apply {
-                        set("id", it.id)
-                        set("movie", it)
-                    }
-                    navController.navigate("movie/{${it.id}}"){
-                        launchSingleTop = true
+            itemsIndexed(videos) { index, item ->
+                item?.let {
+                    VideoCard(movie = it) {
+                        Log.w("PlaylistView", "click on ${it.title} ${it.id}")
+                        navController.currentBackStackEntry!!.savedStateHandle.apply {
+                            set("id", it.id)
+                            set("movie", it)
+                        }
+                        navController.navigate("movie/{${it.id}}"){
+                            launchSingleTop = true
+                        }
                     }
                 }
             }

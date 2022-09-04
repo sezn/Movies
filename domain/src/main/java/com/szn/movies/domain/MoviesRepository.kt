@@ -8,6 +8,8 @@ interface MoviesRepository {
 
 //    Trendings
     suspend fun getTrendings(page: Int): Playlist
+
+    suspend fun getMovies(what: String, page: Int): Playlist
 //    Populars
     suspend fun getPopulars(): Flow<List<Video>>
 //    soon

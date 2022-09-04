@@ -5,13 +5,12 @@ import androidx.paging.PagingState
 import com.szn.core.repos.MoviesRepo
 import com.szn.movies.domain.model.Video
 
-class MoviesDataSource(private val moviesRepository: MoviesRepo,
-                       private val what: String): PagingSource<Int, Video>(){
+class TrendingsDataSource(private val moviesRepository: MoviesRepo): PagingSource<Int, Video>(){
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Video> {
         return try {
             val nextPage = params.key ?: 1
-            val playlist = moviesRepository.getMovies(what, nextPage)
+            val playlist = moviesRepository.getTrendings(nextPage)
             playlist.page = nextPage
 
             LoadResult.Page(
