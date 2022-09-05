@@ -1,7 +1,10 @@
 package com.szn.movies.domain.model
 
+import android.os.Parcelable
 import com.szn.movies.domain.BuildConfig
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Video(
     val id: Int,
     val title: String,
@@ -17,7 +20,7 @@ data class Video(
     val video: Boolean?,
     val vote_average: Double?,
     val vote_count: Int
-) {
+) : Parcelable {
     constructor(id: Int, title: String, poster_path: String, back_path: String): this(id, title, false, back_path,null, null, null, null, null, poster_path, null, null, null, 0)
 
     fun getImage(): String? {

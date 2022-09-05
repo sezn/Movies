@@ -28,7 +28,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun HomeView(navController: NavHostController, moviesViewModel: MoviesViewModel = hiltViewModel()) {
 
@@ -42,14 +41,12 @@ fun HomeView(navController: NavHostController, moviesViewModel: MoviesViewModel 
     playlists.add(Playlist("Les plus populaires", mutableListOf(), what = "sort_by=vote_average.desc"))
     playlists.add(Playlist("Les films à venir", mutableListOf(), what = "primary_release_year=2022&sort_by=vote_average.desc"))
 
-    Column() {
-        LazyColumn() {
-            itemsIndexed(playlists) { index, playlist ->
-                if (index == 0)
-                    HeaderView(playlist = playlist, navController)
-                else
-                    PlaylistView(playlist = playlist, navController)
-            }
+    LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        itemsIndexed(playlists) { index, playlist ->
+            if (index == 0)
+                HeaderView(playlist = playlist, navController)
+            else
+                PlaylistView(playlist = playlist, navController)
         }
     }
 }

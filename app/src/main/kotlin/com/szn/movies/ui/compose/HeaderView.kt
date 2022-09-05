@@ -42,7 +42,7 @@ fun HeaderView(playlist: Playlist, navController: NavHostController,
     val pagerState = rememberPagerState(initialPage = startIndex)
 
     val videos = moviesViewModel.trendingMovies.collectAsLazyPagingItems()
-
+/*
     HorizontalPager(
         // Set the raw page count to a really large number
         count = Int.MAX_VALUE,
@@ -60,7 +60,7 @@ fun HeaderView(playlist: Playlist, navController: NavHostController,
             val video = videos[page]
             video?.let { HeaderVideoCard(movie = it, onClick = {}) }
         }
-    }
+    }*/
     Column {
         Text(text = playlist.title,
             style = MaterialTheme.typography.h5,
