@@ -61,6 +61,7 @@ fun HeaderView(playlist: Playlist, navController: NavHostController,
             video?.let { HeaderVideoCard(movie = it, onClick = {}) }
         }
     }*/
+
     Column {
         Text(text = playlist.title,
             style = MaterialTheme.typography.h5,

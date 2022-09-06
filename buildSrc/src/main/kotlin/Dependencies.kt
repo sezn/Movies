@@ -37,6 +37,7 @@ object Dependencies {
     const val appcompanist_pager = "com.google.accompanist:accompanist-pager:${Versions.APP_COMPANIST}"
 
     const val compose_paging = "androidx.paging:paging-compose:1.0.0-alpha16"
+    const val compose_constraint = "androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha03"
 
     const val test_junit = "junit:junit:4.13.2"
     const val test_junit_ext = "androidx.test.ext:junit:1.1.3"

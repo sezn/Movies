@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 val LightColors = lightColors(
-    background = Color(46, 43, 61),
+    background = Color.White,
     onBackground = Color.Black,
     primary = Color(4, 7, 34),
     primaryVariant = Color.Blue,
@@ -22,13 +22,16 @@ val LightColors = lightColors(
 )
 
 private val DarkColors = darkColors(
-    background = Color(46, 43, 61),
-    onBackground = Color.Black,
+    background = Color(4, 7, 34),
+    onBackground = Color.White,
     primary = Color(4, 7, 34),
     primaryVariant = Color.Blue,
     secondary = Color.White,
-    surface = Color.Black,
-    secondaryVariant = Color.LightGray
+    surface = Color.White,
+    secondaryVariant = Color.LightGray,
+
+    onPrimary = Color.White,
+    onSecondary = Color.White
 )
 
 private val Typography = Typography(
@@ -41,7 +44,12 @@ private val Typography = Typography(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp
-    )
+    ),
+    h2 = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize = 32.sp,
+//        letterSpacing = (-0.5).sp
+    ),
 )
 
 private val Shapes = Shapes(

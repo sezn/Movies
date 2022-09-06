@@ -1,5 +1,6 @@
 package com.szn.core.repos
 
+import com.szn.core.mappers.VideoMapper
 import com.szn.core.network.API
 import com.szn.core.network.model.MEDIA_TYPE
 import com.szn.core.network.model.TIME_TYPE
@@ -20,7 +21,7 @@ class MoviesRepo @Inject constructor(private val api: API): MoviesRepository {
         val playlist = Playlist("Trendings", videos)
 
         resp.results.map {
-            val video = Video(it.id, it.title, it.poster_path!!, it.backdrop_path.toString())
+            val video = VideoMapper().map(it)
             videos.add(video)
         }
         return playlist
@@ -31,7 +32,7 @@ class MoviesRepo @Inject constructor(private val api: API): MoviesRepository {
         val videos = mutableListOf<Video>()
         val playlist = Playlist("Trendings", videos)
         resp.results.map {
-            val video = Video(it.id, it.title, it.poster_path.toString(), it.backdrop_path.toString())
+            val video = VideoMapper().map(it)
             videos.add(video)
         }
         return playlist
@@ -41,7 +42,7 @@ class MoviesRepo @Inject constructor(private val api: API): MoviesRepository {
         val resp = api.getMovies(null)
         val videos = mutableListOf<Video>()
         resp.results.map {
-            val video = Video(it.id, it.title, it.poster_path.toString(), it.backdrop_path.toString())
+            val video = VideoMapper().map(it)
             videos.add(video)
         }
         emit(videos)
@@ -51,7 +52,7 @@ class MoviesRepo @Inject constructor(private val api: API): MoviesRepository {
         val resp = api.getMovies("sort_by=vote_average.desc")
         val videos = mutableListOf<Video>()
         resp.results.map {
-            val video = Video(it.id, it.title, it.poster_path.toString(), it.backdrop_path.toString())
+            val video = VideoMapper().map(it)
             videos.add(video)
         }
         emit(videos)

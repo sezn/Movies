@@ -62,6 +62,7 @@ dependencies {
     implementation(Dependencies.compose_foundation)
     implementation(Dependencies.compose_ui)
     implementation(Dependencies.compose_navigation)
+    implementation(Dependencies.compose_constraint)
     // Helpers for Compose (TODO: take care!)
     implementation(Dependencies.appcompanist_navigation)
     implementation(Dependencies.appcompanist_pager)
