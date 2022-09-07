@@ -20,9 +20,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
-class MoviesViewModel @Inject constructor(private val moviesApi: API,
-                                          private val moviesRepo: MoviesRepo,
-                                          private val database: AppDatabase,
+class MoviesViewModel @Inject constructor(private val moviesRepo: MoviesRepo,
                                           private val datastore: DataStoreManager
 ): ViewModel() {
 
@@ -30,16 +28,10 @@ class MoviesViewModel @Inject constructor(private val moviesApi: API,
 
     init {
         viewModelScope.launch {
-            getMovies()
+
         }
 
     }
-
-    private suspend fun getMovies() {
-        val movies = moviesApi.getMovies(null)
-        Log.w(TAG, "getMovies ${movies.results.size}")
-    }
-
     val trendingMovies: Flow<PagingData<Video>> = Pager(PagingConfig(pageSize = 20)) {
         TrendingsDataSource(moviesRepo)
     }.flow
@@ -52,13 +44,8 @@ class MoviesViewModel @Inject constructor(private val moviesApi: API,
         MoviesDataSource(moviesRepo, "primary_release_year=2022&sort_by=vote_average.desc")
     }.flow
 
-    @OptIn(ExperimentalPagingApi::class)
-    val pagedFlow = Pager(
-        PagingConfig(pageSize = 20),
-        remoteMediator = MoviesMediator(moviesApi, database, datastore)
-    ) {
-        database.movieDao().pagingSource()
-    }.flow
+
+    val pagedFlow = moviesRepo.pagedFlow
 
     suspend fun getPopulars() = moviesRepo.getPopulars()
     suspend fun getMostRated() = moviesRepo.getMostRated()

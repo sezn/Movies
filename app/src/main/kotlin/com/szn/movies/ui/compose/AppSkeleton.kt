@@ -58,6 +58,7 @@ fun NavigationHost(navController: NavHostController){
 
         composable(NavRoutes.Home.route) {
             PlaylistsView(navController)
+//            HomeView(navController)
         }
 
         composable(NavRoutes.Movie.route) { backStackEntry ->

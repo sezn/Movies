@@ -1,5 +1,9 @@
 package com.szn.core.repos
 
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import com.szn.core.datasource.MoviesMediator
 import com.szn.core.datastore.DataStoreManager
 import com.szn.core.db.AppDatabase
 import com.szn.core.mappers.VideoMapper
@@ -66,12 +70,11 @@ class MoviesRepo @Inject constructor(private val api: API,
         emit(videos)
     }
 
-    /*@OptIn(ExperimentalPagingApi::class)
-    val flow = Pager(
+    @OptIn(ExperimentalPagingApi::class)
+    val pagedFlow = Pager(
         PagingConfig(pageSize = 20),
         remoteMediator = MoviesMediator(api, database, datastore)
     ) {
         database.movieDao().pagingSource()
     }.flow
-    */
 }
