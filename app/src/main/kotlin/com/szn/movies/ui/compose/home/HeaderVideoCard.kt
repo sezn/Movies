@@ -31,7 +31,7 @@ fun HeaderVideoCard(movie: Video, onClick: (Video) -> Unit){
     Card(
         modifier = Modifier
             .height(200.dp)
-            .width(420.dp)
+            .width(320.dp)
             .clickable { onClick.invoke(movie) },
         elevation = 10.dp
     ) {

@@ -1,24 +1,22 @@
 package com.szn.movies.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.szn.core.datasource.MoviesMediator
 import com.szn.core.datastore.DataStoreManager
-import com.szn.core.db.AppDatabase
-import com.szn.core.network.API
+import com.szn.core.network.State
 import com.szn.core.repos.MoviesRepo
 import com.szn.movies.datasource.MoviesDataSource
 import com.szn.movies.datasource.TrendingsDataSource
 import com.szn.movies.domain.model.Video
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
 class MoviesViewModel @Inject constructor(private val moviesRepo: MoviesRepo,
                                           private val datastore: DataStoreManager
@@ -28,7 +26,8 @@ class MoviesViewModel @Inject constructor(private val moviesRepo: MoviesRepo,
 
     init {
         viewModelScope.launch {
-
+            delay(2000) // Test TODO: remove
+            state.emit(State.SUCCESS)
         }
 
     }
@@ -46,6 +45,8 @@ class MoviesViewModel @Inject constructor(private val moviesRepo: MoviesRepo,
 
 
     val pagedFlow = moviesRepo.pagedFlow
+    val upcomingsFlow = moviesRepo.upcomingsPagedFlow
+    val popularsPagedFlow = moviesRepo.popularPagedFlow
 
     suspend fun getPopulars() = moviesRepo.getPopulars()
     suspend fun getMostRated() = moviesRepo.getMostRated()

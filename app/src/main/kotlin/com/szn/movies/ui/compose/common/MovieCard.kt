@@ -1,4 +1,4 @@
-package com.szn.movies.ui.compose.home
+package com.szn.movies.ui.compose.common
 
 import android.graphics.drawable.Drawable
 import android.util.Log
@@ -25,7 +25,6 @@ import com.szn.movies.domain.model.Video
 @Composable
 fun VideoCard(movie: Movie, onClick: (Video) -> Unit){
     val TAG = "VideoCard"
-    Log.e(TAG, "init ${movie.title} ${movie.poster_path}  ${movie.poster_path} ")
 
     val img = BuildConfig.IMAGE_BASE + movie.poster_path
     Card(

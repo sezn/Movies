@@ -27,6 +27,16 @@ import com.szn.movies.R
 import com.szn.movies.viewmodel.MoviesViewModel
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.getValue
+import com.szn.core.Constants
+import com.szn.movies.domain.model.Playlist
+import com.szn.movies.ui.compose.common.PlaylistsView
+
+val homePlaylists = mutableListOf(
+    Playlist("Header", mutableListOf()),
+    Playlist("Les plus populaires", mutableListOf(), what = Constants.POPULARS),
+    Playlist("Les films à venir", mutableListOf(), what = Constants.UPCOMMINGS),
+    Playlist("Les mieux notés", mutableListOf(), what = "sort_by=vote_average.desc")
+)
 
 @Composable
 fun HomeView(navController: NavHostController, viewModel: MoviesViewModel = hiltViewModel()) {
@@ -38,7 +48,7 @@ fun HomeView(navController: NavHostController, viewModel: MoviesViewModel = hilt
     Surface(
         modifier = Modifier
             .fillMaxSize()
-            .padding(0.dp, 0.dp, 0.dp, 64.dp),
+            .padding(8.dp, 0.dp, 8.dp, 0.dp),
         color = MaterialTheme.colors.background
     ) {
 

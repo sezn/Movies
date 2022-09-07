@@ -9,6 +9,7 @@ import androidx.paging.RemoteMediator
 import androidx.paging.RemoteMediator.InitializeAction
 import androidx.paging.RemoteMediator.MediatorResult
 import androidx.room.withTransaction
+import com.szn.core.Constants
 import com.szn.core.datastore.DataStoreManager
 import com.szn.core.datastore.LAST_UPDATE
 import com.szn.core.db.AppDatabase
@@ -19,11 +20,15 @@ import com.szn.core.network.model.Movie
 import com.szn.movies.domain.model.Video
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 @OptIn(ExperimentalPagingApi::class)
 class MoviesMediator @Inject constructor(private val api: API,
                                          private val database: AppDatabase,
-                                         private val dataStore: DataStoreManager): RemoteMediator<Int, Movie>() {
+                                         private val dataStore: DataStoreManager,
+                                         private val what: String?
+                                         ): RemoteMediator<Int, Movie>() {
 
     private val videoDao = database.movieDao()
 
@@ -54,23 +59,33 @@ class MoviesMediator @Inject constructor(private val api: API,
                 }
             }
 
-            Log.w("Mediator", "loadType $loadType $loadKey")
+            Log.w("Mediator", "loadType $loadType $loadKey $what")
 
             // Retrofit's Coroutine CallAdapter dispatches on a worker thread.
-            val response = api.getMovies(null).results
+//            val response = api.getMovies(null).results
+            var response = if(what.equals(Constants.UPCOMMINGS)) {
+                api.getUpcomingMovies().results
+            } else if(what.equals(Constants.POPULARS)){
+                api.getMovies("sort_by=vote_average.desc").results
+            }else {
+                api.getMovies(null).results
+            }
+
+
             if (response != null)
                 dataStore.add(LAST_UPDATE, System.currentTimeMillis())
 
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    videoDao.clear()
+//                    videoDao.clear()
                 }
 
+                videoDao.insertAll(response)
                 // Insert new videos into database, which invalidates the current PagingData,
                 // allowing Paging to present the updates in the DB.
-                response?.map {
+                /*response?.map {
                     videoDao.insert(it)
-                }
+                }*/
             }
 
             MediatorResult.Success(

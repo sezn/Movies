@@ -61,7 +61,7 @@ fun HeaderView(playlist: Playlist, navController: NavHostController,
             color = MaterialTheme.colors.secondary,
             modifier = Modifier.padding(8.dp))
 
-        LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        LazyRow(horizontalArrangement = Arrangement.spacedBy(24.dp)) {
             itemsIndexed(videos) { index, item ->
                 item?.let {
                     HeaderVideoCard(movie = it) {

@@ -31,6 +31,13 @@ interface MovieDao {
 
     @Query("SELECT * FROM movie")
     fun pagingSource(): PagingSource<Int, Movie>
+
+    @Query("SELECT * FROM movie ORDER BY popularity DESC")
+    fun pagingPopularSource(): PagingSource<Int, Movie>
+
+    @Query("SELECT * FROM movie ORDER BY (vote_average * vote_count) DESC")
+    fun pagingTopRatedSource(): PagingSource<Int, Movie>
+
 }
 
 

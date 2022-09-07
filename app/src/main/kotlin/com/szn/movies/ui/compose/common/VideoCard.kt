@@ -1,4 +1,4 @@
-package com.szn.movies.ui.compose.home
+package com.szn.movies.ui.compose.common
 
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
@@ -25,7 +25,6 @@ import com.szn.movies.domain.model.fakeMovie
 @Composable
 fun VideoCard(movie: Video, onClick: (Video) -> Unit){
     val TAG = "VideoCard"
-    Log.e(TAG, "init ${movie.title} ${movie.getImage()}  ${movie.poster_path} ")
 
     Card(
         modifier = Modifier

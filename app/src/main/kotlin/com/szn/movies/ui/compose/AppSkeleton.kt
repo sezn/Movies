@@ -17,7 +17,6 @@ import com.szn.core.network.utils.Constants
 import com.szn.movies.domain.model.Video
 import com.szn.movies.ui.compose.detail.VideoView
 import com.szn.movies.ui.compose.home.HomeView
-import com.szn.movies.ui.compose.home.PlaylistsView
 import com.szn.movies.ui.navigation.NavRoutes
 import com.szn.movies.ui.theme.AppTheme
 
@@ -57,8 +56,8 @@ fun NavigationHost(navController: NavHostController){
         }
 
         composable(NavRoutes.Home.route) {
-            PlaylistsView(navController)
-//            HomeView(navController)
+//            PlaylistsView(navController)
+            HomeView(navController)
         }
 
         composable(NavRoutes.Movie.route) { backStackEntry ->
