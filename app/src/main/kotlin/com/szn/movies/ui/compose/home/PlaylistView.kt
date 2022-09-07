@@ -1,4 +1,4 @@
-package com.szn.movies.ui.compose
+package com.szn.movies.ui.compose.home
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.util.Log
@@ -27,7 +27,8 @@ fun PlaylistView(playlist: Playlist, navController: NavHostController,
                  moviesViewModel: MoviesViewModel = hiltViewModel()) {
     Log.w("PlaylistView", "${playlist.title} ${playlist.movies.size}")
 
-    val videos = moviesViewModel.ratedMovies.collectAsLazyPagingItems()
+//    val videos = moviesViewModel.ratedMovies.collectAsLazyPagingItems()
+    val videos = moviesViewModel.pagedFlow.collectAsLazyPagingItems()
     Column {
         Text(text = playlist.title,
             style = MaterialTheme.typography.h5,

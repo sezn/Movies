@@ -32,7 +32,7 @@ android {
 dependencies {
     implementation(project(":domain"))
     implementation(Dependencies.android_core)
-    testImplementation(Dependencies.test_junit)
+    implementation("androidx.paging:paging-common-ktx:3.1.1")
 
     // Hilt for DI
     implementation(Dependencies.hilt)
@@ -45,9 +45,13 @@ dependencies {
 
     implementation(Dependencies.room_runtime)
     implementation(Dependencies.room_ktx)
+    implementation(Dependencies.room_paging)
     kapt(Dependencies.room_compiler)
     testImplementation(Dependencies.room_testing)
 
+    implementation(Dependencies.datastore)
+
+    testImplementation(Dependencies.test_junit)
     androidTestImplementation(Dependencies.test_junit_ext)
     androidTestImplementation(Dependencies.test_expresso)
 }

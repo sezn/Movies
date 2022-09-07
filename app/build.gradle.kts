@@ -61,6 +61,7 @@ dependencies {
     // Jetpack Compose
     implementation(Dependencies.compose_foundation)
     implementation(Dependencies.compose_ui)
+    implementation(Dependencies.compose_runtime)
     implementation(Dependencies.compose_navigation)
     implementation(Dependencies.compose_constraint)
     // Helpers for Compose (TODO: take care!)
@@ -76,6 +77,7 @@ dependencies {
     // There is paging-common, which is a pure kotlin library that contains PagingSource and RemoteMediator among others.
     // That means that you can use paging-common in a pure kotlin module and in your repositories just fine, there is no android specific code in there
     implementation(Dependencies.compose_paging)
+    implementation(Dependencies.room_runtime)
 
     testImplementation(Dependencies.test_junit)
     androidTestImplementation(Dependencies.test_junit_ext)

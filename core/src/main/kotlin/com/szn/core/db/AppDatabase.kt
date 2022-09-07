@@ -25,6 +25,5 @@ abstract class AppDatabase: RoomDatabase() {
             AppDatabase::class.java,
             "MOVIES"
         ).build()
-
     }
 }

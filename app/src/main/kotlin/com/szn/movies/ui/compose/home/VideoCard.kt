@@ -1,4 +1,4 @@
-package com.szn.movies.ui.compose
+package com.szn.movies.ui.compose.home
 
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
@@ -8,7 +8,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.SnackbarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -22,25 +21,23 @@ import com.skydoves.landscapist.glide.GlideImage
 import com.szn.movies.R
 import com.szn.movies.domain.model.Video
 import com.szn.movies.domain.model.fakeMovie
-import com.szn.movies.ui.theme.AppTheme
 
 @Composable
-fun HeaderVideoCard(movie: Video, onClick: (Video) -> Unit){
+fun VideoCard(movie: Video, onClick: (Video) -> Unit){
     val TAG = "VideoCard"
     Log.e(TAG, "init ${movie.title} ${movie.getImage()}  ${movie.poster_path} ")
 
     Card(
         modifier = Modifier
-            .height(200.dp)
-            .width(420.dp)
+            .fillMaxWidth()
+            .height(240.dp)
             .clickable { onClick.invoke(movie) },
         elevation = 10.dp
     ) {
-        Column(modifier = Modifier.background(MaterialTheme.colors.background)
-        ) {
-            GlideImage(imageModel = movie.getBackImage(),
+        Column(modifier = Modifier.background(MaterialTheme.colors.background)) {
+            GlideImage(imageModel = movie.getImage(),
                 contentDescription = movie.title,
-                previewPlaceholder = R.drawable.backdrop,
+                previewPlaceholder = R.drawable.minions,
                 contentScale = ContentScale.Fit,
                 requestListener = object: RequestListener<Drawable> {
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
@@ -52,19 +49,16 @@ fun HeaderVideoCard(movie: Video, onClick: (Video) -> Unit){
                         return true
                     }
                 } ,
-                modifier = Modifier.fillMaxSize())
-//                    .size(135.dp))
+                modifier = Modifier.fillMaxSize()
+                    .size(135.dp))
 
 
         }
     }
 }
 
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun HeaderCardPreview(){
-    AppTheme {
-        HeaderVideoCard(movie = fakeMovie, onClick = {})
-    }
+fun VideoCardPreview(){
+    VideoCard(movie = fakeMovie, onClick = {})
 }

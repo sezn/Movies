@@ -7,6 +7,7 @@ object Dependencies {
     const val material_compose ="androidx.compose.material:material:${Versions.COMPOSE}"
     const val view_model ="androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
     const val coroutines ="org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.COROUTINES}"
+    const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.KOTLIN}"
 
     const val hilt = "com.google.dagger:hilt-android:${Versions.HILT}"
     const val hiltCompiler = "com.google.dagger:hilt-compiler:${Versions.HILT}"
@@ -20,6 +21,7 @@ object Dependencies {
     const val room_runtime = "androidx.room:room-runtime:${Versions.ROOM}"
     const val room_compiler = "androidx.room:room-compiler:${Versions.ROOM}"
     const val room_ktx = "androidx.room:room-ktx:${Versions.ROOM}"
+    const val room_paging = "androidx.room:room-paging:${Versions.ROOM}"
     const val room_testing = "androidx.room:room-testing:${Versions.ROOM}"
 
     const val landscapist = "com.github.skydoves:landscapist-glide:1.5.3"
@@ -28,6 +30,7 @@ object Dependencies {
     const val firebase_analytics = "com.google.firebase:firebase-analytics-ktx"
 
     const val compose_ui = "androidx.compose.ui:ui:${Versions.COMPOSE}"
+    const val compose_runtime = "androidx.compose.runtime:runtime:${Versions.COMPOSE}"
     const val compose_tooling = "androidx.compose.ui:ui-tooling:${Versions.COMPOSE}"
     const val tooling_preview = "androidx.compose.ui:ui-tooling-preview:${Versions.COMPOSE}"
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
@@ -38,6 +41,8 @@ object Dependencies {
 
     const val compose_paging = "androidx.paging:paging-compose:1.0.0-alpha16"
     const val compose_constraint = "androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha03"
+
+    const val datastore = "androidx.datastore:datastore-preferences:1.0.0"
 
     const val test_junit = "junit:junit:4.13.2"
     const val test_junit_ext = "androidx.test.ext:junit:1.1.3"
