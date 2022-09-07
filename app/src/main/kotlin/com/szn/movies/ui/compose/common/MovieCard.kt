@@ -3,6 +3,7 @@ package com.szn.movies.ui.compose.home
 import android.graphics.drawable.Drawable
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -15,6 +16,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.skydoves.landscapist.glide.GlideImage
+import com.szn.core.mappers.VideoMapper
 import com.szn.core.network.model.Movie
 import com.szn.movies.R
 import com.szn.movies.domain.BuildConfig
@@ -29,8 +31,10 @@ fun VideoCard(movie: Movie, onClick: (Video) -> Unit){
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(240.dp),
-//            .clickable { onClick.invoke(movie) },
+            .height(240.dp)
+            .clickable {
+                onClick.invoke(VideoMapper().map(movie))
+                       },
         elevation = 10.dp
     ) {
         Column(modifier = Modifier.background(MaterialTheme.colors.background)) {
