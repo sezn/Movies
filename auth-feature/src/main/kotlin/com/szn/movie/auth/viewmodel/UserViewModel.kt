@@ -14,6 +14,7 @@ class UserViewModel @Inject constructor(private val userRepository: UserRepo): V
 
     val TAG = UserViewModel::class.java.simpleName
     val isLogged = mutableStateOf(false)
+    val errorMessage = mutableStateOf("")
 
     init {
         Log.w(TAG, "init")
@@ -24,13 +25,21 @@ class UserViewModel @Inject constructor(private val userRepository: UserRepo): V
     }
 
 
-    suspend fun create(login: String, pass: String, pseudo: String){
-        userRepository.login(pseudo, pass)
+    suspend fun login(login: String, pass: String, pseudo: String) {
+        userRepository.login(pseudo, pass).collect { auth ->
+            Log.w(TAG, "Login:: $auth")
+            if(!auth.success){
+                val er = auth.error
+                errorMessage.value = er?.status_message.toString()
+            } else {
+                isLogged.value = true
+            }
+        }
     }
 
-
-    fun login(login: String, pass: String){
-
+    fun favorite(id: Int) {
+        Log.w(TAG, "favorite $id sessId: ${userRepository.sessionId}  token: ${userRepository.token}")
     }
+
 
 }

@@ -6,10 +6,12 @@ import com.szn.core.datastore.DataStoreManager
 import com.szn.core.db.AppDatabase
 import com.szn.core.extensions.toRequestBody
 import com.szn.core.network.API
+import com.szn.core.network.model.ErrorResponse
 import com.szn.core.network.model.session.AuthResult
 import com.szn.core.network.model.session.UserSession
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -20,8 +22,8 @@ class UserRepo @Inject constructor(private val api: API,
                                   private val datastore: DataStoreManager) {
 
     val TAG = UserRepo::class.java.simpleName
-//    private var sessionId =
-    private var token = ""
+    var sessionId = ""
+    var token = ""
 
     init {
         CoroutineScope(Dispatchers.Main).launch {
@@ -36,7 +38,6 @@ class UserRepo @Inject constructor(private val api: API,
         if(auth != null && auth.success && auth.request_token?.isNotEmpty() == true) {
             token = auth.request_token
             datastore.setToken(auth.request_token)
-//            login(auth.request_token)
         } else {
             Log.e(TAG, "Error while authenticate")
         }
@@ -66,6 +67,7 @@ class UserRepo @Inject constructor(private val api: API,
             Log.w(TAG, "createSessionId $sess")
             sess.session_id?.let {
                 datastore.setSessionId(it)
+                sessionId = it
                 getAccount(it)
             }
             sess
@@ -75,20 +77,19 @@ class UserRepo @Inject constructor(private val api: API,
         }
     }
 
-    suspend fun login(mail: String, pass: String): AuthResult? {
+    suspend fun login(mail: String, pass: String) = flow {
         val session = UserSession(mail, pass, token)
         val js = Gson().toJson(session)
         Log.w(TAG, "login $js")
         val json = js.toRequestBody()
-        return try {
-            var sess = api.login(json).data
-            Log.w(TAG, "createSessionId $sess")
-            createSession(sess!!)
-            sess
-        } catch (e: Exception){
-            Log.e(TAG,"Exception while login $e ${e.message} ")
-            Log.e(TAG,"Exception while login ${e.localizedMessage}")
-            null
+
+        api.login(json).onSuccess {
+            createSession(it)
+            emit(it)
+        } .onFailure { error ->
+            val errorResponse = error as ErrorResponse
+            Log.e(TAG, "error login $errorResponse")
+            emit(AuthResult(errorResponse))
         }
     }
 

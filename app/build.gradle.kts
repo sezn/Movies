@@ -5,7 +5,6 @@ plugins {
     id(Plugins.kotlinKapt)
     id(Plugins.safeArgs)
     id(Plugins.androidHilt)
-    id(Plugins.googleServices)
 }
 
 android {

@@ -2,12 +2,11 @@ package com.szn.movie.auth.ui
 
 import android.content.res.Configuration
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -15,21 +14,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.szn.core.R
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.szn.movie.auth.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
-fun LoginScreen(/*userViewModel: UserViewModel = hiltViewModel()*/) {
+fun LoginScreen(navController: NavHostController) {
 
     val userViewModel: UserViewModel = hiltViewModel()
     var login by remember { mutableStateOf("") }
     var pass by remember { mutableStateOf("") }
     var pseudo by remember { mutableStateOf("") }
+    var errorMessage = userViewModel.errorMessage
 
 
     val title = stringResource(id = R.string.account_create)
@@ -88,14 +88,22 @@ fun LoginScreen(/*userViewModel: UserViewModel = hiltViewModel()*/) {
         Button(onClick = {
             Log.w("Login", "onButtonClick $login $pseudo")
             CoroutineScope(Dispatchers.Main).launch {
-                userViewModel.create(login, pass, pseudo)
+                userViewModel.login(login, pass, pseudo)
             }
+
+            navController.navigate("home")
 
         }) {
             Text(text = stringResource(id = R.string.account_create),
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(8.dp).fillMaxWidth())
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth())
         }
+    }
+
+    errorMessage.value.let {
+        Toast.makeText(navController.context, it, Toast.LENGTH_LONG).show()
     }
 
 }
@@ -103,7 +111,7 @@ fun LoginScreen(/*userViewModel: UserViewModel = hiltViewModel()*/) {
 @Composable
 @Preview(showSystemUi = true, uiMode = Configuration.UI_MODE_TYPE_NORMAL)
 fun PreviewLoginScreen(){
-    LoginScreen()
+    LoginScreen(rememberNavController())
 }
 
 /**

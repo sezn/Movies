@@ -71,7 +71,7 @@ fun NavigationHost(navController: NavHostController){
 
 
         composable(NavRoutes.Login.route) {
-            LoginScreen()
+            LoginScreen(navController)
         }
 
     }
