@@ -1,6 +1,8 @@
 package com.szn.movies.ui.compose
 
+import android.util.Log
 import android.view.animation.OvershootInterpolator
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -16,16 +18,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.szn.movie.auth.viewmodel.UserViewModel
 import com.szn.movies.R
 import com.szn.movies.ui.navigation.NavRoutes
-import com.szn.movies.viewmodel.MoviesViewModel
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashView(navController: NavHostController, moviesViewModel: MoviesViewModel = hiltViewModel()) {
-
+fun SplashView(navController: NavHostController, userViewModel: UserViewModel = hiltViewModel()) {
+    val TAG = "SplashView"
+//    val isLogged = userViewModel.isLogged
+//    Log.w(TAG, "IsLogged: $isLogged")
     val scale = remember {
-        androidx.compose.animation.core.Animatable(0f)
+        Animatable(0f)
     }
 
     // AnimationEffect
@@ -33,13 +37,14 @@ fun SplashView(navController: NavHostController, moviesViewModel: MoviesViewMode
         scale.animateTo(
             targetValue = 0.7f,
             animationSpec = tween(
-                durationMillis = 800,
+                durationMillis = 1000,
                 easing = {
-                    OvershootInterpolator(4f).getInterpolation(it)
+                    OvershootInterpolator(5f).getInterpolation(it)
                 })
         )
-        delay(3000L)
+        delay(2000L)
         navController.navigate(NavRoutes.Home.route)
+//        navController.navigate(NavRoutes.Login.route)
     }
 
     // Image
@@ -49,6 +54,7 @@ fun SplashView(navController: NavHostController, moviesViewModel: MoviesViewMode
             contentDescription = "Logo",
             modifier = Modifier.size(320.dp).scale(scale.value))
     }
+
 }
 
 

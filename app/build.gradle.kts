@@ -45,6 +45,7 @@ android {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":core")) // TODO: see if can remove this dep?
+    implementation(project(":auth-feature"))
     implementation(Dependencies.android_core)
     implementation(Dependencies.activity_compose)
     implementation(Dependencies.material)

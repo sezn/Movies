@@ -32,3 +32,10 @@ Display Details of a Movie
 
 ### Tests:
     JUnit, Espresso
+
+
+# User Authentication
+User authentication is controlled with a session_id query parameter. You can generate a session_id by following these steps:
+## 1. Create a new request token
+## 2. Get the user to authorize the request token
+## 3. Create a new  session id with the athorized request token

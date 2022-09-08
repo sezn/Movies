@@ -12,7 +12,6 @@ import com.szn.movies.datasource.MoviesDataSource
 import com.szn.movies.datasource.TrendingsDataSource
 import com.szn.movies.domain.model.Video
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,7 +25,7 @@ class MoviesViewModel @Inject constructor(private val moviesRepo: MoviesRepo,
 
     init {
         viewModelScope.launch {
-            delay(2000) // Test TODO: remove
+//            delay(1000) // Test TODO: remove
             state.emit(State.SUCCESS)
         }
 

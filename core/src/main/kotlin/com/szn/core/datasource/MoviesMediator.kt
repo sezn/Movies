@@ -1,23 +1,17 @@
 package com.szn.core.datasource
 
 import android.util.Log
-import androidx.datastore.dataStore
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
-import androidx.paging.RemoteMediator.InitializeAction
-import androidx.paging.RemoteMediator.MediatorResult
 import androidx.room.withTransaction
 import com.szn.core.Constants
 import com.szn.core.datastore.DataStoreManager
-import com.szn.core.datastore.LAST_UPDATE
 import com.szn.core.db.AppDatabase
 import com.szn.core.extensions.isOnline
-import com.szn.core.mappers.VideoMapper
 import com.szn.core.network.API
 import com.szn.core.network.model.Movie
-import com.szn.movies.domain.model.Video
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -73,7 +67,7 @@ class MoviesMediator @Inject constructor(private val api: API,
 
 
             if (response != null)
-                dataStore.add(LAST_UPDATE, System.currentTimeMillis())
+                dataStore.setLastUpdated(System.currentTimeMillis())
 
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {
