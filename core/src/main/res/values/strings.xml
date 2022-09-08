@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="account_create">Créer un compte</string>
+    <string name="account_login">Se connecter</string>
+    <string name="firstname">Prénom</string>
+    <string name="lastname">Nom</string>
+    <string name="mail">Email</string>
+    <string name="pass">Mot de passe</string>
+    <string name="nickname">Pseudo</string>
+
+</resources>

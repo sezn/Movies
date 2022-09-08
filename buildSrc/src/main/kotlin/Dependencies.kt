@@ -1,7 +1,7 @@
 object Dependencies {
 
     const val android_core = "androidx.core:core-ktx:1.8.0"
-    const val activity_compose = "androidx.activity:activity-compose:${Versions.COMPOSE}"
+    const val activity_compose = "androidx.activity:activity-compose:1.5.1"
     const val material = "com.google.android.material:material:1.6.1"
     const val material3 = "androidx.compose.material3:material3:${Versions.MATERIAL3}"
     const val material_compose ="androidx.compose.material:material:${Versions.COMPOSE}"

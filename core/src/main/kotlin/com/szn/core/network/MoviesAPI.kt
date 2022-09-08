@@ -1,6 +1,7 @@
 package com.szn.core.network
 
 import com.szn.core.network.model.Movies
+import com.szn.core.network.model.Resource
 import com.szn.core.network.model.session.AuthResult
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -57,7 +58,7 @@ interface API {
      * @param request_token
      */
     @POST("3/authentication/token/validate_with_login")
-    suspend fun login(@Body params: RequestBody): AuthResult
+    suspend fun login(@Body params: RequestBody): Resource<AuthResult>
 
     @GET("3/account")
     suspend fun getAccount(@Query("session_id") sessId: String): AuthResult

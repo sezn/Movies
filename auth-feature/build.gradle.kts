@@ -38,9 +38,17 @@ dependencies {
     implementation(Dependencies.material_compose)
 
     implementation(Dependencies.hilt)
+    implementation(Dependencies.hiltCompose)
     kapt(Dependencies.hiltCompiler)
+    kapt(Dependencies.hiltAndroidXCompiler)
 
     testImplementation(Dependencies.test_junit)
     androidTestImplementation(Dependencies.test_junit_ext)
     androidTestImplementation(Dependencies.test_expresso)
+
+    debugImplementation(Dependencies.compose_tooling)
+    implementation(Dependencies.tooling_preview)
+
+    debugImplementation("androidx.customview:customview:1.2.0-alpha01")
+    debugImplementation("androidx.customview:customview-poolingcontainer:1.0.0-alpha01")
 }

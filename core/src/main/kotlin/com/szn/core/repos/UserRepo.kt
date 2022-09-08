@@ -21,10 +21,12 @@ class UserRepo @Inject constructor(private val api: API,
 
     val TAG = UserRepo::class.java.simpleName
 //    private var sessionId =
+    private var token = ""
 
     init {
         CoroutineScope(Dispatchers.Main).launch {
             val sess = datastore.getSessionId()
+
             Log.w(TAG, "init $sess")
         }
     }
@@ -32,15 +34,16 @@ class UserRepo @Inject constructor(private val api: API,
     suspend fun newToken(): AuthResult {
         val auth = api.authenticate()
         if(auth != null && auth.success && auth.request_token?.isNotEmpty() == true) {
+            token = auth.request_token
             datastore.setToken(auth.request_token)
-            login(auth.request_token)
+//            login(auth.request_token)
         } else {
             Log.e(TAG, "Error while authenticate")
         }
         return auth
     }
 
-    suspend fun login(token: String): AuthResult? {
+  /*  suspend fun login(token: String): AuthResult? {
         val session = UserSession("test", "test123", token)
         val js = Gson().toJson(session)
         val json = js.toRequestBody()
@@ -53,7 +56,7 @@ class UserRepo @Inject constructor(private val api: API,
             Log.e(TAG,"Exception while login $e")
             null
         }
-    }
+    }*/
 
     suspend fun createSession(sess: AuthResult): AuthResult? {
         val js = Gson().toJson(sess)
@@ -73,16 +76,18 @@ class UserRepo @Inject constructor(private val api: API,
     }
 
     suspend fun login(mail: String, pass: String): AuthResult? {
-        val session = UserSession(mail, pass, mail)
+        val session = UserSession(mail, pass, token)
         val js = Gson().toJson(session)
+        Log.w(TAG, "login $js")
         val json = js.toRequestBody()
         return try {
-            var sess = api.login(json)
+            var sess = api.login(json).data
             Log.w(TAG, "createSessionId $sess")
-            createSession(sess)
+            createSession(sess!!)
             sess
         } catch (e: Exception){
-            Log.e(TAG,"Exception while login $e")
+            Log.e(TAG,"Exception while login $e ${e.message} ")
+            Log.e(TAG,"Exception while login ${e.localizedMessage}")
             null
         }
     }

@@ -43,8 +43,8 @@ fun SplashView(navController: NavHostController, userViewModel: UserViewModel = 
                 })
         )
         delay(2000L)
-        navController.navigate(NavRoutes.Home.route)
-//        navController.navigate(NavRoutes.Login.route)
+//        navController.navigate(NavRoutes.Home.route)
+        navController.navigate(NavRoutes.Login.route)
     }
 
     // Image

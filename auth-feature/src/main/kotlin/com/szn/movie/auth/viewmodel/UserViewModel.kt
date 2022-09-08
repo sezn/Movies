@@ -24,5 +24,13 @@ class UserViewModel @Inject constructor(private val userRepository: UserRepo): V
     }
 
 
+    suspend fun create(login: String, pass: String, pseudo: String){
+        userRepository.login(pseudo, pass)
+    }
+
+
+    fun login(login: String, pass: String){
+
+    }
 
 }
