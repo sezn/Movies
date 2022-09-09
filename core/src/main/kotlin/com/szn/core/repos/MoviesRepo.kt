@@ -31,7 +31,7 @@ class MoviesRepo @Inject constructor(private val api: API,
                                     private val datastore: DataStoreManager): MoviesRepository {
 
     val TAG = "MoviesRepo"
-    val state by lazy { MutableStateFlow<State>(State.START) }
+    val state by lazy { MutableStateFlow<State>(State.LOADING) }
 
     init {
         Log.w(TAG, "init")

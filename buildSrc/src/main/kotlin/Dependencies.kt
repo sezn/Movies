@@ -1,11 +1,11 @@
 object Dependencies {
 
-    const val android_core = "androidx.core:core-ktx:1.7.0"
-    const val activity_compose = "androidx.activity:activity-compose:${Versions.COMPOSE}"
+    const val android_core = "androidx.core:core-ktx:1.8.0"
+    const val activity_compose = "androidx.activity:activity-compose:1.5.1"
     const val material = "com.google.android.material:material:1.6.1"
     const val material3 = "androidx.compose.material3:material3:${Versions.MATERIAL3}"
     const val material_compose ="androidx.compose.material:material:${Versions.COMPOSE}"
-    const val view_model ="androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    const val view_model ="androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.LIFECYCLE}"
     const val coroutines ="org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.COROUTINES}"
     const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.KOTLIN}"
 

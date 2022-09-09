@@ -18,7 +18,9 @@ val LightColors = lightColors(
     primaryVariant = Color.Blue,
     secondary = Color.White,
     surface = Color.Black,
-    secondaryVariant = Color.LightGray
+    secondaryVariant = Color.LightGray,
+    error = Color(0xFFA51E37),
+    onError = Color.LightGray
 )
 
 private val DarkColors = darkColors(
@@ -27,11 +29,13 @@ private val DarkColors = darkColors(
     primary = Color(4, 7, 34),
     primaryVariant = Color.Blue,
     secondary = Color.White,
-    surface = Color.White,
+    surface = Color(0xFFCF6679),
     secondaryVariant = Color.LightGray,
 
     onPrimary = Color.White,
-    onSecondary = Color.White
+    onSecondary = Color.White,
+    error = Color(0xFF85041C),
+    onError = Color.LightGray
 )
 
 private val Typography = Typography(

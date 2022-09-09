@@ -8,7 +8,6 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 
-const val LAST_UPDATE = "LastUpdate"
 
 /**
  * Helper class for write & read values in preferences storage
@@ -57,12 +56,34 @@ class DataStoreManager(val context: Context) {
         }
     }
 
+    suspend fun setLastUpdated(updated: Long) {
+        add(LAST_UPDATE, updated)
+    }
+
     suspend fun lastUpdated(): Long {
         val up = getValue(LAST_UPDATE)
         return up?.toString()?.toLong()?: 0
     }
 
+    suspend fun getToken(): String? {
+        return get(TOKEN)
+    }
+
+    suspend fun setToken(token: String){
+        add(TOKEN, token)
+    }
+    suspend fun getSessionId(): String? {
+        return get(SESS_ID)
+    }
+
+    suspend fun setSessionId(token: String){
+        add(SESS_ID, token)
+    }
+
     companion object {
         val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+        const val TOKEN = "token"
+        const val SESS_ID = "token"
+        const val LAST_UPDATE = "LastUpdate"
     }
 }

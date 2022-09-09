@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.szn.core.network.utils.Constants
+import com.szn.movie.auth.ui.LoginScreen
 import com.szn.movies.domain.model.Video
 import com.szn.movies.ui.compose.detail.VideoView
 import com.szn.movies.ui.compose.home.HomeView
@@ -69,6 +70,9 @@ fun NavigationHost(navController: NavHostController){
         }
 
 
+        composable(NavRoutes.Login.route) {
+            LoginScreen(navController)
+        }
 
     }
 

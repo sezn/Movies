@@ -5,7 +5,6 @@ plugins {
     id(Plugins.kotlinKapt)
     id(Plugins.safeArgs)
     id(Plugins.androidHilt)
-    id(Plugins.googleServices)
 }
 
 android {
@@ -45,6 +44,7 @@ android {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":core")) // TODO: see if can remove this dep?
+    implementation(project(":auth-feature"))
     implementation(Dependencies.android_core)
     implementation(Dependencies.activity_compose)
     implementation(Dependencies.material)
