@@ -11,8 +11,8 @@ import com.szn.core.db.AppDatabase
 import com.szn.core.mappers.VideoMapper
 import com.szn.core.network.API
 import com.szn.core.network.State
-import com.szn.core.network.model.user.MEDIA_TYPE
-import com.szn.core.network.model.user.TIME_TYPE
+import com.szn.core.network.model.MEDIA_TYPE
+import com.szn.core.network.model.TIME_TYPE
 import com.szn.movies.domain.MoviesRepository
 import com.szn.movies.domain.model.Playlist
 import com.szn.movies.domain.model.Video

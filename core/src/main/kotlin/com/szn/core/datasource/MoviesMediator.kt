@@ -11,7 +11,7 @@ import com.szn.core.datastore.DataStoreManager
 import com.szn.core.db.AppDatabase
 import com.szn.core.extensions.isOnline
 import com.szn.core.network.API
-import com.szn.core.network.model.user.Movie
+import com.szn.core.network.model.Movie
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton

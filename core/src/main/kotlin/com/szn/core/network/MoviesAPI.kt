@@ -64,13 +64,16 @@ interface API {
     @GET("3/account")
     suspend fun getAccount(@Query("session_id") sessId: String): Account
 
-    @GET("/account/{account_id}/favorite/movies")
+    @GET("3/account/{account_id}/favorite/movies")
     suspend fun getFavorites(@Path("account_id") accountId: String,
                              @Query("session_id") sessId: String,
                              @Query("language") lang: String? = "fr",
                              @Query("page") page: Int? = 1): Movies
 
-    @POST("/account/{account_id}/favorite")
-    suspend fun favorite(@Path("account_id") accountId: String,
-                         @Query("session_id") sessId: String): Movies
+    @POST("3/account/{account_id}/favorite")
+    suspend fun favorite(
+        @Path("account_id") accountId: String,
+        @Query("session_id") sessId: String,
+        @Body params: RequestBody
+    ): Movies
 }

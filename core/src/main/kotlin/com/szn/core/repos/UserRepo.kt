@@ -8,8 +8,10 @@ import com.szn.core.extensions.toRequestBody
 import com.szn.core.network.API
 import com.szn.core.network.ApiResult
 import com.szn.core.network.model.ErrorResponse
+import com.szn.core.network.model.MEDIA_TYPE
 import com.szn.core.network.model.session.AuthResult
 import com.szn.core.network.model.session.UserSession
+import com.szn.core.network.model.user.FavRequestBody
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -47,21 +49,6 @@ class UserRepo @Inject constructor(private val api: API,
         return auth
     }
 
-  /*  suspend fun login(token: String): AuthResult? {
-        val session = UserSession("test", "test123", token)
-        val js = Gson().toJson(session)
-        val json = js.toRequestBody()
-        return try {
-            var sess = api.login(json)
-            Log.w(TAG, "createSessionId $sess")
-            createSession(sess)
-            sess
-        } catch (e: Exception){
-            Log.e(TAG,"Exception while login $e")
-            null
-        }
-    }*/
-
     suspend fun createSession(sess: AuthResult): AuthResult? {
         val js = Gson().toJson(sess)
         val json = js.toRequestBody()
@@ -86,6 +73,7 @@ class UserRepo @Inject constructor(private val api: API,
         val json = Gson().toJson(UserSession(mail, pass, token)).toRequestBody()
         val logResponse = api.login(json)
         if(logResponse.isSuccessful){
+            logResponse.body()?.let { createSession(it) }
             emit(ApiResult.Success(logResponse))
         } else{
             emit(ApiResult.Error(fromJson(logResponse.errorBody()?.string())))
@@ -98,6 +86,11 @@ class UserRepo @Inject constructor(private val api: API,
         Log.w(TAG, "getAccount $account")
         accountId = account.id
         datastore.add(ACCOUNT_ID, account.id)
+    }
+
+    suspend fun favorite(accountId: String, sessId: String, movieId: Int) = flow {
+        val json = Gson().toJson(FavRequestBody(true, movieId, MEDIA_TYPE.movie.name)).toRequestBody()
+        emit(api.favorite(accountId, sessId, json))
     }
 
     companion object {

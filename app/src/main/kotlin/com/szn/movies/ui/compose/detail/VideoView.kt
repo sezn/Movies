@@ -1,22 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 package com.szn.movies.ui.compose.detail
 
 import android.content.res.Configuration
@@ -46,15 +27,18 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.skydoves.landscapist.glide.GlideImage
-import com.szn.movies.domain.model.Video
-import com.szn.movies.domain.model.fakeMovie
-import com.szn.movies.ui.theme.AppTheme
 import com.szn.core.extensions.toYear
 import com.szn.movie.auth.viewmodel.UserViewModel
 import com.szn.movies.R
 import com.szn.movies.actions.FAV
 import com.szn.movies.actions.IconItem
 import com.szn.movies.actions.movieActions
+import com.szn.movies.domain.model.Video
+import com.szn.movies.domain.model.fakeMovie
+import com.szn.movies.ui.theme.AppTheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
 fun VideoView (video: Video){
@@ -96,7 +80,9 @@ fun VideoView (video: Video){
                 Log.w(TAG, "onClick on ${item.name} $checked ${video.title}")
 
                 if(item.name == FAV){
-                    userViewModel.favorite(video.id)
+                    CoroutineScope(Dispatchers.Main).launch {
+                        userViewModel.favorite(video.id)
+                    }
                 }
 
             }

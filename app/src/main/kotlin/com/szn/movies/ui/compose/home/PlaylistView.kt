@@ -18,7 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
-import com.szn.core.network.model.user.Movie
+import com.szn.core.network.model.Movie
 import com.szn.movies.domain.model.Playlist
 import com.szn.movies.domain.model.fakeMovie
 import com.szn.movies.ui.compose.common.VideoCard
