@@ -3,7 +3,6 @@ package com.szn.core.network
 import android.content.Context
 import com.google.gson.GsonBuilder
 import com.szn.core.BuildConfig
-import com.szn.core.network.error.ResultCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -53,7 +52,6 @@ class MoviesClient {
             .baseUrl(BuildConfig.MOVIES_BASE_URL)
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
-            .addCallAdapterFactory(ResultCallAdapterFactory())
             .build()
     }
 

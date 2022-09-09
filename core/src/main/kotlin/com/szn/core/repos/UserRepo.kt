@@ -6,11 +6,13 @@ import com.szn.core.datastore.DataStoreManager
 import com.szn.core.db.AppDatabase
 import com.szn.core.extensions.toRequestBody
 import com.szn.core.network.API
+import com.szn.core.network.ApiResult
 import com.szn.core.network.model.ErrorResponse
 import com.szn.core.network.model.session.AuthResult
 import com.szn.core.network.model.session.UserSession
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,6 +26,7 @@ class UserRepo @Inject constructor(private val api: API,
     val TAG = UserRepo::class.java.simpleName
     var sessionId = ""
     var token = ""
+    var accountId = 0
 
     init {
         CoroutineScope(Dispatchers.Main).launch {
@@ -78,24 +81,31 @@ class UserRepo @Inject constructor(private val api: API,
     }
 
     suspend fun login(mail: String, pass: String) = flow {
-        val session = UserSession(mail, pass, token)
-        val js = Gson().toJson(session)
-        Log.w(TAG, "login $js")
-        val json = js.toRequestBody()
-
-        api.login(json).onSuccess {
-            createSession(it)
-            emit(it)
-        } .onFailure { error ->
-            val errorResponse = error as ErrorResponse
-            Log.e(TAG, "error login $errorResponse")
-            emit(AuthResult(errorResponse))
+        emit(ApiResult.Loading(true))
+        delay(2000)
+        val json = Gson().toJson(UserSession(mail, pass, token)).toRequestBody()
+        val logResponse = api.login(json)
+        if(logResponse.isSuccessful){
+            emit(ApiResult.Success(logResponse))
+        } else{
+            emit(ApiResult.Error(fromJson(logResponse.errorBody()?.string())))
         }
+
     }
 
     suspend fun getAccount(sessId: String){
         val account = api.getAccount(sessId)
         Log.w(TAG, "getAccount $account")
+        accountId = account.id
+        datastore.add(ACCOUNT_ID, account.id)
+    }
 
+    companion object {
+        const val ACCOUNT_ID = "account_id"
     }
 }
+
+private fun fromJson(string: String?): ErrorResponse {
+    return Gson().fromJson(string, ErrorResponse::class.java)
+}
+

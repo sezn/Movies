@@ -2,7 +2,7 @@ package com.szn.core.db
 
 import androidx.paging.PagingSource
 import androidx.room.*
-import com.szn.core.network.model.Movie
+import com.szn.core.network.model.user.Movie
 
 @Dao
 interface MovieDao {

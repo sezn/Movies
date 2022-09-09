@@ -2,7 +2,6 @@ package com.szn.movie.auth.ui
 
 import android.content.res.Configuration
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -13,10 +12,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.szn.core.R
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.szn.core.R
 import com.szn.movie.auth.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,14 +28,21 @@ fun LoginScreen(navController: NavHostController) {
     var login by remember { mutableStateOf("") }
     var pass by remember { mutableStateOf("") }
     var pseudo by remember { mutableStateOf("") }
+    val logged = remember { userViewModel.isLogged}
+    val openDialog = remember { userViewModel.showError}
     var errorMessage = userViewModel.errorMessage
+    val title = stringResource(id = R.string.account_login)
 
+    if(logged.value)
+        navController.navigate("home"){
+            launchSingleTop = true
+        }
 
-    val title = stringResource(id = R.string.account_create)
     Column(Modifier.padding(24.dp)) {
 
 //        Titre
         Text(text = title,
+            style = MaterialTheme.typography.h2,
             color = Color.Black)
 
         Spacer( Modifier.height(24.dp))
@@ -88,10 +94,8 @@ fun LoginScreen(navController: NavHostController) {
         Button(onClick = {
             Log.w("Login", "onButtonClick $login $pseudo")
             CoroutineScope(Dispatchers.Main).launch {
-                userViewModel.login(login, pass, pseudo)
+                userViewModel.login(pass, pseudo)
             }
-
-            navController.navigate("home")
 
         }) {
             Text(text = stringResource(id = R.string.account_create),
@@ -102,9 +106,8 @@ fun LoginScreen(navController: NavHostController) {
         }
     }
 
-    errorMessage.value.let {
-        Toast.makeText(navController.context, it, Toast.LENGTH_LONG).show()
-    }
+    if(openDialog.value)
+        ErrorDialog(openDialog, errorMessage)
 
 }
 

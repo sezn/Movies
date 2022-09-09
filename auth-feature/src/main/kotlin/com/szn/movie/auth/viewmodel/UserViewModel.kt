@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.szn.core.network.ApiStatus
+import com.szn.core.network.model.ErrorResponse
 import com.szn.core.repos.UserRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -14,6 +16,8 @@ class UserViewModel @Inject constructor(private val userRepository: UserRepo): V
 
     val TAG = UserViewModel::class.java.simpleName
     val isLogged = mutableStateOf(false)
+    val showError = mutableStateOf(false)
+    val isLoading = mutableStateOf(false)
     val errorMessage = mutableStateOf("")
 
     init {
@@ -25,20 +29,35 @@ class UserViewModel @Inject constructor(private val userRepository: UserRepo): V
     }
 
 
-    suspend fun login(login: String, pass: String, pseudo: String) {
-        userRepository.login(pseudo, pass).collect { auth ->
-            Log.w(TAG, "Login:: $auth")
-            if(!auth.success){
-                val er = auth.error
-                errorMessage.value = er?.status_message.toString()
-            } else {
-                isLogged.value = true
-            }
+    suspend fun login(/*login: String, */pass: String, pseudo: String) {
+        errorMessage.value = ""
+        userRepository.login(pseudo, pass)
+            .collect { result ->
+                when(result.status) {
+                    ApiStatus.SUCCESS -> {
+                        isLoading.value = false
+                        isLogged.value = true
+                        val auth = result.data
+                        Log.w(TAG, "Login sucesss $auth")
+                    }
+                    ApiStatus.ERROR -> {
+                        isLoading.value = false
+                        showError.value = true
+                        val error = result.data as ErrorResponse
+                        Log.e(TAG, "Login Error ${error.status_code} ${error.status_message}")
+                        errorMessage.value = error.status_message
+                    }
+                    ApiStatus.LOADING -> {
+                        isLoading.value = true
+                        Log.w(TAG, "Loading...")
+                    }
+                }
+
         }
     }
 
     fun favorite(id: Int) {
-        Log.w(TAG, "favorite $id sessId: ${userRepository.sessionId}  token: ${userRepository.token}")
+        Log.w(TAG, "favorite $id sessId: ${userRepository.sessionId}  token: ${userRepository.token}  ${userRepository.accountId}")
     }
 
 

@@ -7,5 +7,7 @@
     <string name="mail">Email</string>
     <string name="pass">Mot de passe</string>
     <string name="nickname">Pseudo</string>
+    <string name="error">Erreur</string>
+    <string name="ok">OK</string>
 
 </resources>

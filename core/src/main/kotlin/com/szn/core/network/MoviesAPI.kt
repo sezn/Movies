@@ -2,7 +2,9 @@ package com.szn.core.network
 
 import com.szn.core.network.model.Movies
 import com.szn.core.network.model.session.AuthResult
+import com.szn.core.network.model.user.Account
 import okhttp3.RequestBody
+import retrofit2.Response
 import retrofit2.http.*
 
 interface API {
@@ -57,10 +59,10 @@ interface API {
      * @param request_token
      */
     @POST("3/authentication/token/validate_with_login")
-    suspend fun login(@Body params: RequestBody): Result<AuthResult>
+    suspend fun login(@Body params: RequestBody): Response<AuthResult>
 
     @GET("3/account")
-    suspend fun getAccount(@Query("session_id") sessId: String): AuthResult
+    suspend fun getAccount(@Query("session_id") sessId: String): Account
 
     @GET("/account/{account_id}/favorite/movies")
     suspend fun getFavorites(@Path("account_id") accountId: String,

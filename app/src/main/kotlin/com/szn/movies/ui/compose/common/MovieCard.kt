@@ -17,7 +17,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.skydoves.landscapist.glide.GlideImage
 import com.szn.core.mappers.VideoMapper
-import com.szn.core.network.model.Movie
+import com.szn.core.network.model.user.Movie
 import com.szn.movies.R
 import com.szn.movies.domain.BuildConfig
 import com.szn.movies.domain.model.Video

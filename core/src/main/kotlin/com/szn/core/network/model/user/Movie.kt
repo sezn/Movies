@@ -1,4 +1,4 @@
-package com.szn.core.network.model
+package com.szn.core.network.model.user
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
