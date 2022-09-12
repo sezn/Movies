@@ -14,7 +14,6 @@ import com.szn.core.network.model.session.UserSession
 import com.szn.core.network.model.user.FavRequestBody
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,9 +31,15 @@ class UserRepo @Inject constructor(private val api: API,
 
     init {
         CoroutineScope(Dispatchers.Main).launch {
-            val sess = datastore.getSessionId()
-
-            Log.w(TAG, "init $sess")
+            datastore.getSessionId().let {
+                if (it != null)
+                    sessionId = it
+            }
+            datastore.getToken().let {
+                if (it != null)
+                    token = it
+            }
+            Log.w(TAG, "init $sessionId")
         }
     }
 
@@ -69,8 +74,9 @@ class UserRepo @Inject constructor(private val api: API,
 
     suspend fun login(mail: String, pass: String) = flow {
         emit(ApiResult.Loading(true))
-        delay(2000)
+//        delay(2000)
         val json = Gson().toJson(UserSession(mail, pass, token)).toRequestBody()
+
         val logResponse = api.login(json)
         if(logResponse.isSuccessful){
             logResponse.body()?.let { createSession(it) }
@@ -90,7 +96,11 @@ class UserRepo @Inject constructor(private val api: API,
 
     suspend fun favorite(accountId: String, sessId: String, movieId: Int) = flow {
         val json = Gson().toJson(FavRequestBody(true, movieId, MEDIA_TYPE.movie.name)).toRequestBody()
-        emit(api.favorite(accountId, sessId, json))
+        val mvs = api.favorite(accountId, sessId, json)
+        if(mvs.isSuccessful)
+            emit(ApiResult.Success(mvs))
+        else
+            emit(ApiResult.Error(fromJson(mvs.errorBody()?.string())))
     }
 
     companion object {

@@ -2,7 +2,9 @@ package com.szn.movies.ui.compose.home
 
 import android.content.res.Configuration
 import android.util.Log
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -27,7 +29,7 @@ import com.szn.movies.viewmodel.MoviesViewModel
 fun HeaderView(playlist: Playlist, navController: NavHostController,
                  moviesViewModel: MoviesViewModel = hiltViewModel()
 ) {
-    Log.w("PlaylistView", "${playlist.title} ${playlist.movies.size}")
+    Log.w("HeaderView", "${playlist.title} ${playlist.movies.size}")
 
     // We start the pager in the middle of the raw number of pages
     val pageCount = 20

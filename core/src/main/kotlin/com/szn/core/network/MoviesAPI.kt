@@ -75,5 +75,5 @@ interface API {
         @Path("account_id") accountId: String,
         @Query("session_id") sessId: String,
         @Body params: RequestBody
-    ): Movies
+    ): Response<Movies>
 }

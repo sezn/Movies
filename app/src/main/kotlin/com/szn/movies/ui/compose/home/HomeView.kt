@@ -10,10 +10,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -24,19 +21,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.szn.core.network.State
 import com.szn.movies.R
+import com.szn.movies.ui.compose.common.PlaylistsView
 import com.szn.movies.viewmodel.MoviesViewModel
 import kotlinx.coroutines.launch
-import androidx.compose.runtime.getValue
-import com.szn.core.Constants
-import com.szn.movies.domain.model.Playlist
-import com.szn.movies.ui.compose.common.PlaylistsView
-
-val homePlaylists = mutableListOf(
-    Playlist("Header", mutableListOf()),
-    Playlist("Les plus populaires", mutableListOf(), what = Constants.POPULARS),
-    Playlist("Les films à venir", mutableListOf(), what = Constants.UPCOMMINGS),
-    Playlist("Les mieux notés", mutableListOf(), what = "sort_by=vote_average.desc")
-)
 
 @Composable
 fun HomeView(navController: NavHostController, viewModel: MoviesViewModel = hiltViewModel()) {
@@ -44,6 +31,12 @@ fun HomeView(navController: NavHostController, viewModel: MoviesViewModel = hilt
     val scope = rememberCoroutineScope()
     val state by viewModel.state.collectAsState()
     Log.w(TAG, "compose $state")
+    val homePlaylists = viewModel.homePlaylists
+
+    scope.launch {
+        if(homePlaylists[1].movies.isEmpty())
+            viewModel.getHome()
+    }
 
     Surface(
         modifier = Modifier
@@ -90,7 +83,7 @@ fun HomeView(navController: NavHostController, viewModel: MoviesViewModel = hilt
                 }
                 State.SUCCESS -> {
                     Log.e(TAG, "State SUCCESS!!! ")
-                    PlaylistsView(navController)
+                    PlaylistsView(navController, homePlaylists)
                     }
 
                 }

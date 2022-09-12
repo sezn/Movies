@@ -75,7 +75,17 @@ class MoviesRepo @Inject constructor(private val api: API,
     }
 
     suspend fun getMostRated(): Flow<List<Video>> = flow{
-        val resp = api.getMovies("sort_by=vote_average.desc")
+        val resp = api.getMovies("sort_by=vote_average.asc")
+        val videos = mutableListOf<Video>()
+        resp.results.map {
+            val video = VideoMapper().map(it)
+            videos.add(video)
+        }
+        emit(videos)
+    }
+
+    suspend fun getUpComings(): Flow<List<Video>> = flow{
+        val resp = api.getUpcomingMovies()
         val videos = mutableListOf<Video>()
         resp.results.map {
             val video = VideoMapper().map(it)
