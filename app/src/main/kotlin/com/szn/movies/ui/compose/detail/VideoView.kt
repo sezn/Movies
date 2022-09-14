@@ -12,9 +12,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.IconToggleButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,12 +20,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.skydoves.landscapist.glide.GlideImage
 import com.szn.core.extensions.toYear
+import com.szn.core.network.State
+import com.szn.movie.auth.ui.ErrorDialog
 import com.szn.movie.auth.viewmodel.UserViewModel
 import com.szn.movies.R
 import com.szn.movies.actions.FAV
@@ -36,15 +37,31 @@ import com.szn.movies.actions.movieActions
 import com.szn.movies.domain.model.Video
 import com.szn.movies.domain.model.fakeMovie
 import com.szn.movies.ui.theme.AppTheme
+import com.szn.movies.viewmodel.MoviesViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.time.DurationUnit
+import kotlin.time.toDuration
 
 @Composable
-fun VideoView (video: Video){
-    val TAG = "VideoView"
+fun VideoView (video: Video,
+               userViewModel: UserViewModel = hiltViewModel(),
+               videoViewModel: MoviesViewModel = hiltViewModel()){
 
-    val userViewModel: UserViewModel = hiltViewModel()
+    val TAG = "VideoView"
+    val genders = remember { mutableStateOf("") }
+    val duration = remember { mutableStateOf("") }
+    val openDialog = remember { userViewModel.showError}
+    val scope = rememberCoroutineScope()
+
+    if(videoViewModel.movieState.value != State.LOADING && videoViewModel.movieState.value != State.SUCCESS)
+        scope.launch {
+            val vid = videoViewModel.getMovie(video.id)
+            duration.value = "${vid.duration?.toDuration(DurationUnit.MINUTES)}"
+            genders.value = vid.getGenders()
+            Log.w(TAG, "Video genres: ${genders.value}")
+        }
 
     Column(
         modifier = Modifier
@@ -74,14 +91,16 @@ fun VideoView (video: Video){
                 )
             }
 
-           GenderView(video)
+            GenderView(genders, duration)
 
             ActionsView { item, checked ->
                 Log.w(TAG, "onClick on ${item.name} $checked ${video.title}")
 
                 if(item.name == FAV){
                     CoroutineScope(Dispatchers.Main).launch {
-                        userViewModel.favorite(video.id)
+                        userViewModel.favorite(video.id).collect{
+
+                        }
                     }
                 }
 
@@ -93,6 +112,11 @@ fun VideoView (video: Video){
 
         }
     }
+
+    if(openDialog.value)
+        ErrorDialog(openDialog, userViewModel.errorMessage){
+            Log.w(TAG, "Dismissed!")
+        }
 }
 
 @Composable
@@ -107,7 +131,7 @@ fun HeaderView(video: Video) {
             modifier = Modifier
                 .fillMaxSize()
                 .constrainAs(image) {
-                    top.linkTo(this.parent.top)
+                    top.linkTo(parent.top)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     bottom.linkTo(parent.bottom)
@@ -132,23 +156,24 @@ fun HeaderView(video: Video) {
 }
 
 @Composable
-fun GenderView(video: Video) {
+fun GenderView(genders: MutableState<String>, duration: MutableState<String>) {
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
         val(genres, time) = createRefs()
         Text(
-            text = "TODO Genres, Animation, Mangas, series, familial, action, aventure etc ",
-            modifier =
-            Modifier
-                .padding(16.dp)
+            text = genders.value,
+            textAlign = TextAlign.Start,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(24.dp)
                 .constrainAs(genres) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
                     end.linkTo(time.start)
                 }
         )
-//            TODO: /movie/{movie_id}
+
         Text(
-            text = "1:28",
+            text = duration.value,
             modifier =
             Modifier.constrainAs(time) {
                 top.linkTo(parent.top)

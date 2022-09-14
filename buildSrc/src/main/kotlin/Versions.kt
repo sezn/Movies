@@ -8,6 +8,7 @@ object Versions {
     const val KOTLIN = "1.7.10"
     const val MATERIAL3 = "1.0.0-alpha14"
     const val COMPOSE =  "1.3.0-beta01"
+    const val COMPOSE_COMPILER =  "1.3.0"
     const val COROUTINES = "1.6.4"
     const val LIFECYCLE = "2.5.1"
     const val ROOM = "2.4.3"

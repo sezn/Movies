@@ -1,5 +1,6 @@
 package com.szn.core.network
 
+import com.szn.core.network.model.Movie
 import com.szn.core.network.model.Movies
 import com.szn.core.network.model.session.AuthResult
 import com.szn.core.network.model.user.Account
@@ -33,6 +34,8 @@ interface API {
                              @Query("page") page: Int? = 1): Movies
 
 
+    @GET("3/movie/{movie_id}")
+    suspend fun getMovie(@Path("movie_id")id: Int): Movie
 //    Auth
 
     @GET("3/authentication/token/new")

@@ -12,6 +12,7 @@ import com.szn.core.mappers.VideoMapper
 import com.szn.core.network.API
 import com.szn.core.network.State
 import com.szn.core.network.model.MEDIA_TYPE
+import com.szn.core.network.model.Movie
 import com.szn.core.network.model.TIME_TYPE
 import com.szn.movies.domain.MoviesRepository
 import com.szn.movies.domain.model.Playlist
@@ -92,6 +93,10 @@ class MoviesRepo @Inject constructor(private val api: API,
             videos.add(video)
         }
         emit(videos)
+    }
+
+    suspend fun getMovie(id: Int) : Movie{
+        return api.getMovie(id)
     }
 
     @OptIn(ExperimentalPagingApi::class)

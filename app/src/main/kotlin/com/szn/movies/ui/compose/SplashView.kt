@@ -1,5 +1,6 @@
 package com.szn.movies.ui.compose
 
+import android.util.Log
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
@@ -20,8 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.szn.core.R
 import com.szn.movie.auth.viewmodel.UserViewModel
-import com.szn.movies.R
 import com.szn.movies.ui.navigation.NavRoutes
 import kotlinx.coroutines.delay
 
@@ -30,7 +31,7 @@ fun SplashView(navController: NavHostController) {
     val TAG = "SplashView"
     val userViewModel: UserViewModel = hiltViewModel()
     val isLogged = userViewModel.isLogged
-//    Log.w(TAG, "IsLogged: $isLogged")
+    Log.w(TAG, "IsLogged: $isLogged")
     val scale = remember {
         Animatable(0f)
     }

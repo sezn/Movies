@@ -1,12 +1,15 @@
 package com.szn.core.network.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import com.szn.core.db.GenderConverter
 import com.szn.core.db.MovieConverter
+import kotlinx.parcelize.Parcelize
 
 @Entity
-@TypeConverters(MovieConverter::class)
+@TypeConverters(MovieConverter::class, GenderConverter::class)
 data class Movie(
     @PrimaryKey val id: Int,
     val title: String,
@@ -21,8 +24,25 @@ data class Movie(
     val release_date: String?,
     val video: Boolean?,
     val vote_average: Double?,
-    val vote_count: Int
-)
+    val vote_count: Int?,
+    val genres: List<Genre>?,
+    val runtime: Int?
+) {
+    fun getGenders(): List<String> {
+        val genders = mutableListOf<String>()
+        genres?.forEach {
+            genders.add(it.name)
+        }
+        return genders
+    }
+}
+
+@Parcelize
+data class Genre(
+    val id: Int,
+    val name: String
+): Parcelable
+
 
 enum class TIME_TYPE{
     day,

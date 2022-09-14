@@ -8,6 +8,7 @@ import androidx.paging.PagingData
 import com.szn.core.Constants
 import com.szn.core.datastore.DataStoreManager
 import com.szn.core.extensions.flattenToList
+import com.szn.core.mappers.VideoMapper
 import com.szn.core.network.State
 import com.szn.core.repos.MoviesRepo
 import com.szn.movies.datasource.MoviesDataSource
@@ -17,6 +18,7 @@ import com.szn.movies.domain.model.Video
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,6 +28,7 @@ class MoviesViewModel @Inject constructor(private val moviesRepo: MoviesRepo,
 ): ViewModel() {
 
     val state = moviesRepo.state
+    val movieState by lazy { MutableStateFlow<State>(State.START) }
 
     init {
         viewModelScope.launch {
@@ -68,6 +71,13 @@ class MoviesViewModel @Inject constructor(private val moviesRepo: MoviesRepo,
         popsPlaylist.movies = moviesRepo.getPopulars().flattenToList()
         comingPlaylist.movies = moviesRepo.getUpComings().flattenToList()
         ratedPlaylist.movies = moviesRepo.getMostRated().flattenToList()
+    }
+
+    suspend fun getMovie(id: Int): Video {
+        movieState.emit(State.LOADING)
+        val mv = moviesRepo.getMovie(id)
+        movieState.emit(State.SUCCESS)
+        return VideoMapper().map(mv)
     }
 
     companion object {

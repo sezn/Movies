@@ -21,22 +21,29 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 
+/**
+ * TODO: extract in common-ui?
+ */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ErrorDialog(openDialog: MutableState<Boolean>,
-                message: MutableState<String>) {
+                message: MutableState<String>,
+                onDismiss: () -> Unit) {
 
     Dialog(
         onDismissRequest = {
+            onDismiss.invoke()
             openDialog.value = false
         }
     ) {
         Surface(
-            modifier = Modifier
-                .fillMaxWidth(),
-            elevation = 4.dp,
+            modifier = Modifier.fillMaxWidth(),
+            elevation = 32.dp,
             //MEF: Need ExperimentalMaterialApi
-            onClick = { openDialog.value = false }
+            onClick = {
+                openDialog.value = false
+                onDismiss.invoke()
+            }
         ) {
             Column(
                 verticalArrangement = Arrangement.Center,
@@ -97,5 +104,5 @@ fun ErrorDialog(openDialog: MutableState<Boolean>,
 @Composable
 fun ErrorDialogPreview(){
         ErrorDialog(openDialog = mutableStateOf(true),
-            message = mutableStateOf("Erreur prévisualisation"))
+            message = mutableStateOf("Erreur prévisualisation")){}
 }

@@ -33,7 +33,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.COMPOSE
+        kotlinCompilerExtensionVersion = Versions.COMPOSE_COMPILER
     }
     buildFeatures {
         compose = true
@@ -86,4 +86,6 @@ dependencies {
 
     debugImplementation(Dependencies.compose_tooling)
     implementation(Dependencies.tooling_preview)
+    debugImplementation("androidx.customview:customview-poolingcontainer:1.0.0")
+    debugImplementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.0-alpha01")
 }

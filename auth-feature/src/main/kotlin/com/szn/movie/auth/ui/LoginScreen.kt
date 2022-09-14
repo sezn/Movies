@@ -2,12 +2,18 @@ package com.szn.movie.auth.ui
 
 import android.content.res.Configuration
 import android.util.Log
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,7 +43,15 @@ fun LoginScreen(navController: NavHostController) {
         navController.navigate("home"){
             launchSingleTop = true
         }
-
+    Image(painter = painterResource(id = R.drawable.background),
+        contentDescription = "BG",
+        contentScale = ContentScale.FillBounds,
+        modifier = Modifier.fillMaxSize(),
+        colorFilter = ColorFilter.tint(
+            Color(0x1A040722),
+            BlendMode.Saturation
+        )
+    )
     Column(Modifier.padding(24.dp)) {
 
 //        Titre
@@ -68,6 +82,7 @@ fun LoginScreen(navController: NavHostController) {
         Text(text = stringResource(id = R.string.nickname))
         RoundedCornersTextField(
             holder = "Gégé",
+
             onValueChange = { pseudo = it }
         )
 
@@ -107,7 +122,9 @@ fun LoginScreen(navController: NavHostController) {
     }
 
     if(openDialog.value)
-        ErrorDialog(openDialog, errorMessage)
+        ErrorDialog(openDialog, errorMessage){
+
+        }
 
 }
 
@@ -127,7 +144,8 @@ fun RoundedCornersTextField(holder: String, onValueChange: (String) -> Unit) {
     }
 
     OutlinedTextField(value = state.value,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.background(MaterialTheme.colors.background)
+            .fillMaxWidth(),
         onValueChange = {
             state.value = it
             onValueChange.invoke(it)
@@ -137,7 +155,7 @@ fun RoundedCornersTextField(holder: String, onValueChange: (String) -> Unit) {
         colors = TextFieldDefaults.outlinedTextFieldColors(
 //             textColor = Color.White,
 //             placeholderColor = Color.White,
-//             cursorColor = Color.Red,
+             cursorColor = Color.White,
             focusedBorderColor = Color.Black, // TODO: DarkMode
          ),
         placeholder = {
