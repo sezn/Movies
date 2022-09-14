@@ -1,5 +1,6 @@
 package com.szn.movies.ui.theme
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -62,6 +63,7 @@ private val Shapes = Shapes(
     large = RoundedCornerShape(0.dp)
 )
 
+@SuppressLint("ConflictingOnColor")
 @Composable
 fun AppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
 
