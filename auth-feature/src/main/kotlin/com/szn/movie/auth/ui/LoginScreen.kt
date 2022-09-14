@@ -7,7 +7,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
@@ -15,13 +19,15 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.szn.core.R
+import com.szn.movie.auth.R
 import com.szn.movie.auth.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,6 +44,7 @@ fun LoginScreen(navController: NavHostController) {
     val openDialog = remember { userViewModel.showError}
     var errorMessage = userViewModel.errorMessage
     val title = stringResource(id = R.string.account_login)
+    var passwordVisible by rememberSaveable { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
 
     if(logged.value)
@@ -45,7 +52,7 @@ fun LoginScreen(navController: NavHostController) {
             launchSingleTop = true
         }
 
-    Image(painter = painterResource(id = R.drawable.background),
+    Image(painter = painterResource(id = com.szn.core.R.drawable.background),
         contentDescription = "BG",
         contentScale = ContentScale.FillBounds,
         modifier = Modifier.fillMaxSize(),
@@ -58,53 +65,36 @@ fun LoginScreen(navController: NavHostController) {
 
 //        Titre
         Text(text = title,
-            style = MaterialTheme.typography.h2,
-            color = Color.Black)
+            style = MaterialTheme.typography.h2)
 
         Spacer( Modifier.height(24.dp))
-/*
-
-//        firstname
-        Text(text = stringResource(id = R.string.firstname))
-        RoundedCornersTextField(holder = "Gérard",
-            onValueChange = { login = it }
-        )
-        Spacer( Modifier.height(8.dp))
-
-        Text(text = stringResource(id = R.string.lastname))
-        RoundedCornersTextField(
-            holder = "Depardieu",
-            onValueChange = { pass = it }
-        )
-
-        Spacer( Modifier.height(8.dp))
-*/
 
     //        pseudo
         Text(text = stringResource(id = R.string.nickname))
         RoundedCornersTextField(
             holder = "Gégé",
-
             onValueChange = { pseudo = it }
         )
 
         Spacer( Modifier.height(8.dp))
-/*
-    //        mail
-        Text(text = stringResource(id = R.string.mail))
-        RoundedCornersTextField(
-            holder = stringResource(id = R.string.mail),
-            onValueChange = { pseudo = it }
-        )
-
-        Spacer( Modifier.height(8.dp))*/
 
     //        Pass
         Text(text = stringResource(id = R.string.pass))
         RoundedCornersTextField(
             holder = stringResource(id = R.string.pass),
-            onValueChange = { pass = it }
-        )
+            onValueChange = { pass = it },
+            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation()
+        ) {
+            val image = if (passwordVisible)
+                Icons.Filled.Visibility
+            else Icons.Filled.VisibilityOff
+
+            val description = if (passwordVisible) stringResource(id = com.szn.movie.auth.R.string.pass_hide) else stringResource(id = com.szn.movie.auth.R.string.pass_show)
+
+            IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                Icon(imageVector = image, description)
+            }
+        }
 
         Spacer( Modifier.height(48.dp))
 
@@ -115,7 +105,7 @@ fun LoginScreen(navController: NavHostController) {
             }
 
         }) {
-            Text(text = stringResource(id = R.string.account_create),
+            Text(text = stringResource(id = R.string.account_login),
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .padding(8.dp)
@@ -140,12 +130,18 @@ fun PreviewLoginScreen(){
  * TODO: extract
  */
 @Composable
-fun RoundedCornersTextField(holder: String, onValueChange: (String) -> Unit) {
+fun RoundedCornersTextField(
+    holder: String,
+    onValueChange: (String) -> Unit,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    trailingIcon: @Composable (() -> Unit)? = null
+) {
     val state = remember {
         mutableStateOf("")
     }
 
-    OutlinedTextField(value = state.value,
+    OutlinedTextField(
+        value = state.value,
         modifier = Modifier
             .background(MaterialTheme.colors.background)
             .fillMaxWidth(),
@@ -158,11 +154,13 @@ fun RoundedCornersTextField(holder: String, onValueChange: (String) -> Unit) {
         colors = TextFieldDefaults.outlinedTextFieldColors(
 //             textColor = Color.White,
 //             placeholderColor = Color.White,
-             cursorColor = Color.White,
+            cursorColor = Color.White,
             focusedBorderColor = Color.Black, // TODO: DarkMode
-         ),
+        ),
         placeholder = {
             Text(text = holder)
-        }
-        )
+        },
+        visualTransformation = visualTransformation,
+        trailingIcon = trailingIcon,
+    )
 }

@@ -36,6 +36,7 @@ object Dependencies {
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
     const val compose_foundation = "androidx.compose.foundation:foundation:${Versions.COMPOSE}"
     const val compose_navigation = "androidx.navigation:navigation-compose:2.5.1"
+    const val compose_extended = "androidx.compose.material:material-icons-extended:${Versions.COMPOSE}"
     const val appcompanist_navigation = "com.google.accompanist:accompanist-navigation-animation:${Versions.APP_COMPANIST}"
     const val appcompanist_pager = "com.google.accompanist:accompanist-pager:${Versions.APP_COMPANIST}"
 
