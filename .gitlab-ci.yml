@@ -64,7 +64,7 @@ before_script:
 # Basic android and gradle stuff
 # Check linting
 lintDebug:
-  interruptible: true
+  interruptible: false
   stage: build
   script:
     - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
