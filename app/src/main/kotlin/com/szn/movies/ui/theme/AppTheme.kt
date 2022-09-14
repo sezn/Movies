@@ -12,6 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+@SuppressLint("ConflictingOnColor")
 val LightColors = lightColors(
     background = Color.White,
     onBackground = Color.Black,
@@ -24,6 +25,7 @@ val LightColors = lightColors(
     onError = Color.LightGray
 )
 
+@SuppressLint("ConflictingOnColor")
 private val DarkColors = darkColors(
     background = Color(4, 7, 34),
     onBackground = Color.White,
@@ -63,7 +65,6 @@ private val Shapes = Shapes(
     large = RoundedCornerShape(0.dp)
 )
 
-@SuppressLint("ConflictingOnColor")
 @Composable
 fun AppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
 
