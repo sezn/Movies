@@ -69,15 +69,15 @@ lintDebug:
   script:
     - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
 
-# Make Project
-assembleDebug:
-  interruptible: true
-  stage: build
-  script:
-    - ./gradlew assembleDebug --stacktrace
-  artifacts:
-    paths:
-      - app/build/outputs/
+## Make Project
+#assembleDebug:
+#  interruptible: true
+#  stage: build
+#  script:
+#    - ./gradlew assembleDebug --stacktrace
+#  artifacts:
+#    paths:
+#      - app/build/outputs/
 
 
 # Run all tests, if any fails, interrupt the pipeline(fail it)

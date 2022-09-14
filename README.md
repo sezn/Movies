@@ -1,6 +1,11 @@
 ## The Goal
 Display a list of Videos using themoviedb.org API
 
+### 
+if you want to test from Android Studio, you have just to create an api.properties file 
+with api_key="YOUR_API_KEY" 
+Or put it in local.properties and change file name in app.gradle.kt
+
 ## Features
 # Home
 * Display lists of Movies
@@ -10,8 +15,8 @@ Display a list of Videos using themoviedb.org API
 Display Details of a Movie
 
 # Account
-## Create Account
-* should be a feature, maybe a module independant from Home
+## Auth Account
+* Feature module independant from Home
 
 ## Architecture:
 * ui layer, domain layer, data layer
@@ -32,3 +37,14 @@ Display Details of a Movie
 
 ### Tests:
     JUnit, Espresso
+
+
+# User Authentication
+User authentication is controlled with a session_id query parameter. You can generate a session_id by following these steps:
+## 1. Create a new request token
+## 2. Get the user to authorize the request token
+## 3. Create a new  session id with the authorized request token
+
+Creation:
+Automatically or using API this is not possible.
+Each of them will have to create their own account here on the website.

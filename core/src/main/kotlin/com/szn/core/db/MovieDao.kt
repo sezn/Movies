@@ -1,5 +1,6 @@
 package com.szn.core.db
 
+import androidx.paging.PagingSource
 import androidx.room.*
 import com.szn.core.network.model.Movie
 
@@ -17,13 +18,26 @@ interface MovieDao {
     suspend fun findByName(first: String, last: String): Movie
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(video: Movie): Long
+    suspend fun insert(Movie: Movie): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(videos: List<Movie>): LongArray
+    suspend fun insertAll(Movies: List<Movie>): LongArray
 
     @Delete
-    suspend fun delete(video: Movie)
+    suspend fun delete(Movie: Movie)
+
+    @Query("DELETE FROM movie")
+    suspend fun clear()
+
+    @Query("SELECT * FROM movie")
+    fun pagingSource(): PagingSource<Int, Movie>
+
+    @Query("SELECT * FROM movie ORDER BY popularity DESC")
+    fun pagingPopularSource(): PagingSource<Int, Movie>
+
+    @Query("SELECT * FROM movie ORDER BY (vote_average * vote_count) DESC")
+    fun pagingTopRatedSource(): PagingSource<Int, Movie>
+
 }
 
 

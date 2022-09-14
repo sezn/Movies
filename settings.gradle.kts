@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MoviesDb"
 include(":app", ":domain", ":core")
+include(":auth-feature")
