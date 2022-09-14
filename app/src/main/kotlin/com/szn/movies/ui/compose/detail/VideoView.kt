@@ -60,7 +60,6 @@ fun VideoView (video: Video,
             val vid = videoViewModel.getMovie(video.id)
             duration.value = "${vid.duration?.toDuration(DurationUnit.MINUTES)}"
             genders.value = vid.getGenders()
-            Log.w(TAG, "Video genres: ${genders.value}")
         }
 
     Column(
