@@ -98,7 +98,7 @@ fun VideoView (video: Video,
 
                 if(item.name == FAV){
                     CoroutineScope(Dispatchers.Main).launch {
-                        userViewModel.favorite(video.id).collect{
+                        userViewModel.favorite(checked, video.id).collect{
 
                         }
                     }
