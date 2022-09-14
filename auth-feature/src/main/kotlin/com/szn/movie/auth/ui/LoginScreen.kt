@@ -38,11 +38,13 @@ fun LoginScreen(navController: NavHostController) {
     val openDialog = remember { userViewModel.showError}
     var errorMessage = userViewModel.errorMessage
     val title = stringResource(id = R.string.account_login)
+    val scope = rememberCoroutineScope()
 
     if(logged.value)
         navController.navigate("home"){
             launchSingleTop = true
         }
+
     Image(painter = painterResource(id = R.drawable.background),
         contentDescription = "BG",
         contentScale = ContentScale.FillBounds,
@@ -144,7 +146,8 @@ fun RoundedCornersTextField(holder: String, onValueChange: (String) -> Unit) {
     }
 
     OutlinedTextField(value = state.value,
-        modifier = Modifier.background(MaterialTheme.colors.background)
+        modifier = Modifier
+            .background(MaterialTheme.colors.background)
             .fillMaxWidth(),
         onValueChange = {
             state.value = it

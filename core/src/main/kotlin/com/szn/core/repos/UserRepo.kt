@@ -28,6 +28,7 @@ class UserRepo @Inject constructor(private val api: API,
     var sessionId = ""
     var token = ""
     var accountId = 0
+    var isLogged = false
 
     init {
         CoroutineScope(Dispatchers.Main).launch {
@@ -38,8 +39,17 @@ class UserRepo @Inject constructor(private val api: API,
             datastore.getToken().let {
                 if (it != null)
                     token = it
+                else
+                    newToken()
             }
-            Log.w(TAG, "init $sessionId")
+            datastore.getValue(ACCOUNT_ID).let {
+                if(it != null)
+                    accountId = Integer.parseInt(it.toString())
+            }
+            Log.w(TAG, "init token: $token sess: $sessionId acc: $accountId")
+            if(token.isNotEmpty() && accountId > 0){
+                isLogged = true
+            }
         }
     }
 
@@ -94,8 +104,8 @@ class UserRepo @Inject constructor(private val api: API,
         datastore.add(ACCOUNT_ID, account.id)
     }
 
-    suspend fun favorite(accountId: String, sessId: String, movieId: Int) = flow {
-        val json = Gson().toJson(FavRequestBody(true, movieId, MEDIA_TYPE.movie.name)).toRequestBody()
+    suspend fun favorite(fav: Boolean, accountId: String, sessId: String, movieId: Int) = flow {
+        val json = Gson().toJson(FavRequestBody(fav, movieId, MEDIA_TYPE.movie.name)).toRequestBody()
         val mvs = api.favorite(accountId, sessId, json)
         if(mvs.isSuccessful)
             emit(ApiResult.Success(mvs))

@@ -14,22 +14,13 @@ import javax.inject.Inject
 class UserViewModel @Inject constructor(private val userRepository: UserRepo): ViewModel() {
 
     val TAG = UserViewModel::class.java.simpleName
-    val isLogged = mutableStateOf(false)
+    val isLogged = mutableStateOf(userRepository.isLogged)
     val showError = mutableStateOf(false)
     val isLoading = mutableStateOf(false)
     val errorMessage = mutableStateOf("")
 
     init {
-        Log.w(TAG, "init")
-        /*viewModelScope.launch {
-            val auth = userRepository.newToken()
-            Log.w(TAG, "init $auth  ${auth.request_token}")
-        }*/
-    }
-
-    suspend fun newToken(){
-        val auth = userRepository.newToken()
-        Log.w(TAG, "init $auth  ${auth.request_token}")
+        Log.w(TAG, "init ${isLogged.value}")
     }
 
     suspend fun login(/*login: String, */pass: String, pseudo: String) {
@@ -59,9 +50,9 @@ class UserViewModel @Inject constructor(private val userRepository: UserRepo): V
         }
     }
 
-    suspend fun favorite(id: Int) = flow {
+    suspend fun favorite(fav: Boolean, id: Int) = flow {
         Log.w(TAG, "favorite $id sessId: ${userRepository.sessionId}  token: ${userRepository.token}  ${userRepository.accountId}")
-        userRepository.favorite(userRepository.accountId.toString(), userRepository.sessionId, id).collect{ result ->
+        userRepository.favorite(fav, userRepository.accountId.toString(), userRepository.sessionId, id).collect{ result ->
             Log.w(TAG, "favorite.. $result")
             when(result.status) {
                 ApiStatus.SUCCESS -> {
@@ -77,8 +68,7 @@ class UserViewModel @Inject constructor(private val userRepository: UserRepo): V
                 }
                 else -> {}
             }
+        }
     }
-    }
-
 
 }

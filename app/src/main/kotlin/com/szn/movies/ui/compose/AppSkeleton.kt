@@ -49,7 +49,7 @@ fun NavigationHost(navController: NavHostController){
 
     NavHost(
         navController = navController,
-        startDestination = NavRoutes.Home.route
+        startDestination = NavRoutes.Splash.route
     ) {
 
         composable(NavRoutes.Splash.route) {

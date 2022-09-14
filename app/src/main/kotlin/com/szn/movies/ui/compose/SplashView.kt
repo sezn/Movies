@@ -24,7 +24,6 @@ import androidx.navigation.compose.rememberNavController
 import com.szn.core.R
 import com.szn.movie.auth.viewmodel.UserViewModel
 import com.szn.movies.ui.navigation.NavRoutes
-import kotlinx.coroutines.delay
 
 @Composable
 fun SplashView(navController: NavHostController) {
@@ -46,8 +45,7 @@ fun SplashView(navController: NavHostController) {
                     OvershootInterpolator(5f).getInterpolation(it)
                 })
         )
-        delay(1000L)
-//        navController.navigate(NavRoutes.Home.route)
+//        delay(1000L)
         navController.navigate(NavRoutes.Login.route)
     }
 
