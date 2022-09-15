@@ -107,6 +107,7 @@ fun LoginScreen(navController: NavHostController) {
         }) {
             Text(text = stringResource(id = R.string.account_login),
                 textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.h3,
                 modifier = Modifier
                     .padding(8.dp)
                     .fillMaxWidth())
@@ -114,9 +115,7 @@ fun LoginScreen(navController: NavHostController) {
     }
 
     if(openDialog.value)
-        ErrorDialog(openDialog, errorMessage){
-
-        }
+        ErrorDialog(openDialog, errorMessage){}
 
 }
 

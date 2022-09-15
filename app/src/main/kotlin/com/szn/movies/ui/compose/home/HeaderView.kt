@@ -4,8 +4,10 @@ import android.content.res.Configuration
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -22,11 +24,9 @@ import com.szn.movies.viewmodel.MoviesViewModel
 fun HeaderView(playlist: Playlist, navController: NavHostController,
                  moviesViewModel: MoviesViewModel = hiltViewModel()
 ) {
-    Log.w("HeaderView", "${playlist.title} ${playlist.movies.size}")
-
     val videos = moviesViewModel.trendingMovies.collectAsLazyPagingItems()
 
-    Column {
+    Column (Modifier.height(200.dp)){
 
         LazyRow(horizontalArrangement = Arrangement.spacedBy(24.dp)) {
             itemsIndexed(videos) { index, item ->
@@ -55,9 +55,4 @@ fun HeaderViewPreview(){
     AppTheme {
         HeaderView(playlist = playlist, navController = rememberNavController())
     }
-}
-
-private fun Int.floorMod(other: Int): Int = when (other) {
-    0 -> this
-    else -> this - floorDiv(other) * other
 }

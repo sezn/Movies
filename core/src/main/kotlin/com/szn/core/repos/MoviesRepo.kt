@@ -10,36 +10,26 @@ import com.szn.core.datastore.DataStoreManager
 import com.szn.core.db.AppDatabase
 import com.szn.core.mappers.VideoMapper
 import com.szn.core.network.API
-import com.szn.core.network.State
 import com.szn.core.network.model.MEDIA_TYPE
 import com.szn.core.network.model.Movie
 import com.szn.core.network.model.TIME_TYPE
 import com.szn.movies.domain.MoviesRepository
 import com.szn.movies.domain.model.Playlist
 import com.szn.movies.domain.model.Video
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class MoviesRepo @Inject constructor(private val api: API,
                                      private val database: AppDatabase,
-                                    private val datastore: DataStoreManager): MoviesRepository {
+                                     private val datastore: DataStoreManager): MoviesRepository {
 
-    val TAG = "MoviesRepo"
-    val state by lazy { MutableStateFlow<State>(State.LOADING) }
+    val TAG = MoviesRepo::class.java.simpleName
 
     init {
         Log.w(TAG, "init")
-        CoroutineScope(Dispatchers.IO).launch {
-            val movies = database.movieDao().getAll()
-            Log.w(TAG, "init ${movies.size}")
-        }
     }
 
     override suspend fun getTrendings(page: Int): Playlist {
