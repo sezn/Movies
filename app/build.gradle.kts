@@ -39,13 +39,13 @@ android {
     buildFeatures {
         compose = true
     }
-
 }
 
 dependencies {
     implementation(project(":domain"))
-    implementation(project(":core")) // TODO: see if can remove this dep?
+    implementation(project(":core"))
     implementation(project(":auth-feature"))
+    implementation(project(":account-feature"))
     implementation(Dependencies.android_core)
     implementation(Dependencies.activity_compose)
     implementation(Dependencies.material)

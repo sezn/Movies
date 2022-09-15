@@ -18,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import com.szn.core.network.utils.Constants
 import com.szn.movie.auth.ui.LoginScreen
 import com.szn.movies.R
+import com.szn.movies.account.ui.AccountView
 import com.szn.movies.domain.model.Video
 import com.szn.movies.ui.compose.detail.VideoView
 import com.szn.movies.ui.compose.home.HomeView
@@ -83,9 +84,12 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier){
             } else Log.e("App", "MEF, Video null!!")
         }
 
-
         composable(NavRoutes.Login.route) {
             LoginScreen(navController)
+        }
+
+        composable(NavRoutes.Account.route) {
+            AccountView()
         }
     }
 }
