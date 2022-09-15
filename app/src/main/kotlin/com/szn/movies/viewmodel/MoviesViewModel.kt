@@ -11,7 +11,6 @@ import com.szn.core.extensions.flattenToList
 import com.szn.core.mappers.VideoMapper
 import com.szn.core.network.State
 import com.szn.core.repos.MoviesRepo
-import com.szn.movies.datasource.MoviesDataSource
 import com.szn.movies.datasource.TrendingsDataSource
 import com.szn.movies.domain.model.Playlist
 import com.szn.movies.domain.model.Video
@@ -41,23 +40,6 @@ class MoviesViewModel @Inject constructor(private val moviesRepo: MoviesRepo,
         TrendingsDataSource(moviesRepo)
     }.flow
 
-    val ratedMovies: Flow<PagingData<Video>> = Pager(PagingConfig(pageSize = 20)) {
-        MoviesDataSource(moviesRepo, "sort_by=vote_average.desc")
-    }.flow
-
-    val recentMovies: Flow<PagingData<Video>> = Pager(PagingConfig(pageSize = 20)) {
-        MoviesDataSource(moviesRepo, "primary_release_year=2022&sort_by=vote_average.desc")
-    }.flow
-
-
-    val pagedFlow = moviesRepo.pagedFlow
-    val upcomingsFlow = moviesRepo.upcomingsPagedFlow
-    val popularsPagedFlow = moviesRepo.popularPagedFlow
-
-    suspend fun getPopulars() = moviesRepo.getMovies("", 1)
-    suspend fun getMostRated() = moviesRepo.getMostRated()
-    suspend fun getUpComing() = moviesRepo.getUpComings()
-
     private val popsPlaylist = Playlist("Les plus populaires", mutableListOf(), what = Constants.POPULARS)
     private val comingPlaylist = Playlist("Les films à venir", mutableListOf(), what = Constants.UPCOMMINGS)
     private val ratedPlaylist = Playlist("Les mieux notés", mutableListOf(), what = "sort_by=vote_average.desc")
@@ -76,8 +58,9 @@ class MoviesViewModel @Inject constructor(private val moviesRepo: MoviesRepo,
     suspend fun getMovie(id: Int): Video {
         movieState.emit(State.LOADING)
         val mv = moviesRepo.getMovie(id)
+        val video = VideoMapper().map(mv)
         movieState.emit(State.SUCCESS)
-        return VideoMapper().map(mv)
+        return video
     }
 
     companion object {

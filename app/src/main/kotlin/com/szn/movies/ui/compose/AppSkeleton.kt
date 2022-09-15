@@ -36,15 +36,22 @@ fun AppSkeleton() {
     val navController = rememberNavController()
     var (canPop, setCanPop) = remember { mutableStateOf(false) }
     var title = mutableStateOf(stringResource(id = R.string.app_name))
+    val showTopBar = remember { mutableStateOf(false) }
     navController.addOnDestinationChangedListener { controller, destination, _ ->
         setCanPop(controller.previousBackStackEntry != null && destination.route != NavRoutes.Home.route)
+
+        if(destination.route != NavRoutes.Splash.route)
+            showTopBar.value = true
     }
     Log.w(TAG, "compose ${navController.currentDestination?.route} pop $canPop")
 
     AppTheme {
         Scaffold(
             modifier = Modifier.testTag(Constants.APP),
-            topBar = { TopBar(navController, canPop, title) },
+            topBar = {
+                if(showTopBar.value)
+                    TopBar(navController, canPop, title)
+                     },
             contentColor = MaterialTheme.colors.onBackground,
             content = {
                 NavigationHost(navController = navController)
