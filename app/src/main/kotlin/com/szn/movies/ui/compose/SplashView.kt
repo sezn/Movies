@@ -45,7 +45,6 @@ fun SplashView(navController: NavHostController) {
                     OvershootInterpolator(5f).getInterpolation(it)
                 })
         )
-//        delay(1000L)
         navController.navigate(NavRoutes.Login.route)
     }
 

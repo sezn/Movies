@@ -50,6 +50,7 @@ dependencies {
     testImplementation(Dependencies.room_testing)
 
     implementation(Dependencies.datastore)
+    implementation(Dependencies.compose_runtime)
 
     testImplementation(Dependencies.test_junit)
     androidTestImplementation(Dependencies.test_junit_ext)
