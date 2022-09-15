@@ -27,7 +27,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.skydoves.landscapist.glide.GlideImage
 import com.szn.core.extensions.toYear
-import com.szn.core.network.State
 import com.szn.movie.auth.ui.dialogs.ErrorDialog
 import com.szn.movie.auth.viewmodel.UserViewModel
 import com.szn.movies.R
@@ -55,12 +54,13 @@ fun VideoView (video: Video,
     val openDialog = remember { userViewModel.showError}
     val scope = rememberCoroutineScope()
 
-    if(videoViewModel.movieState.value != State.LOADING && videoViewModel.movieState.value != State.SUCCESS)
+    LaunchedEffect(key1 = "Video", block = {
         scope.launch {
             val vid = videoViewModel.getMovie(video.id)
             duration.value = "${vid.duration?.toDuration(DurationUnit.MINUTES)}"
             genders.value = vid.getGenders()
         }
+    })
 
     Column(
         modifier = Modifier
