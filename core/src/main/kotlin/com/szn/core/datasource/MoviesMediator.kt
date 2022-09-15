@@ -65,9 +65,7 @@ class MoviesMediator @Inject constructor(private val api: API,
                 api.getMovies(null).results
             }
 
-
-            if (response != null)
-                dataStore.setLastUpdated(System.currentTimeMillis())
+            dataStore.setLastUpdated(System.currentTimeMillis())
 
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {

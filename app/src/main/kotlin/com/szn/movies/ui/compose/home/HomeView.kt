@@ -33,10 +33,13 @@ fun HomeView(navController: NavHostController, viewModel: MoviesViewModel = hilt
     Log.w(TAG, "compose $state")
     val homePlaylists = viewModel.homePlaylists
 
-    scope.launch {
-        if(homePlaylists[1].movies.isEmpty())
-            viewModel.getHome()
-    }
+    LaunchedEffect(key1 = "Home", block = {
+        scope.launch {
+            if(homePlaylists[1].movies.isEmpty())
+                viewModel.getHome()
+        }
+    })
+
 
     Surface(
         modifier = Modifier

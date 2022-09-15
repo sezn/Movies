@@ -115,5 +115,6 @@ fun logout(navController: NavHostController, scope: CoroutineScope, userViewMode
 @Preview
 @Composable
 fun TopBarPreview(){
-    TopBar(rememberNavController(), rememberCoroutineScope(), false, true, mutableStateOf("Preview"))
+    val title = remember { mutableStateOf("Preview") }
+    TopBar(rememberNavController(), rememberCoroutineScope(), false, true, title)
 }

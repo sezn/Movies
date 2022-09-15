@@ -1,6 +1,7 @@
 package com.szn.movies.ui.compose
 
 import android.util.Log
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -29,7 +30,8 @@ fun AppSkeleton() {
     val navController = rememberNavController()
     val scope = rememberCoroutineScope()
     var (canPop, setCanPop) = remember { mutableStateOf(false) }
-    var title = mutableStateOf(stringResource(id = R.string.app_name))
+    val mainTitle = stringResource(id = R.string.app_name)
+    var title = remember { mutableStateOf(mainTitle) }
     val showTopBar = remember { mutableStateOf(false) }
     val showLogout = remember { mutableStateOf(false) }
     navController.addOnDestinationChangedListener { controller, destination, _ ->
@@ -50,15 +52,15 @@ fun AppSkeleton() {
                     TopBar(navController, scope, canPop, showLogout.value, title)
                      },
             contentColor = MaterialTheme.colors.onBackground,
-            content = {
-                NavigationHost(navController = navController)
+            content = { padding ->
+                NavigationHost(navController = navController, modifier = Modifier.padding(padding))
             }
         )
     }
 }
 
 @Composable
-fun NavigationHost(navController: NavHostController){
+fun NavigationHost(navController: NavHostController, modifier: Modifier){
 
     NavHost(
         navController = navController,
