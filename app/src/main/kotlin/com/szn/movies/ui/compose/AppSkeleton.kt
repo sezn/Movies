@@ -6,6 +6,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -26,14 +27,18 @@ import com.szn.movies.ui.theme.AppTheme
 fun AppSkeleton() {
     val TAG = "CrossApp"
     val navController = rememberNavController()
+    val scope = rememberCoroutineScope()
     var (canPop, setCanPop) = remember { mutableStateOf(false) }
     var title = mutableStateOf(stringResource(id = R.string.app_name))
     val showTopBar = remember { mutableStateOf(false) }
+    val showLogout = remember { mutableStateOf(false) }
     navController.addOnDestinationChangedListener { controller, destination, _ ->
         setCanPop(controller.previousBackStackEntry != null && destination.route != NavRoutes.Home.route)
 
         if(destination.route != NavRoutes.Splash.route)
             showTopBar.value = true
+
+        showLogout.value = destination.route == NavRoutes.Home.route
     }
     Log.w(TAG, "compose ${navController.currentDestination?.route} pop $canPop")
 
@@ -42,7 +47,7 @@ fun AppSkeleton() {
             modifier = Modifier.testTag(Constants.APP),
             topBar = {
                 if(showTopBar.value)
-                    TopBar(navController, canPop, title)
+                    TopBar(navController, scope, canPop, showLogout.value, title)
                      },
             contentColor = MaterialTheme.colors.onBackground,
             content = {

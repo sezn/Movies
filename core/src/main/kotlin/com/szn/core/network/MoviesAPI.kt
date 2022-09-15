@@ -67,6 +67,9 @@ interface API {
     @GET("3/account")
     suspend fun getAccount(@Query("session_id") sessId: String): Account
 
+    @DELETE("3/authentication/session")
+    suspend fun logout(@Query("session_id") sessId: String): Response<AuthResult>
+
     @GET("3/account/{account_id}/favorite/movies")
     suspend fun getFavorites(@Path("account_id") accountId: String,
                              @Query("session_id") sessId: String,

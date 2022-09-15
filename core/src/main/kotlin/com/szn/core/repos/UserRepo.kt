@@ -1,8 +1,10 @@
 package com.szn.core.repos
 
 import android.util.Log
+import androidx.compose.runtime.mutableStateOf
 import com.google.gson.Gson
 import com.szn.core.datastore.DataStoreManager
+import com.szn.core.datastore.DataStoreManager.Companion.ACCOUNT_ID
 import com.szn.core.db.AppDatabase
 import com.szn.core.extensions.toRequestBody
 import com.szn.core.network.API
@@ -25,35 +27,40 @@ class UserRepo @Inject constructor(private val api: API,
                                   private val datastore: DataStoreManager) {
 
     val TAG = UserRepo::class.java.simpleName
-    var sessionId = ""
-    var token = ""
+    var sessionId: String? = null
+    var token: String? = null
     var accountId = 0
-    var isLogged = false
+    var isLogged = mutableStateOf(false)
 
     init {
+        Log.w(TAG, "init")
         CoroutineScope(Dispatchers.Main).launch {
-            datastore.getSessionId().let {
-                if (it != null)
-                    sessionId = it
-            }
-            datastore.getToken().let {
-                if (it != null)
-                    token = it
-                else
-                    newToken()
-            }
-            datastore.getValue(ACCOUNT_ID).let {
-                if(it != null)
-                    accountId = Integer.parseInt(it.toString())
-            }
-            Log.w(TAG, "init token: $token sess: $sessionId acc: $accountId")
-            if(token.isNotEmpty() && accountId > 0){
-                isLogged = true
-            }
+           checkDataStore()
         }
     }
 
-    suspend fun newToken(): AuthResult {
+    private suspend fun checkDataStore() {
+        datastore.getSessionId().let {
+            if (it != null)
+                sessionId = it
+        }
+        datastore.getToken().let {
+            if (it != null)
+                token = it
+            else
+                newToken()
+        }
+        datastore.getValue(ACCOUNT_ID).let {
+            if(it != null)
+                accountId = Integer.parseInt(it.toString())
+        }
+        Log.w(TAG, "checkDataStore token: $token sess: $sessionId acc: $accountId")
+        if(token?.isNotEmpty() == true && accountId > 0){
+            isLogged.value = true
+        }
+    }
+
+    private suspend fun newToken(): AuthResult {
         val auth = api.authenticate()
         if(auth != null && auth.success && auth.request_token?.isNotEmpty() == true) {
             token = auth.request_token
@@ -73,6 +80,7 @@ class UserRepo @Inject constructor(private val api: API,
             sess.session_id?.let {
                 datastore.setSessionId(it)
                 sessionId = it
+                isLogged.value = true
                 getAccount(it)
             }
             sess
@@ -84,8 +92,10 @@ class UserRepo @Inject constructor(private val api: API,
 
     suspend fun login(mail: String, pass: String) = flow {
         emit(ApiResult.Loading(true))
-//        delay(2000)
-        val json = Gson().toJson(UserSession(mail, pass, token)).toRequestBody()
+        if(token.isNullOrEmpty()){
+            emit(ApiResult.Error(ErrorResponse(-1, "No token provided", false)))
+        }
+        val json = Gson().toJson(UserSession(mail, pass, token!!)).toRequestBody()
 
         val logResponse = api.login(json)
         if(logResponse.isSuccessful){
@@ -104,18 +114,32 @@ class UserRepo @Inject constructor(private val api: API,
         datastore.add(ACCOUNT_ID, account.id)
     }
 
-    suspend fun favorite(fav: Boolean, accountId: String, sessId: String, movieId: Int) = flow {
+    suspend fun favorite(fav: Boolean, accountId: String, movieId: Int) = flow {
         val json = Gson().toJson(FavRequestBody(fav, movieId, MEDIA_TYPE.movie.name)).toRequestBody()
-        val mvs = api.favorite(accountId, sessId, json)
+        val mvs = api.favorite(accountId, sessionId!!, json)
         if(mvs.isSuccessful)
             emit(ApiResult.Success(mvs))
         else
             emit(ApiResult.Error(fromJson(mvs.errorBody()?.string())))
     }
 
-    companion object {
-        const val ACCOUNT_ID = "account_id"
+    suspend fun logout() = flow {
+        if(sessionId.isNullOrEmpty())
+            emit(ApiResult.Error("you dont have a valid Session"))
+
+        val lout = api.logout(sessionId!!)
+        if(lout.isSuccessful){
+            datastore.clear()
+            sessionId = null
+            isLogged.value = false
+            token = null
+            accountId = 0
+            newToken()
+            emit(ApiResult.Success(lout))
+        } else
+            emit(ApiResult.Error(fromJson(lout.errorBody()?.string())))
     }
+
 }
 
 private fun fromJson(string: String?): ErrorResponse {

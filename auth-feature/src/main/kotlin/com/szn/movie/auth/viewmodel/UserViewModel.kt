@@ -14,7 +14,7 @@ import javax.inject.Inject
 class UserViewModel @Inject constructor(private val userRepository: UserRepo): ViewModel() {
 
     val TAG = UserViewModel::class.java.simpleName
-    val isLogged = mutableStateOf(userRepository.isLogged)
+    val isLogged = userRepository.isLogged
     val showError = mutableStateOf(false)
     val isLoading = mutableStateOf(false)
     val errorMessage = mutableStateOf("")
@@ -52,7 +52,7 @@ class UserViewModel @Inject constructor(private val userRepository: UserRepo): V
 
     suspend fun favorite(fav: Boolean, id: Int) = flow {
         Log.w(TAG, "favorite $id sessId: ${userRepository.sessionId}  token: ${userRepository.token}  ${userRepository.accountId}")
-        userRepository.favorite(fav, userRepository.accountId.toString(), userRepository.sessionId, id).collect{ result ->
+        userRepository.favorite(fav, userRepository.accountId.toString(), id).collect{ result ->
             Log.w(TAG, "favorite.. $result")
             when(result.status) {
                 ApiStatus.SUCCESS -> {
@@ -70,5 +70,7 @@ class UserViewModel @Inject constructor(private val userRepository: UserRepo): V
             }
         }
     }
+
+    suspend fun logout() = userRepository.logout()
 
 }
