@@ -55,7 +55,11 @@ private val Typography = Typography(
     h2 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = 32.sp,
-//        letterSpacing = (-0.5).sp
+    ),
+    h3 = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize = 28.sp,
+        letterSpacing = (1.2).sp
     ),
 )
 
