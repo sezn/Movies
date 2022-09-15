@@ -16,6 +16,7 @@ android {
         targetSdk = Versions.ANDROID
         versionCode = 1
         versionName = "1.0"
+        base.archivesName.set("Movies-${android.defaultConfig.versionName}(${android.defaultConfig.versionCode})")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
