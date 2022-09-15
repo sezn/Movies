@@ -1,4 +1,4 @@
-package com.szn.movie.auth.ui
+package com.szn.movie.auth.ui.dialogs
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image

@@ -28,7 +28,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.skydoves.landscapist.glide.GlideImage
 import com.szn.core.extensions.toYear
 import com.szn.core.network.State
-import com.szn.movie.auth.ui.ErrorDialog
+import com.szn.movie.auth.ui.dialogs.ErrorDialog
 import com.szn.movie.auth.viewmodel.UserViewModel
 import com.szn.movies.R
 import com.szn.movies.actions.FAV

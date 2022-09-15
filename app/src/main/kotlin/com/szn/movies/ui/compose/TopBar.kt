@@ -8,9 +8,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -22,17 +20,25 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.szn.core.R
 import com.szn.core.network.ApiStatus
+import com.szn.movie.auth.ui.dialogs.LogoutDialog
 import com.szn.movie.auth.viewmodel.UserViewModel
 import com.szn.movies.ui.navigation.NavRoutes
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
-fun TopBar(navController: NavHostController, canPop: Boolean, showLogout: Boolean, title: MutableState<String>) {
+fun TopBar(
+    navController: NavHostController,
+    scope: CoroutineScope,
+    canPop: Boolean,
+    showLogout: Boolean,
+    title: MutableState<String>
+) {
 
     val userViewModel: UserViewModel = hiltViewModel()
     val context = LocalContext.current
+    val openDialog = remember { mutableStateOf(false) }
+
     Log.w("TopBar", "logged: ${userViewModel.isLogged}...")
     if(canPop){
         TopAppBar(
@@ -63,22 +69,10 @@ fun TopBar(navController: NavHostController, canPop: Boolean, showLogout: Boolea
                 )
             },
             actions = {
+                // Just show it on Home for the moment
                 if (showLogout && userViewModel.isLogged.value){
                     IconButton(onClick = {
-
-//                    openDialog.value = true
-                        CoroutineScope(Dispatchers.Main).launch {
-
-                            userViewModel.logout().collect{
-                                Log.w("TopBar", "Logout $it ")
-                                if(it.status == ApiStatus.SUCCESS){
-                                    navController.navigate(NavRoutes.Splash.route)
-                                } else if(it.status == ApiStatus.ERROR) {
-                                    Toast.makeText(context, "Error while Logout ${it.message}", Toast.LENGTH_LONG).show()
-                                }
-                            }
-
-                        }
+                        openDialog.value = true
                     }) {
                         Icon(
                             painterResource(id = R.drawable.ic_power_settings),
@@ -92,11 +86,34 @@ fun TopBar(navController: NavHostController, canPop: Boolean, showLogout: Boolea
             backgroundColor = MaterialTheme.colors.background,
         )
     }
+
+    if(openDialog.value) {
+        LogoutDialog(openDialog = openDialog, {
+            Log.w("TopBar", "logout!!!!")
+            logout(navController, scope, userViewModel)
+        }, {
+            Log.w("TopBar", "dismissed")
+        })
+    }
+
 }
 
+fun logout(navController: NavHostController, scope: CoroutineScope, userViewModel: UserViewModel){
+    Log.w("TopBar", "Logout")
+    scope.launch {
+        userViewModel.logout().collect{
+            Log.w("TopBar", "Logout $it ")
+            if(it.status == ApiStatus.SUCCESS){
+                navController.navigate(NavRoutes.Splash.route)
+            } else if(it.status == ApiStatus.ERROR) {
+                Toast.makeText(navController.context, "Error while Logout ${it.message}", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+}
 
 @Preview
 @Composable
 fun TopBarPreview(){
-    TopBar(rememberNavController(), false, true, mutableStateOf("Preview"))
+    TopBar(rememberNavController(), rememberCoroutineScope(), false, true, mutableStateOf("Preview"))
 }

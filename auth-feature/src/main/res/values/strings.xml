@@ -9,4 +9,8 @@
     <string name="nickname">Pseudo</string>
     <string name="pass_show">Montrer le mdp</string>
     <string name="pass_hide">Cacher le mdp</string>
+    <string name="logout">Se déconnecter</string>
+    <string name="logout_confirm">Etes vous sûr de vouloir vous déconnecter?</string>
+    <string name="ok">OK</string>
+    <string name="nok">No</string>
 </resources>

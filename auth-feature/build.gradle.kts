@@ -36,6 +36,7 @@ dependencies {
     implementation(Dependencies.compose_navigation)
     implementation(Dependencies.compose_runtime)
     implementation(Dependencies.material_compose)
+    implementation(Dependencies.material3)
     implementation(Dependencies.compose_extended)
 
     implementation(Dependencies.hilt)
