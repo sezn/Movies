@@ -13,7 +13,7 @@ https://9c8cb97.online-server.cloud/gitlab/juszn/moviesdb/-/blob/main/app/releas
 ## Features
 # Home
 * Display lists of Movies
-* API is paginated, so will use a DataSource
+* API is paginated, so will use a DataSource for the Header
 
 # Detail
 Display Details of a Movie
@@ -23,10 +23,14 @@ Display Details of a Movie
 * Feature module independant from Home
 
 ## Architecture:
-* ui layer, domain layer, data layer
-* MVVM for UI
+* UI layer, domain layer, data layer
+* MVVM
 * DI by Hilt
 * Jetpack Compose
+
+#Dependencies:
+Dependencies and versions are in buildSrc module. buildSrc is the first module compiled during a Gradle build, and its source artifacts are available throughout your entire build script.
+
 
 ## Libraries:
 ### DI:
