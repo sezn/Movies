@@ -28,7 +28,7 @@ Display Details of a Movie
 * DI by Hilt
 * Jetpack Compose
 
-# Dependencies:
+## Dependencies:
 Dependencies and versions are in buildSrc module. buildSrc is the first module compiled during a Gradle build, and its source artifacts are available throughout your entire build script.
 
 
