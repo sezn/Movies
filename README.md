@@ -6,9 +6,7 @@ if you want to test from Android Studio, you have just to create an api.properti
 with api_key="YOUR_API_KEY" 
 Or put it in local.properties and change file name in app.gradle.kt
 
-An APK is available in the Folder app/release 
-
-[Release](/app/release)
+A signed APK is available in the Folder app/release [Release](/app/release)
 
 https://9c8cb97.online-server.cloud/gitlab/juszn/moviesdb/-/blob/main/app/release/Movies-1.0(1)-release.apk
 
