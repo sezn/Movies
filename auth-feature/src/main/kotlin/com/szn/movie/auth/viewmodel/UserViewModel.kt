@@ -72,5 +72,9 @@ class UserViewModel @Inject constructor(private val userRepository: UserRepo): V
     }
 
     suspend fun logout() = userRepository.logout()
+    suspend fun getUser() = flow {
+//        userRepository.getAccount()
+        emit(null)
+    }
 
 }

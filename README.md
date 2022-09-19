@@ -6,10 +6,14 @@ if you want to test from Android Studio, you have just to create an api.properti
 with api_key="YOUR_API_KEY" 
 Or put it in local.properties and change file name in app.gradle.kt
 
+A signed APK is available in the Folder app/release [Release](/app/release)
+
+https://9c8cb97.online-server.cloud/gitlab/juszn/moviesdb/-/blob/main/app/release/Movies-1.0(1)-release.apk
+
 ## Features
 # Home
 * Display lists of Movies
-* API is paginated, so will use a DataSource
+* API is paginated, so will use a DataSource for the Header
 
 # Detail
 Display Details of a Movie
@@ -19,10 +23,14 @@ Display Details of a Movie
 * Feature module independant from Home
 
 ## Architecture:
-* ui layer, domain layer, data layer
-* MVVM for UI
+* UI layer, domain layer, data layer
+* MVVM
 * DI by Hilt
 * Jetpack Compose
+
+## Dependencies:
+Dependencies and versions are in buildSrc module. buildSrc is the first module compiled during a Gradle build, and its source artifacts are available throughout your entire build script.
+
 
 ## Libraries:
 ### DI:

@@ -12,11 +12,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.szn.core.R
 import com.szn.movie.auth.viewmodel.UserViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
 fun AccountView() {
 
     val userViewModel: UserViewModel = hiltViewModel()
+    CoroutineScope(Dispatchers.Main).launch {
+
+        userViewModel.getUser()
+    }
     Image(painter = painterResource(id = R.drawable.background),
         contentDescription = "BG",
         contentScale = ContentScale.FillBounds,

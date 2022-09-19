@@ -65,7 +65,8 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier){
 
     NavHost(
         navController = navController,
-        startDestination = NavRoutes.Splash.route
+        startDestination = NavRoutes.Splash.route,
+        modifier = modifier
     ) {
 
         composable(NavRoutes.Splash.route) {

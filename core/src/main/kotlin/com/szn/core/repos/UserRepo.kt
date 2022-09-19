@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import com.google.gson.Gson
 import com.szn.core.datastore.DataStoreManager
+import com.szn.core.datastore.DataStoreManager.Companion.ACCOUNT
 import com.szn.core.datastore.DataStoreManager.Companion.ACCOUNT_ID
 import com.szn.core.db.AppDatabase
 import com.szn.core.extensions.toRequestBody
@@ -112,6 +113,7 @@ class UserRepo @Inject constructor(private val api: API,
         Log.w(TAG, "getAccount $account")
         accountId = account.id
         datastore.add(ACCOUNT_ID, account.id)
+        datastore.add(ACCOUNT, account)
     }
 
     suspend fun favorite(fav: Boolean, accountId: String, movieId: Int) = flow {
