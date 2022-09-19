@@ -37,8 +37,6 @@ import com.szn.movies.domain.model.Video
 import com.szn.movies.domain.model.fakeMovie
 import com.szn.movies.ui.theme.AppTheme
 import com.szn.movies.viewmodel.MoviesViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
@@ -96,7 +94,7 @@ fun VideoView (video: Video,
                 Log.w(TAG, "onClick on ${item.name} $checked ${video.title}")
 
                 if(item.name == FAV){
-                    CoroutineScope(Dispatchers.Main).launch {
+                    scope.launch {
                         userViewModel.favorite(checked, video.id).collect{
 
                         }
