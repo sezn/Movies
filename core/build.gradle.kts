@@ -1,7 +1,8 @@
 plugins {
     id(Plugins.androidLibrary)
-    id(Plugins.jetAndroid)
+    id(Plugins.kotlinAndroid)
     id(Plugins.kotlinKapt)
+    id(Plugins.kotlinSerialization)
     id(Plugins.androidHilt)
     id(Plugins.kotlinParcelize)
 }
@@ -54,9 +55,13 @@ dependencies {
     implementation(Dependencies.room_paging)
     kapt(Dependencies.room_compiler)
     testImplementation(Dependencies.room_testing)
+    implementation(Dependencies.datastore)
 
     implementation(Dependencies.datastore)
+    implementation(Dependencies.datastore_preferences)
     implementation(Dependencies.compose_runtime)
+    implementation(Dependencies.kotlin_collections_immutable)
+    implementation(Dependencies.kotlin_serialization_json)
 
     testImplementation(Dependencies.test_junit)
     androidTestImplementation(Dependencies.test_junit_ext)

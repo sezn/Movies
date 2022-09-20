@@ -1,20 +1,19 @@
 package com.szn.core.network.model.user
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 
-@Parcelize
+@Serializable
 data class Avatar(
     val gravatar: Gravatar,
     val tmdb: Tmdb
-): Parcelable
+)
 
-@Parcelize
+@Serializable
 data class Gravatar(
     val hash: String
-): Parcelable
+)
 
-@Parcelize
+@Serializable
 data class Tmdb(
     val avatar_path: String?
-): Parcelable
+)

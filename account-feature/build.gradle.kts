@@ -37,7 +37,7 @@ dependencies {
     implementation(Dependencies.material_compose)
     implementation(Dependencies.material3)
     implementation(Dependencies.compose_extended)
-
+    implementation(Dependencies.datastore)
     implementation(Dependencies.hilt)
     implementation(Dependencies.hiltCompose)
     kapt(Dependencies.hiltCompiler)

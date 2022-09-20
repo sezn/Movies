@@ -1,7 +1,9 @@
 package com.szn.core.repos
 
+import android.content.Context
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
+import androidx.datastore.dataStore
 import com.google.gson.Gson
 import com.szn.core.datastore.DataStoreManager
 import com.szn.core.datastore.DataStoreManager.Companion.ACCOUNT
@@ -14,6 +16,8 @@ import com.szn.core.network.model.ErrorResponse
 import com.szn.core.network.model.MEDIA_TYPE
 import com.szn.core.network.model.session.AuthResult
 import com.szn.core.network.model.session.UserSession
+import com.szn.core.network.model.user.Account
+import com.szn.core.network.model.user.AccountSerializer
 import com.szn.core.network.model.user.FavRequestBody
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -58,7 +62,24 @@ class UserRepo @Inject constructor(private val api: API,
         Log.w(TAG, "checkDataStore token: $token sess: $sessionId acc: $accountId")
         if(token?.isNotEmpty() == true && accountId > 0){
             isLogged.value = true
+
+            checkAccount()
         }
+    }
+
+    private suspend fun checkAccount() {
+        val account = datastore.getValue(ACCOUNT)
+       /* val account = datastore.getVal(ACCOUNT).collect{
+            Log.w(TAG, "Account?: $it")
+        }*/
+        if(account != null && account is Account){
+            Log.w(TAG, "Account: ${account.toString()}")
+        } else
+            Log.w(TAG, "Account?: ${account.toString()} ${account?.javaClass?.simpleName}")
+    }
+
+    suspend fun getUser() = flow {
+        emit(datastore.getValue(ACCOUNT))
     }
 
     private suspend fun newToken(): AuthResult {
@@ -114,6 +135,10 @@ class UserRepo @Inject constructor(private val api: API,
         accountId = account.id
         datastore.add(ACCOUNT_ID, account.id)
         datastore.add(ACCOUNT, account)
+
+        datastore.context.userDataStore.updateData {
+            account
+        }
     }
 
     suspend fun favorite(fav: Boolean, accountId: String, movieId: Int) = flow {
@@ -140,6 +165,12 @@ class UserRepo @Inject constructor(private val api: API,
             emit(ApiResult.Success(lout))
         } else
             emit(ApiResult.Error(fromJson(lout.errorBody()?.string())))
+    }
+
+    companion object {
+        const val USER_PREFS = "UserPrefs"
+//        private val Context.userDataStore: DataStore<Preferences> by preferencesDataStore(name = USER_PREFS)
+        val Context.userDataStore by dataStore(USER_PREFS, AccountSerializer)
     }
 
 }

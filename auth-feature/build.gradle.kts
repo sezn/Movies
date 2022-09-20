@@ -1,6 +1,6 @@
 plugins {
     id(Plugins.androidLibrary)
-    id(Plugins.jetAndroid)
+    id(Plugins.kotlinAndroid)
     id(Plugins.androidHilt)
     id(Plugins.kotlinKapt)
 }
@@ -38,6 +38,7 @@ dependencies {
     implementation(Dependencies.material_compose)
     implementation(Dependencies.material3)
     implementation(Dependencies.compose_extended)
+    implementation(Dependencies.datastore)
 
     implementation(Dependencies.hilt)
     implementation(Dependencies.hiltCompose)

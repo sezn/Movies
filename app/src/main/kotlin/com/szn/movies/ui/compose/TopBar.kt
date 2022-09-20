@@ -72,7 +72,8 @@ fun TopBar(
                 // Just show it on Home for the moment
                 if (showLogout && userViewModel.isLogged.value){
                     IconButton(onClick = {
-                        openDialog.value = true
+//                        openDialog.value = true
+                        navController.navigate(NavRoutes.Account.route)
                     }) {
                         Icon(
                             painterResource(id = R.drawable.ic_power_settings),

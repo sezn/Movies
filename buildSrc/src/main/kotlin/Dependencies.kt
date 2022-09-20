@@ -43,7 +43,11 @@ object Dependencies {
     const val compose_paging = "androidx.paging:paging-compose:1.0.0-alpha16"
     const val compose_constraint = "androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha03"
 
-    const val datastore = "androidx.datastore:datastore-preferences:1.0.0"
+    const val datastore = "androidx.datastore:datastore:1.0.0"
+    const val datastore_preferences = "androidx.datastore:datastore-preferences:1.0.0"
+
+    const val kotlin_collections_immutable = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5"
+    const val kotlin_serialization_json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
 
     const val test_junit = "junit:junit:4.13.2"
     const val test_junit_ext = "androidx.test.ext:junit:1.1.3"

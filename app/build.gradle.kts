@@ -1,6 +1,5 @@
 plugins {
     id(Plugins.androidApplication)
-    id(Plugins.jetAndroid)
     id(Plugins.kotlinAndroid)
     id(Plugins.kotlinKapt)
     id(Plugins.safeArgs)
@@ -68,6 +67,7 @@ dependencies {
     // Helpers for Compose (TODO: take care!)
     implementation(Dependencies.appcompanist_navigation)
     implementation(Dependencies.appcompanist_pager)
+    implementation(Dependencies.datastore)
 
     implementation(platform(Dependencies.firebase_bom))
     implementation(Dependencies.firebase_analytics)
