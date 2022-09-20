@@ -69,11 +69,8 @@ class UserRepo @Inject constructor(private val api: API,
 
     private suspend fun checkAccount() {
         val account = datastore.getValue(ACCOUNT)
-       /* val account = datastore.getVal(ACCOUNT).collect{
-            Log.w(TAG, "Account?: $it")
-        }*/
         if(account != null && account is Account){
-            Log.w(TAG, "Account: ${account.toString()}")
+            Log.w(TAG, "Account: $account")
         } else
             Log.w(TAG, "Account?: ${account.toString()} ${account?.javaClass?.simpleName}")
     }
@@ -169,7 +166,6 @@ class UserRepo @Inject constructor(private val api: API,
 
     companion object {
         const val USER_PREFS = "UserPrefs"
-//        private val Context.userDataStore: DataStore<Preferences> by preferencesDataStore(name = USER_PREFS)
         val Context.userDataStore by dataStore(USER_PREFS, AccountSerializer)
     }
 
