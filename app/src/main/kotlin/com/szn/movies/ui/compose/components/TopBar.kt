@@ -1,4 +1,4 @@
-package com.szn.movies.ui.compose
+package com.szn.movies.ui.compose.components
 
 import android.util.Log
 import android.widget.Toast

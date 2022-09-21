@@ -20,6 +20,7 @@ import com.szn.movie.auth.ui.LoginScreen
 import com.szn.movies.R
 import com.szn.movies.account.ui.AccountView
 import com.szn.movies.domain.model.Video
+import com.szn.movies.ui.compose.components.TopBar
 import com.szn.movies.ui.compose.detail.VideoView
 import com.szn.movies.ui.compose.home.HomeView
 import com.szn.movies.ui.navigation.NavRoutes
