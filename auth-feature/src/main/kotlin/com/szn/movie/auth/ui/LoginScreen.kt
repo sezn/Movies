@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -36,8 +37,6 @@ import androidx.navigation.compose.rememberNavController
 import com.szn.movie.auth.R
 import com.szn.movie.auth.ui.dialogs.ErrorDialog
 import com.szn.movie.auth.viewmodel.UserViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -80,17 +79,17 @@ fun LoginScreen(navController: NavHostController) {
 
         Spacer( Modifier.height(24.dp))
 
-    //        pseudo
+//        pseudo
         Text(text = stringResource(id = R.string.nickname))
         RoundedCornersTextField(
-            holder = "Gégé",
+            holder = stringResource(id = R.string.friendly_nickname),
             onValueChange = { pseudo = it },
             focusRequester = focusRequester
         )
 
         Spacer( Modifier.height(8.dp))
 
-    //        Pass
+//        Pass
         Text(text = stringResource(id = R.string.pass))
         RoundedCornersTextField(
             holder = stringResource(id = R.string.pass),
@@ -111,13 +110,18 @@ fun LoginScreen(navController: NavHostController) {
 
         Spacer( Modifier.height(48.dp))
 
+//       Button
         Button(onClick = {
             Log.w("Login", "onButtonClick $login $pseudo")
-            CoroutineScope(Dispatchers.Main).launch {
+            scope.launch {
                 userViewModel.login(pass, pseudo)
             }
+        },
+            modifier = Modifier
+                .focusRequester(focusRequester)
+                .border(0.75.dp, MaterialTheme.colors.onBackground, RoundedCornerShape(4.dp))
 
-        }) {
+        ) {
             Text(text = stringResource(id = R.string.account_login),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.h3,
@@ -129,7 +133,6 @@ fun LoginScreen(navController: NavHostController) {
 
     if(openDialog.value)
         ErrorDialog(openDialog, errorMessage){}
-
 }
 
 @Composable
@@ -169,7 +172,7 @@ fun RoundedCornersTextField(
 //             textColor = Color.White,
 //             placeholderColor = Color.White,
             cursorColor = Color.White,
-            focusedBorderColor = Color.Black, // TODO: DarkMode
+//            focusedBorderColor = Color.Black, // TODO: DarkMode
         ),
         placeholder = {
             Text(text = holder)
@@ -179,7 +182,9 @@ fun RoundedCornersTextField(
 
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
         keyboardActions = KeyboardActions(
-            onNext = { focusRequester.requestFocus() },
+            onNext = {
+                focusRequester.requestFocus()
+            },
         )
     )
 }

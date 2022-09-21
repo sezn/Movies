@@ -13,4 +13,5 @@
     <string name="logout_confirm">Etes vous sûr de vouloir vous déconnecter?</string>
     <string name="ok">OK</string>
     <string name="nok">No</string>
+    <string name="friendly_nickname">Gégé</string>
 </resources>

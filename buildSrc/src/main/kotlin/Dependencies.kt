@@ -39,6 +39,7 @@ object Dependencies {
     const val compose_extended = "androidx.compose.material:material-icons-extended:${Versions.COMPOSE}"
     const val appcompanist_navigation = "com.google.accompanist:accompanist-navigation-animation:${Versions.APP_COMPANIST}"
     const val appcompanist_pager = "com.google.accompanist:accompanist-pager:${Versions.APP_COMPANIST}"
+    const val compose_tracing = "androidx.compose.runtime:runtime-tracing:1.0.0-alpha01"
 
     const val compose_paging = "androidx.paging:paging-compose:1.0.0-alpha16"
     const val compose_constraint = "androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha03"
