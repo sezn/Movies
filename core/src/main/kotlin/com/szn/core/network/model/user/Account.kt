@@ -1,5 +1,6 @@
 package com.szn.core.network.model.user
 
+import com.szn.core.BuildConfig
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -13,4 +14,8 @@ data class Account(
     val username: String?
 ) {
     constructor() : this(null, 0, false, null, null, null, null)
+
+    fun getGravatar(): String {
+        return BuildConfig.GRAVATAR_URL + avatar?.gravatar
+    }
 }
