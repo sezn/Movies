@@ -30,7 +30,9 @@ data class Video(
     }
 
     fun getBackImage(): String? {
-        return BuildConfig.IMAGE_BASE + backdrop_path
+        return if(!backdrop_path.isNullOrEmpty())
+            BuildConfig.IMAGE_BASE + backdrop_path
+        else getImage()
     }
 
     fun getGenders(): String {

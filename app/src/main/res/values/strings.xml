@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MoviesDb</string>
+    <string name="title_account_feature">Account</string>
 </resources>

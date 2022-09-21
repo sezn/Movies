@@ -1,6 +1,5 @@
 plugins {
     id(Plugins.androidApplication)
-    id(Plugins.jetAndroid)
     id(Plugins.kotlinAndroid)
     id(Plugins.kotlinKapt)
     id(Plugins.safeArgs)
@@ -39,13 +38,13 @@ android {
     buildFeatures {
         compose = true
     }
-
 }
 
 dependencies {
     implementation(project(":domain"))
-    implementation(project(":core")) // TODO: see if can remove this dep?
+    implementation(project(":core"))
     implementation(project(":auth-feature"))
+    implementation(project(":account-feature"))
     implementation(Dependencies.android_core)
     implementation(Dependencies.activity_compose)
     implementation(Dependencies.material)
@@ -68,6 +67,7 @@ dependencies {
     // Helpers for Compose (TODO: take care!)
     implementation(Dependencies.appcompanist_navigation)
     implementation(Dependencies.appcompanist_pager)
+    implementation(Dependencies.datastore)
 
     implementation(platform(Dependencies.firebase_bom))
     implementation(Dependencies.firebase_analytics)
