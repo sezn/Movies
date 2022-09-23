@@ -23,6 +23,7 @@ import com.szn.movies.domain.model.Video
 import com.szn.movies.ui.compose.components.TopBar
 import com.szn.movies.ui.compose.detail.VideoView
 import com.szn.movies.ui.compose.home.HomeView
+import com.szn.movies.ui.navigation.BottomNavigationBar
 import com.szn.movies.ui.navigation.NavRoutes
 import com.szn.movies.ui.theme.AppTheme
 
@@ -35,14 +36,18 @@ fun AppSkeleton() {
     val mainTitle = stringResource(id = R.string.app_name)
     var title = remember { mutableStateOf(mainTitle) }
     val showTopBar = remember { mutableStateOf(false) }
+    val showBottomBar = remember { mutableStateOf(false) }
     val showLogout = remember { mutableStateOf(false) }
+
+    val homeScreens = mutableListOf(NavRoutes.Home.route, NavRoutes.Account.route)//, NavRoutes.Account.route)
+    val screensWithoutTop = mutableListOf(NavRoutes.Splash.route, NavRoutes.Login.route)//, NavRoutes.Account.route)
+    val screensWithoutBottom = mutableListOf(NavRoutes.Splash.route, NavRoutes.Login.route)
+
     navController.addOnDestinationChangedListener { controller, destination, _ ->
-        setCanPop(controller.previousBackStackEntry != null && destination.route != NavRoutes.Home.route)
-
-        if(destination.route != NavRoutes.Splash.route)
-            showTopBar.value = true
-
-        showLogout.value = destination.route == NavRoutes.Home.route
+    setCanPop(controller.previousBackStackEntry != null && destination.route !in homeScreens)
+        showTopBar.value = destination.route !in screensWithoutTop
+        showLogout.value = showTopBar.value
+        showBottomBar.value = destination.route !in screensWithoutBottom
     }
     Log.w(TAG, "compose ${navController.currentDestination?.route} pop $canPop")
 
@@ -56,6 +61,10 @@ fun AppSkeleton() {
             contentColor = MaterialTheme.colors.onBackground,
             content = { padding ->
                 NavigationHost(navController = navController, modifier = Modifier.padding(padding))
+            },
+            bottomBar = {
+                if(showBottomBar.value)
+                    BottomNavigationBar(navController = navController)
             }
         )
     }
