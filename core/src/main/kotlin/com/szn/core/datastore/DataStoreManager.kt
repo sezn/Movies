@@ -86,5 +86,6 @@ class DataStoreManager(val context: Context) {
         const val SESS_ID = "token"
         const val LAST_UPDATE = "LastUpdate"
         const val ACCOUNT_ID = "account_id"
+        const val ACCOUNT = "account"
     }
 }

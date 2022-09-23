@@ -1,4 +1,4 @@
-package com.szn.movies.ui.compose
+package com.szn.movies.ui.compose.components
 
 import android.util.Log
 import android.widget.Toast
@@ -73,6 +73,7 @@ fun TopBar(
                 if (showLogout && userViewModel.isLogged.value){
                     IconButton(onClick = {
                         openDialog.value = true
+//                        navController.navigate(NavRoutes.Account.route)
                     }) {
                         Icon(
                             painterResource(id = R.drawable.ic_power_settings),

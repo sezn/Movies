@@ -2,11 +2,14 @@ package com.szn.movies.ui.compose.home
 
 import android.content.res.Configuration
 import android.util.Log
+import androidx.compose.foundation.gestures.ScrollableDefaults
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,9 +29,14 @@ fun HeaderView(playlist: Playlist, navController: NavHostController,
 ) {
     val videos = moviesViewModel.trendingMovies.collectAsLazyPagingItems()
 
-    Column (Modifier.height(200.dp)){
+    Column (Modifier.height(200.dp).fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ){
 
-        LazyRow(horizontalArrangement = Arrangement.spacedBy(24.dp)) {
+        LazyRow(horizontalArrangement = Arrangement.spacedBy(24.dp),
+            modifier = Modifier.fillMaxWidth(),
+            flingBehavior = ScrollableDefaults.flingBehavior()
+            ) {
             itemsIndexed(videos) { index, item ->
                 item?.let {
                     HeaderVideoCard(movie = it) {

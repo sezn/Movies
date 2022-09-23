@@ -5,7 +5,9 @@ import android.graphics.drawable.Drawable
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -30,8 +32,8 @@ fun HeaderVideoCard(movie: Video, onClick: (Video) -> Unit){
 
     Card(
         modifier = Modifier
-            .height(200.dp)
-            .width(320.dp)
+//            .height(200.dp)
+            .width(400.dp)
             .clickable { onClick.invoke(movie) },
         elevation = 10.dp
     ) {

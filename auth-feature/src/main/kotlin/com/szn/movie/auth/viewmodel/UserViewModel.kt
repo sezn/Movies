@@ -3,11 +3,14 @@ package com.szn.movie.auth.viewmodel
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.szn.core.network.ApiStatus
 import com.szn.core.network.model.ErrorResponse
 import com.szn.core.repos.UserRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,7 +23,10 @@ class UserViewModel @Inject constructor(private val userRepository: UserRepo): V
     val errorMessage = mutableStateOf("")
 
     init {
-        Log.w(TAG, "init ${isLogged.value}")
+        viewModelScope.launch {
+            delay(1000)
+            Log.w(TAG, "init ${isLogged.value}")
+        }
     }
 
     suspend fun login(/*login: String, */pass: String, pseudo: String) {
@@ -72,5 +78,6 @@ class UserViewModel @Inject constructor(private val userRepository: UserRepo): V
     }
 
     suspend fun logout() = userRepository.logout()
+    suspend fun getUser() = userRepository.getUser()
 
 }

@@ -3,11 +3,9 @@ package com.szn.movies.ui.compose.common
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.util.Log
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -27,17 +25,13 @@ fun VideoCard(movie: Video, onClick: (Video) -> Unit){
     val TAG = "VideoCard"
 
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(240.dp)
-            .clickable { onClick.invoke(movie) },
+        modifier = Modifier.clickable { onClick.invoke(movie) },
         elevation = 10.dp
     ) {
-        Column(modifier = Modifier.background(MaterialTheme.colors.background)) {
             GlideImage(imageModel = movie.getImage(),
                 contentDescription = movie.title,
                 previewPlaceholder = R.drawable.minions,
-                contentScale = ContentScale.Fit,
+                contentScale = ContentScale.FillBounds,
                 requestListener = object: RequestListener<Drawable> {
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                         Log.e(TAG, "onLoadFailed ${e?.localizedMessage}  ${movie.title} ${movie.getImage()}  ${movie.poster_path} ")
@@ -49,10 +43,7 @@ fun VideoCard(movie: Video, onClick: (Video) -> Unit){
                     }
                 } ,
                 modifier = Modifier.fillMaxSize()
-                    .size(135.dp))
-
-
-        }
+            )
     }
 }
 
