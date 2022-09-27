@@ -57,3 +57,10 @@ User authentication is controlled with a session_id query parameter. You can gen
 Creation:
 Automatically or using API this is not possible.
 Each of them will have to create their own account here on the website.
+
+
+# Notes:
+
+Set two url for push
+    git remote set-url --add --push origin git@github.com:sezn/Movies.git
+    git remote set-url --add --push origin git@9xxxx.server.cloud:sezn/moviesdb.git
