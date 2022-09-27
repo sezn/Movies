@@ -90,6 +90,10 @@ fun getApiKey(): String {
         }
     } else {
         // Defined api_key in Gitlab variables
+        val key = System.getProperty("api_key")
+        if(key != null) return key
+        val k = "${System.getenv()["api_key"]}"
+        if(k != null) return k
         return System.getenv("api_key")
     }
 
