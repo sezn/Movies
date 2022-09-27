@@ -31,7 +31,7 @@ pipeline {
 
     post {
          always{
-              archiveArtifaOuleyects artifacts: '**/*-debug.apk',
+              archiveArtifacts artifacts: '**/*-debug.apk',
               onlyIfSuccessful: true
          }
     }
