@@ -17,11 +17,11 @@ pipeline {
                 sh './gradlew test'
             }
         }
-        stage('UI Test') {
+      /*   stage('UI Test') {
             steps {
                 sh './gradlew connectedAndroidTest'
             }
-        }
+        } */
         stage('Assemble Apk') {
             steps {
                 sh './gradlew assembleDebug'
