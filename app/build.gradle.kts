@@ -38,13 +38,14 @@ android {
     buildFeatures {
         compose = true
     }
+    namespace = "com.szn.movies"
 }
 
 dependencies {
     implementation(project(":domain"))
     implementation(project(":core"))
-    implementation(project(":auth-feature"))
-    implementation(project(":account-feature"))
+    implementation(project(":features:auth-feature"))
+    implementation(project(":features:account-feature"))
     implementation(Dependencies.android_core)
     implementation(Dependencies.activity_compose)
     implementation(Dependencies.material)

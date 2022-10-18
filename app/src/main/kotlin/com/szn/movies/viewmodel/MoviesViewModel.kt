@@ -48,7 +48,8 @@ class MoviesViewModel @Inject constructor(private val moviesRepo: MoviesRepo): V
         movieState.emit(State.LOADING)
         val mv = moviesRepo.getMovie(id)
         val video = VideoMapper().map(mv)
-        movieState.emit(State.SUCCESS)
+//        movieState.emit(State.SUCCESS)
+        movieState.value = State.SUCCESS
         return video
     }
 

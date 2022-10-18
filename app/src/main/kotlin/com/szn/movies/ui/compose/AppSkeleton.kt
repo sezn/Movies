@@ -44,7 +44,7 @@ fun AppSkeleton() {
     val screensWithoutBottom = mutableListOf(NavRoutes.Splash.route, NavRoutes.Login.route)
 
     navController.addOnDestinationChangedListener { controller, destination, _ ->
-    setCanPop(controller.previousBackStackEntry != null && destination.route !in homeScreens)
+        setCanPop(controller.previousBackStackEntry != null && destination.route !in homeScreens)
         showTopBar.value = destination.route !in screensWithoutTop
         showLogout.value = showTopBar.value
         showBottomBar.value = destination.route !in screensWithoutBottom
