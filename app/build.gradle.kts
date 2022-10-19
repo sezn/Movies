@@ -1,7 +1,5 @@
 plugins {
-    id(Plugins.androidApplication)
-    id(Plugins.kotlinAndroid)
-    id(Plugins.kotlinKapt)
+    id("android.application.compose")
     id(Plugins.safeArgs)
     id(Plugins.androidHilt)
 }
@@ -16,28 +14,9 @@ android {
         versionCode = 1
         versionName = "1.0"
         base.archivesName.set("Movies-${android.defaultConfig.versionName}(${android.defaultConfig.versionCode})")
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = Versions.COMPOSE_COMPILER
-    }
-    buildFeatures {
-        compose = true
-    }
     namespace = "com.szn.movies"
 }
 
