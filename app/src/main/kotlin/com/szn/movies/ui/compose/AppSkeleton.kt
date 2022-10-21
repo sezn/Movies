@@ -15,7 +15,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.szn.core.network.utils.Constants
 import com.szn.movie.auth.ui.LoginScreen
 import com.szn.movies.R
 import com.szn.movies.account.ui.AccountView
@@ -53,7 +52,7 @@ fun AppSkeleton() {
 
     AppTheme {
         Scaffold(
-            modifier = Modifier.testTag(Constants.APP),
+            modifier = Modifier.testTag("MoviesApp"),
             topBar = {
                 if(showTopBar.value)
                     TopBar(navController, scope, canPop, showLogout.value, title)

@@ -41,6 +41,8 @@ android {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":core:datastore"))
+    implementation(project(":core:network"))
+    implementation(project(":core:common"))
     implementation(Dependencies.android_core)
     implementation("androidx.paging:paging-common-ktx:3.1.1")
 

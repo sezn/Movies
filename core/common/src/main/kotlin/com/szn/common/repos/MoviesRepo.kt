@@ -1,36 +1,25 @@
-package com.szn.core.repos
+package com.szn.common.repos
 
-import android.util.Log
-import androidx.paging.ExperimentalPagingApi
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import com.szn.core.Constants
-import com.szn.core.datasource.MoviesMediator
-import com.szn.core.db.AppDatabase
-import com.szn.core.mappers.VideoMapper
-import com.szn.core.network.API
-import com.szn.core.network.model.MEDIA_TYPE
-import com.szn.core.network.model.Movie
-import com.szn.core.network.model.TIME_TYPE
+import com.szn.common.mappers.VideoMapper
 import com.szn.datastore.DataStoreManager
 import com.szn.movies.domain.MoviesRepository
 import com.szn.movies.domain.model.Playlist
 import com.szn.movies.domain.model.Video
+import com.szn.network.API
+import com.szn.network.model.MEDIA_TYPE
+import com.szn.network.model.Movie
+import com.szn.network.model.TIME_TYPE
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MoviesRepo @Inject constructor(private val api: API,
-                                     private val database: AppDatabase,
-                                     private val datastore: DataStoreManager): MoviesRepository {
+class MoviesRepo  @Inject constructor(private val api: API,
+//                                      private val database: AppDatabase,
+                                      private val datastore: DataStoreManager
+): MoviesRepository {
 
-    val TAG = MoviesRepo::class.java.simpleName
-
-    init {
-        Log.w(TAG, "init")
-    }
 
     override suspend fun getTrendings(page: Int): Playlist {
         val resp = api.getTrendings(MEDIA_TYPE.movie.name, TIME_TYPE.day.name, page)
@@ -86,10 +75,12 @@ class MoviesRepo @Inject constructor(private val api: API,
         emit(videos)
     }
 
-    suspend fun getMovie(id: Int) : Movie{
+    suspend fun getMovie(id: Int) : Movie {
         return api.getMovie(id)
     }
 
+
+/*
     @OptIn(ExperimentalPagingApi::class)
     val pagedFlow = Pager(
         PagingConfig(pageSize = 20),
@@ -112,5 +103,5 @@ class MoviesRepo @Inject constructor(private val api: API,
         remoteMediator = MoviesMediator(api, database, datastore, Constants.UPCOMMINGS)
     ) {
         database.movieDao().pagingTopRatedSource()
-    }.flow
+    }.flow*/
 }

@@ -3,16 +3,12 @@ package com.szn.movies
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.szn.core.network.utils.Constants
 import com.szn.movies.ui.MainActivity
-
-import org.junit.Test
-import org.junit.runner.RunWith
-
 import org.junit.Assert.*
 import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -30,7 +26,7 @@ class HomeInstrumentedTest {
      */
     @Test
     fun app_launches() {
-        composeTestRule.onNodeWithTag(Constants.APP).assertIsDisplayed()
+        composeTestRule.onNodeWithTag("MoviesApp").assertIsDisplayed()
     }
 
 }

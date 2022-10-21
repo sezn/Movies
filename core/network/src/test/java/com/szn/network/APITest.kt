@@ -1,8 +1,7 @@
-package com.szn.core
+package com.szn.network
 
-import com.szn.core.network.API
-import com.szn.core.network.model.MEDIA_TYPE
-import com.szn.core.network.model.TIME_TYPE
+import com.szn.network.model.MEDIA_TYPE
+import com.szn.network.model.TIME_TYPE
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import org.junit.Before
