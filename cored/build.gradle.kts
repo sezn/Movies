@@ -2,9 +2,9 @@ plugins {
     id(Plugins.androidLibrary)
     id(Plugins.kotlinAndroid)
     id(Plugins.kotlinSerialization)
-    id(Plugins.androidHilt)
     id(Plugins.kotlinParcelize)
     id(Plugins.kotlinKapt)
+    id("android.hilt")
 }
 
 android {
@@ -39,38 +39,25 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
     implementation(project(":core:datastore"))
     implementation(project(":core:network"))
     implementation(project(":core:common"))
     implementation(Dependencies.android_core)
-    implementation("androidx.paging:paging-common-ktx:3.1.1")
 
     // Hilt for DI
-    implementation(Dependencies.hilt)
-    kapt(Dependencies.hiltCompiler)
-    kapt(Dependencies.hiltAndroidXCompiler)
+//    implementation(Dependencies.hilt)
+//    kapt(Dependencies.hiltCompiler)
+//    kapt(Dependencies.hiltAndroidXCompiler)
 
-    implementation(Dependencies.retrofit)
-    implementation(Dependencies.okhttp_interceptor)
+    implementation(libs.retrofit.core)
+    implementation(libs.okhttp.logging)
     implementation(Dependencies.gson)
-
-    implementation(Dependencies.room_runtime)
-    implementation(Dependencies.room_ktx)
-    implementation(Dependencies.room_paging)
-    kapt(Dependencies.room_compiler)
-    testImplementation(Dependencies.room_testing)
-    implementation(Dependencies.datastore)
 
     implementation(Dependencies.datastore)
     implementation(Dependencies.datastore_preferences)
     implementation(Dependencies.compose_runtime)
     implementation(Dependencies.kotlin_collections_immutable)
     implementation(Dependencies.kotlin_serialization_json)
-
-    testImplementation(Dependencies.test_junit)
-    androidTestImplementation(Dependencies.test_junit_ext)
-    androidTestImplementation(Dependencies.test_expresso)
 }
 
 

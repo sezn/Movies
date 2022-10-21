@@ -10,12 +10,12 @@ android {
 dependencies {
 
     implementation(project(":cored"))
-    implementation(Dependencies.material_compose)
-    implementation(Dependencies.material3)
-    implementation(Dependencies.compose_extended)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.iconsExtended)
 
-    debugImplementation(Dependencies.compose_tooling)
-    implementation(Dependencies.tooling_preview)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.compose.ui.tooling.preview)
 
     debugImplementation("androidx.customview:customview:1.2.0-alpha01")
     debugImplementation("androidx.customview:customview-poolingcontainer:1.0.0-alpha01")

@@ -5,21 +5,19 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.datastore.dataStore
 import com.google.gson.Gson
-
-import com.szn.core.db.AppDatabase
 import com.szn.core.extensions.toRequestBody
 import com.szn.core.network.API
 import com.szn.core.network.ApiResult
 import com.szn.core.network.model.ErrorResponse
-import com.szn.core.network.model.MEDIA_TYPE
 import com.szn.core.network.model.session.AuthResult
 import com.szn.core.network.model.session.UserSession
 import com.szn.core.network.model.user.Account
 import com.szn.core.network.model.user.AccountSerializer
 import com.szn.core.network.model.user.FavRequestBody
 import com.szn.datastore.DataStoreManager
-import com.szn.datastore.DataStoreManager.Companion.ACCOUNT_ID
 import com.szn.datastore.DataStoreManager.Companion.ACCOUNT
+import com.szn.datastore.DataStoreManager.Companion.ACCOUNT_ID
+import com.szn.network.model.MEDIA_TYPE
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
@@ -29,7 +27,7 @@ import javax.inject.Singleton
 
 @Singleton
 class UserRepo @Inject constructor(private val api: API,
-                                  private val database: AppDatabase,
+
                                   private val datastore: DataStoreManager
 ) {
 

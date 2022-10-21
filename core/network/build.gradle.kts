@@ -21,8 +21,8 @@ android {
 
 dependencies {
     implementation(Dependencies.kotlin_serialization_json)
-    implementation(Dependencies.retrofit)
-    implementation(Dependencies.okhttp_interceptor)
+    implementation(libs.retrofit.core)
+    implementation(libs.okhttp.logging)
     implementation(Dependencies.gson)
 
     testImplementation("junit:junit:4.13.2")

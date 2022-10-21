@@ -1,41 +1,14 @@
 package com.szn.core.network
 
-import com.szn.core.network.model.Movie
-import com.szn.core.network.model.Movies
 import com.szn.core.network.model.session.AuthResult
 import com.szn.core.network.model.user.Account
+import com.szn.network.model.Movie
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 
 interface API {
 
-    @GET("4/discover/movie")
-    suspend fun getMovies(@Query("sort_by") sort: String?,
-                          @Query("language") lang: String? = "fr",
-                          @Query("page") page: Int? = 1): Movies
-
-    /**
-     * This is a release type query that looks for all movies
-     * that have a release type of 2 or 3 within the specified date range.
-     */
-    @GET("3/movie/upcoming")
-    suspend fun getUpcomingMovies(@Query("language") lang: String? = "fr",
-                          @Query("page") page: Int? = 1): Movies
-
-    /**
-     * Note: not working on 4..
-     * @param media_type: all, movie, tv, person
-     * @param time_window: day, week
-     */
-    @GET("3/trending/{media_type}/{time_window}")
-    suspend fun getTrendings(@Path("media_type") type: String,
-                             @Path("time_window") time: String,
-                             @Query("page") page: Int? = 1): Movies
-
-
-    @GET("3/movie/{movie_id}")
-    suspend fun getMovie(@Path("movie_id")id: Int): Movie
 //    Auth
 
     @GET("3/authentication/token/new")
@@ -69,17 +42,17 @@ interface API {
 
     @DELETE("3/authentication/session")
     suspend fun logout(@Query("session_id") sessId: String): Response<AuthResult>
-
+/*
     @GET("3/account/{account_id}/favorite/movies")
     suspend fun getFavorites(@Path("account_id") accountId: String,
                              @Query("session_id") sessId: String,
                              @Query("language") lang: String? = "fr",
-                             @Query("page") page: Int? = 1): Movies
+                             @Query("page") page: Int? = 1): Movies*/
 
     @POST("3/account/{account_id}/favorite")
     suspend fun favorite(
         @Path("account_id") accountId: String,
         @Query("session_id") sessId: String,
         @Body params: RequestBody
-    ): Response<Movies>
+    ): Response<List<Movie>>
 }

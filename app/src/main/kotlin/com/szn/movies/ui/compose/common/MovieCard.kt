@@ -16,17 +16,16 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.skydoves.landscapist.glide.GlideImage
-import com.szn.core.mappers.VideoMapper
-import com.szn.core.network.model.Movie
-import com.szn.movies.R
-import com.szn.movies.domain.BuildConfig
+import com.szn.common.mappers.VideoMapper
 import com.szn.common.model.Video
+import com.szn.movies.R
+import com.szn.network.model.Movie
 
 @Composable
 fun VideoCard(movie: Movie, onClick: (Video) -> Unit){
     val TAG = "VideoCard"
 
-    val img = BuildConfig.IMAGE_BASE + movie.poster_path
+    val img = movie.poster_path
     Card(
         modifier = Modifier
             .fillMaxWidth()

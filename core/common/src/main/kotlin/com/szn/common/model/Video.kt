@@ -1,7 +1,6 @@
 package com.szn.common.model
 
 import android.os.Parcelable
-import com.szn.movies.domain.BuildConfig
 import com.szn.network.model.Movie
 import kotlinx.parcelize.Parcelize
 
@@ -27,12 +26,14 @@ data class Video(
     constructor(id: Int, title: String, genders: List<String>, desc: String?, poster_path: String?, back_path: String?, released: String?, length: Int?): this(id, title, false, back_path, genders, "FR", null, desc, null, poster_path, released, null, null, 0, length)
 
     fun getImage(): String? {
-        return BuildConfig.IMAGE_BASE + poster_path
+//        return /*BuildConfig.IMAGE_BASE +*/ poster_path
+        return "https://image.tmdb.org/t/p/w500/$poster_path"
     }
 
     fun getBackImage(): String? {
         return if(!backdrop_path.isNullOrEmpty())
-            BuildConfig.IMAGE_BASE + backdrop_path
+//            /*BuildConfig.IMAGE_BASE +*/ backdrop_path
+            return "https://image.tmdb.org/t/p/w500/$backdrop_path"
         else getImage()
     }
 

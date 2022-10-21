@@ -15,11 +15,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.szn.core.network.model.Movie
 import com.szn.common.model.Playlist
 import com.szn.common.model.fakeMovie
 import com.szn.movies.ui.compose.common.VideoCard
 import com.szn.movies.ui.theme.AppTheme
+import com.szn.network.model.Movie
 
 @Composable
 fun PlaylistView(playlist: Playlist, navController: NavHostController) {
