@@ -1,27 +1,11 @@
 plugins {
-    id(Plugins.androidLibrary)
-    id(Plugins.kotlinAndroid)
+    id("android.library")
     id(Plugins.kotlinParcelize)
 }
 
 android {
-    compileSdk = Versions.ANDROID
-
     defaultConfig {
-        minSdk = 21
-        targetSdk = Versions.ANDROID
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
         buildConfigField("String", "IMAGE_BASE", "\"https://image.tmdb.org/t/p/w500\"")
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
     }
     namespace = "com.szn.movies.domain"
 }

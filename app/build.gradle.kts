@@ -1,7 +1,7 @@
 plugins {
     id("android.application.compose")
-    id(Plugins.safeArgs)
-    id(Plugins.androidHilt)
+//    id(Plugins.safeArgs)
+    id("android.hilt")
 }
 
 android {
@@ -22,7 +22,7 @@ android {
 
 dependencies {
     implementation(project(":domain"))
-    implementation(project(":core"))
+    implementation(project(":cored"))
     implementation(project(":features:auth-feature"))
     implementation(project(":features:account-feature"))
     implementation(Dependencies.android_core)

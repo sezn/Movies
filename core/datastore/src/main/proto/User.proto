@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option java_package = "com.szn.common";
+option java_multiple_files = true;
+
+message User {
+  string first_name = 1;
+  string last_name = 2;
+  string picture = 3;
+  string address = 4;
+  int64 birth_day = 5;
+}
