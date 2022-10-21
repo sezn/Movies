@@ -10,7 +10,7 @@ object Versions {
     const val COMPOSE =  "1.3.0-beta01"
     const val COROUTINES = "1.6.4"
     const val LIFECYCLE = "2.5.1"
-    const val ROOM = "2.4.3"
+    const val ROOM = "2.5.0-alpha03"
     const val RETROFIT = "2.9.0"
     const val HILT = "2.44"
     const val HILT_ANDROID = "2.43.2"

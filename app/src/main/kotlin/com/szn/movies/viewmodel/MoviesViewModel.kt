@@ -4,14 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.szn.common.model.Playlist
+import com.szn.common.model.Video
+import com.szn.common.model.fakeMovie
+import com.szn.common.repos.MoviesRepo
 import com.szn.core.Constants
 import com.szn.core.extensions.flattenToList
-import com.szn.core.mappers.VideoMapper
 import com.szn.core.network.State
-import com.szn.core.repos.MoviesRepo
 import com.szn.movies.datasource.TrendingsDataSource
-import com.szn.movies.domain.model.Playlist
-import com.szn.movies.domain.model.Video
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -47,7 +47,8 @@ class MoviesViewModel @Inject constructor(private val moviesRepo: MoviesRepo): V
     suspend fun getMovie(id: Int): Video {
         movieState.emit(State.LOADING)
         val mv = moviesRepo.getMovie(id)
-        val video = VideoMapper().map(mv)
+        val video = fakeMovie
+//        val video = VideoMapper().map(mv)
 //        movieState.emit(State.SUCCESS)
         movieState.value = State.SUCCESS
         return video

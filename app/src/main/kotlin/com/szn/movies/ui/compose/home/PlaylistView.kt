@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.szn.core.network.model.Movie
-import com.szn.movies.domain.model.Playlist
-import com.szn.movies.domain.model.fakeMovie
+import com.szn.common.model.Playlist
+import com.szn.common.model.fakeMovie
 import com.szn.movies.ui.compose.common.VideoCard
 import com.szn.movies.ui.theme.AppTheme
 

@@ -6,7 +6,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.szn.movies.domain.model.Playlist
+import com.szn.common.model.Playlist
 import com.szn.movies.ui.compose.home.HeaderView
 import com.szn.movies.ui.compose.home.PlaylistView
 

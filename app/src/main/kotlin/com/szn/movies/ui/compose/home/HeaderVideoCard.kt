@@ -21,8 +21,8 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.skydoves.landscapist.glide.GlideImage
 import com.szn.movies.R
-import com.szn.movies.domain.model.Video
-import com.szn.movies.domain.model.fakeMovie
+import com.szn.common.model.Video
+import com.szn.common.model.fakeMovie
 import com.szn.movies.ui.theme.AppTheme
 
 @Composable

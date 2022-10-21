@@ -33,8 +33,8 @@ import com.szn.movies.R
 import com.szn.movies.actions.FAV
 import com.szn.movies.actions.IconItem
 import com.szn.movies.actions.movieActions
-import com.szn.movies.domain.model.Video
-import com.szn.movies.domain.model.fakeMovie
+import com.szn.common.model.Video
+import com.szn.common.model.fakeMovie
 import com.szn.movies.ui.theme.AppTheme
 import com.szn.movies.viewmodel.MoviesViewModel
 import kotlinx.coroutines.launch

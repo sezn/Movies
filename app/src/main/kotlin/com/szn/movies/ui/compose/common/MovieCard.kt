@@ -20,7 +20,7 @@ import com.szn.core.mappers.VideoMapper
 import com.szn.core.network.model.Movie
 import com.szn.movies.R
 import com.szn.movies.domain.BuildConfig
-import com.szn.movies.domain.model.Video
+import com.szn.common.model.Video
 
 @Composable
 fun VideoCard(movie: Movie, onClick: (Video) -> Unit){

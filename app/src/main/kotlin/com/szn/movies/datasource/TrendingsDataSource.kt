@@ -2,8 +2,9 @@ package com.szn.movies.datasource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.szn.core.repos.MoviesRepo
-import com.szn.movies.domain.model.Video
+import com.szn.common.repos.MoviesRepo
+
+import com.szn.common.model.Video
 
 class TrendingsDataSource(private val moviesRepository: MoviesRepo): PagingSource<Int, Video>(){
 

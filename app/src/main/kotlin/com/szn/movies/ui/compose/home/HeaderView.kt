@@ -18,14 +18,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
-import com.szn.movies.domain.model.Playlist
-import com.szn.movies.domain.model.fakeMovie
+import com.szn.common.model.Playlist
+import com.szn.common.model.fakeMovie
 import com.szn.movies.ui.theme.AppTheme
 import com.szn.movies.viewmodel.MoviesViewModel
 
 @Composable
 fun HeaderView(playlist: Playlist, navController: NavHostController,
-                 moviesViewModel: MoviesViewModel = hiltViewModel()
+               moviesViewModel: MoviesViewModel = hiltViewModel()
 ) {
     val videos = moviesViewModel.trendingMovies.collectAsLazyPagingItems()
 

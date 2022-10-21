@@ -1,13 +1,14 @@
 package com.szn.common.repos
 
+import com.szn.common.MoviesRepository
 import com.szn.common.mappers.VideoMapper
+import com.szn.common.model.Playlist
+import com.szn.common.model.Video
+import com.szn.common.model.asModel
+import com.szn.database.AppDatabase
 import com.szn.datastore.DataStoreManager
-import com.szn.movies.domain.MoviesRepository
-import com.szn.movies.domain.model.Playlist
-import com.szn.movies.domain.model.Video
 import com.szn.network.API
 import com.szn.network.model.MEDIA_TYPE
-import com.szn.network.model.Movie
 import com.szn.network.model.TIME_TYPE
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -15,8 +16,8 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MoviesRepo  @Inject constructor(private val api: API,
-//                                      private val database: AppDatabase,
+class MoviesRepo @Inject constructor(private val api: API,
+                                      private val database: AppDatabase,
                                       private val datastore: DataStoreManager
 ): MoviesRepository {
 
@@ -75,12 +76,12 @@ class MoviesRepo  @Inject constructor(private val api: API,
         emit(videos)
     }
 
-    suspend fun getMovie(id: Int) : Movie {
-        return api.getMovie(id)
+    suspend fun getMovie(id: Int): Video {
+        return api.getMovie(id).asModel()
     }
 
-
 /*
+
     @OptIn(ExperimentalPagingApi::class)
     val pagedFlow = Pager(
         PagingConfig(pageSize = 20),

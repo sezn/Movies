@@ -23,6 +23,9 @@ android {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":cored"))
+    implementation(project(":core:common"))
+//    TODO: remove
+    implementation(project(":core:network"))
     implementation(project(":features:auth-feature"))
     implementation(project(":features:account-feature"))
     implementation(Dependencies.android_core)

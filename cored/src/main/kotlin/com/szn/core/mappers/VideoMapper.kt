@@ -1,7 +1,7 @@
 package com.szn.core.mappers
 
 import com.szn.core.network.model.Movie
-import com.szn.movies.domain.model.Video
+import com.szn.common.model.Video
 
 class VideoMapper {
 
