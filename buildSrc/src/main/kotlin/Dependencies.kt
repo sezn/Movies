@@ -6,8 +6,6 @@ object Dependencies {
     const val coroutines ="org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.COROUTINES}"
 
     const val hilt = "com.google.dagger:hilt-android:2:44"
-    const val hiltCompiler = "com.google.dagger:hilt-compiler:2.44"
-    const val hiltAndroidXCompiler = "androidx.hilt:hilt-compiler:1.0.0"
 
     const val gson = "com.squareup.retrofit2:converter-gson:2.9.0"
     const val landscapist = "com.github.skydoves:landscapist-glide:1.5.3"
@@ -25,9 +23,6 @@ object Dependencies {
     const val compose_constraint = "androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha03"
 
     const val datastore = "androidx.datastore:datastore:1.0.0"
-    const val datastore_preferences = "androidx.datastore:datastore-preferences:1.0.0"
-
-    const val kotlin_collections_immutable = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5"
     const val kotlin_serialization_json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
 
     const val test_junit = "junit:junit:4.13.2"

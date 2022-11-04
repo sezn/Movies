@@ -35,27 +35,18 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewModelCompose)
     implementation(libs.androidx.hilt.navigation.compose)
 
-    implementation(Dependencies.compose_constraint)
-    implementation(Dependencies.compose_tracing)
-    // Helpers for Compose (TODO: take care!)
-    implementation(Dependencies.appcompanist_navigation)
-    implementation(Dependencies.appcompanist_pager)
-    implementation(Dependencies.datastore)
+    implementation(libs.androidx.constraint.compose)
 
     implementation(platform(Dependencies.firebase_bom))
-    implementation(Dependencies.firebase_analytics)
 
     implementation(Dependencies.landscapist)
 
     // TODO: voir ou le mettre
     // There is paging-common, which is a pure kotlin library that contains PagingSource and RemoteMediator among others.
     // That means that you can use paging-common in a pure kotlin module and in your repositories just fine, there is no android specific code in there
-    implementation(Dependencies.compose_paging)
+    implementation(libs.androidx.compose.paging)
 
-    testImplementation(Dependencies.test_junit)
-    androidTestImplementation(Dependencies.test_junit_ext)
-    androidTestImplementation(Dependencies.test_expresso)
-    androidTestImplementation(Dependencies.test_compose)
+    testImplementation("junit:junit:4.13.2")
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation("androidx.customview:customview-poolingcontainer:1.0.0")
