@@ -1,4 +1,4 @@
-package com.szn.core.extensions
+package com.szn.common.extensions
 
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody

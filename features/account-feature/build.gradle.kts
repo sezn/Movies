@@ -6,6 +6,6 @@ android {
     namespace = "com.szn.movies.account"
 }
 dependencies {
-    implementation(project(":cored"))
+    implementation(project(":core:common"))
 }
 

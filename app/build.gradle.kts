@@ -21,7 +21,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":cored"))
     implementation(project(":core:common"))
 //    TODO: remove
     implementation(project(":core:network"))

@@ -4,14 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.szn.common.Constants
 import com.szn.common.model.Playlist
 import com.szn.common.model.Video
 import com.szn.common.model.fakeMovie
 import com.szn.common.repos.MoviesRepo
-import com.szn.core.Constants
-import com.szn.core.extensions.flattenToList
-import com.szn.core.network.State
+import com.szn.common.extensions.flattenToList
 import com.szn.movies.datasource.TrendingsDataSource
+import com.szn.network.State
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

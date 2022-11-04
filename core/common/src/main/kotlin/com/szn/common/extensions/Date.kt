@@ -1,4 +1,4 @@
-package com.szn.core.extensions
+package com.szn.common.extensions
 
 import java.text.SimpleDateFormat
 import java.util.*

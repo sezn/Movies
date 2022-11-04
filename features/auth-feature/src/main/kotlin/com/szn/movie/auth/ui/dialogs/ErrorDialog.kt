@@ -60,7 +60,7 @@ fun ErrorDialog(openDialog: MutableState<Boolean>,
                 ) {
                     Image(
                         modifier = Modifier.size(96.dp),
-                        painter = painterResource(id = com.szn.core.R.drawable.ic_error),
+                        painter = painterResource(id = com.szn.common.R.drawable.ic_error),
                         contentDescription = "Error",
                         alignment = Alignment.Center
                     )
@@ -87,7 +87,7 @@ fun ErrorDialog(openDialog: MutableState<Boolean>,
                         openDialog.value = false
                     }) {
                     Text(
-                        text = stringResource(id = com.szn.core.R.string.ok),
+                        text = stringResource(id = com.szn.common.R.string.ok),
                         color = Color.White,
                         style = TextStyle(
                             fontSize = 16.sp

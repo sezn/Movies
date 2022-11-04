@@ -19,10 +19,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.szn.core.network.State
 import com.szn.movies.R
 import com.szn.movies.ui.compose.common.PlaylistsView
 import com.szn.movies.viewmodel.MoviesViewModel
+import com.szn.network.State
 import kotlinx.coroutines.launch
 
 @Composable

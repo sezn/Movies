@@ -9,7 +9,7 @@ android {
 
 dependencies {
 
-    implementation(project(":cored"))
+    implementation(project(":core:common"))
     implementation(libs.androidx.compose.material)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.iconsExtended)

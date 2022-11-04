@@ -4,9 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.szn.core.network.ApiStatus
-import com.szn.core.network.model.ErrorResponse
-import com.szn.core.repos.UserRepo
+import com.szn.common.repos.UserRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
@@ -29,9 +27,10 @@ class UserViewModel @Inject constructor(private val userRepository: UserRepo): V
         }
     }
 
+//    TODO: ApiStatus
     suspend fun login(/*login: String, */pass: String, pseudo: String) {
         errorMessage.value = ""
-        userRepository.login(pseudo, pass)
+        /*userRepository.login(pseudo, pass)
             .collect { result ->
                 when(result.status) {
                     ApiStatus.SUCCESS -> {
@@ -53,12 +52,12 @@ class UserViewModel @Inject constructor(private val userRepository: UserRepo): V
                     }
                 }
 
-        }
+        }*/
     }
 
     suspend fun favorite(fav: Boolean, id: Int) = flow {
         Log.w(TAG, "favorite $id sessId: ${userRepository.sessionId}  token: ${userRepository.token}  ${userRepository.accountId}")
-        userRepository.favorite(fav, userRepository.accountId.toString(), id).collect{ result ->
+        /*userRepository.favorite(fav, userRepository.accountId.toString(), id).collect{ result ->
             Log.w(TAG, "favorite.. $result")
             when(result.status) {
                 ApiStatus.SUCCESS -> {
@@ -74,7 +73,8 @@ class UserViewModel @Inject constructor(private val userRepository: UserRepo): V
                 }
                 else -> {}
             }
-        }
+        }*/
+        emit(true)
     }
 
     suspend fun logout() = userRepository.logout()

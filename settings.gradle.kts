@@ -14,7 +14,7 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "MoviesDb"
-include(":app", ":cored")
+include(":app")
 include(":core:datastore")
 include(":core:common")
 include(":core:network")

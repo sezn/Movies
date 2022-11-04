@@ -62,7 +62,7 @@ fun LoginScreen(navController: NavHostController) {
             launchSingleTop = true
         }
 
-    Image(painter = painterResource(id = com.szn.core.R.drawable.background),
+    Image(painter = painterResource(id = com.szn.common.R.drawable.background),
         contentDescription = "BG",
         contentScale = ContentScale.FillBounds,
         modifier = Modifier.fillMaxSize(),

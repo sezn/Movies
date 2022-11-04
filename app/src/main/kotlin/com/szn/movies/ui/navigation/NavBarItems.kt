@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.PlayArrow
-import com.szn.core.R
+import com.szn.common.R
 
 class NavBarItems(context: Context) {
     val BarItems = listOf(

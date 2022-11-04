@@ -29,15 +29,16 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             }
 
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
-
+            val impl = "implementation"
             dependencies {
 //                add("implementation", project(":core:common"))
-                add("implementation", libs.findLibrary("androidx.hilt.navigation.compose").get())
-                add("implementation", libs.findLibrary("androidx.lifecycle.runtimeCompose").get())
-                add("implementation", libs.findLibrary("androidx.lifecycle.viewModelCompose").get())
-                add("implementation", libs.findLibrary("kotlinx.coroutines.android").get())
-                add("implementation", libs.findLibrary("coil.kt").get())
-                add("implementation", libs.findLibrary("coil.kt.compose").get())
+                add(impl, libs.findLibrary("androidx.hilt.navigation.compose").get())
+                add(impl, libs.findLibrary("androidx.lifecycle.runtimeCompose").get())
+                add(impl, libs.findLibrary("androidx.lifecycle.viewModelCompose").get())
+                add(impl, libs.findLibrary("kotlinx.coroutines.android").get())
+                add(impl, libs.findLibrary("coil.kt").get())
+                add(impl, libs.findLibrary("coil.kt.compose").get())
+                add(impl, libs.findLibrary("coil.kt.compose").get())
             }
         }
     }

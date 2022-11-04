@@ -42,7 +42,7 @@ fun VideoCard(movie: Video, onClick: (Video) -> Unit){
                         return true
                     }
                 } ,
-                modifier = Modifier.fillMaxSize()
+//                modifier = Modifier.height(240.dp)
             )
     }
 }
