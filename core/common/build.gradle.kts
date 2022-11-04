@@ -17,8 +17,6 @@ dependencies {
     implementation(libs.androidx.paging)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.room.ktx)
-    implementation(libs.room.ktx)
-
     implementation(Dependencies.gson)
     implementation(libs.androidx.dataStore.core)
     implementation("com.google.protobuf:protobuf-javalite:3.18.0")

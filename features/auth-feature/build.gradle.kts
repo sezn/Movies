@@ -16,7 +16,5 @@ dependencies {
 
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.ui.tooling.preview)
-
-    debugImplementation("androidx.customview:customview:1.2.0-alpha01")
-    debugImplementation("androidx.customview:customview-poolingcontainer:1.0.0-alpha01")
+    debugImplementation(libs.androidx.customview.poolingcontainer)
 }

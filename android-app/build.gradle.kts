@@ -46,9 +46,9 @@ dependencies {
     // That means that you can use paging-common in a pure kotlin module and in your repositories just fine, there is no android specific code in there
     implementation(libs.androidx.compose.paging)
 
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(libs.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.ui.tooling.preview)
-    debugImplementation("androidx.customview:customview-poolingcontainer:1.0.0")
+    debugImplementation(libs.androidx.customview.poolingcontainer)
     debugImplementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.0-alpha02")
 }
