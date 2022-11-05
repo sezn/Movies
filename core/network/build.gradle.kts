@@ -20,9 +20,10 @@ android {
 }
 
 dependencies {
-    implementation(Dependencies.kotlin_serialization_json)
     implementation(libs.retrofit.core)
     implementation(libs.okhttp.logging)
+    implementation(libs.kotlinx.serialization.json)
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
     implementation(Dependencies.gson)
 
     testImplementation("junit:junit:4.13.2")

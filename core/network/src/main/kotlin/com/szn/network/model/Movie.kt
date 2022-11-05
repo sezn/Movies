@@ -1,8 +1,6 @@
 package com.szn.network.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
+@kotlinx.serialization.Serializable
 data class Movie(
     val id: Int,
     val title: String,
@@ -18,8 +16,8 @@ data class Movie(
     val video: Boolean?,
     val vote_average: Double?,
     val vote_count: Int?,
-    val genres: List<Genre>?,
-    val runtime: Int?
+    val genres: List<Genre>? = null,
+    val runtime: Int? = null
 ) {
     fun getGenders(): List<String> {
         val genders = mutableListOf<String>()
@@ -30,11 +28,11 @@ data class Movie(
     }
 }
 
-@Parcelize
+@kotlinx.serialization.Serializable
 data class Genre(
     val id: Int,
     val name: String
-): Parcelable
+)
 
 
 enum class TIME_TYPE{

@@ -41,7 +41,7 @@ Dependencies and versions are in buildSrc module.\buildSrc is the first module c
 ### Network:
     OKhttp, Retrofit
 ### Images:
-    Glide
+    Coil
 
 ### UI:
     Jetpack Compose

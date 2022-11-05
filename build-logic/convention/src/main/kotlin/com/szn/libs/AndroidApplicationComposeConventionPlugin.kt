@@ -18,6 +18,8 @@ import com.android.build.api.dsl.ApplicationExtension
 import com.szn.libs.configureAndroidCompose
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 
 class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
@@ -26,6 +28,11 @@ class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
             pluginManager.apply("com.android.application")
             pluginManager.apply("org.jetbrains.kotlin.android")
             pluginManager.apply("kotlin-kapt")
+
+            val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
+            dependencies {
+                "implementation"(libs.findLibrary("coil.kt.compose").get())
+            }
             val extension = extensions.getByType<ApplicationExtension>()
             configureAndroidCompose(extension)
         }

@@ -38,7 +38,6 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 add(impl, libs.findLibrary("kotlinx.coroutines.android").get())
                 add(impl, libs.findLibrary("coil.kt").get())
                 add(impl, libs.findLibrary("coil.kt.compose").get())
-                add(impl, libs.findLibrary("coil.kt.compose").get())
             }
         }
     }

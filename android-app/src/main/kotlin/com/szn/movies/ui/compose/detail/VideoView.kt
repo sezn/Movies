@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -25,16 +26,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.skydoves.landscapist.glide.GlideImage
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.szn.common.extensions.toYear
+import com.szn.common.model.Video
+import com.szn.common.model.fakeMovie
 import com.szn.movie.auth.ui.dialogs.ErrorDialog
 import com.szn.movie.auth.viewmodel.UserViewModel
 import com.szn.movies.R
 import com.szn.movies.actions.FAV
 import com.szn.movies.actions.IconItem
 import com.szn.movies.actions.movieActions
-import com.szn.common.model.Video
-import com.szn.common.model.fakeMovie
 import com.szn.movies.ui.theme.AppTheme
 import com.szn.movies.viewmodel.MoviesViewModel
 import kotlinx.coroutines.launch
@@ -121,10 +123,9 @@ fun HeaderView(video: Video) {
     ConstraintLayout() {
         val (image, icon) = createRefs()
 
-        GlideImage(imageModel = video.getBackImage(),
+        AsyncImage(model = ImageRequest.Builder(LocalContext.current).data(video.getImage()).build(),
             contentDescription = video.title,
             contentScale = ContentScale.FillWidth,
-            previewPlaceholder = R.drawable.backdrop,
             modifier = Modifier
                 .fillMaxSize()
                 .constrainAs(image) {
@@ -132,8 +133,7 @@ fun HeaderView(video: Video) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     bottom.linkTo(parent.bottom)
-                }
-        )
+                })
 
         Image(painter = painterResource(
             id = R.drawable.ic_play_btn_circle

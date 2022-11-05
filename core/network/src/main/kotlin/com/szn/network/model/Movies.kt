@@ -1,5 +1,6 @@
 package com.szn.network.model
 
+@kotlinx.serialization.Serializable
 data class Movies(
     val page: Int,
     val results: List<Movie>,

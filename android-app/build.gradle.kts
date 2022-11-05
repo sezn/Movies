@@ -34,12 +34,7 @@ dependencies {
     implementation(libs.google.material)
     implementation(libs.androidx.lifecycle.viewModelCompose)
     implementation(libs.androidx.hilt.navigation.compose)
-
     implementation(libs.androidx.constraint.compose)
-
-    implementation(platform(Dependencies.firebase_bom))
-
-    implementation(Dependencies.landscapist)
 
     // TODO: voir ou le mettre
     // There is paging-common, which is a pure kotlin library that contains PagingSource and RemoteMediator among others.

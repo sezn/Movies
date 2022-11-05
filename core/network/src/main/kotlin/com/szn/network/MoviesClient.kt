@@ -47,6 +47,7 @@ class MoviesClient {
     }
 
     private val retrofit: Retrofit by lazy {
+
         Retrofit.Builder()
             .baseUrl(BuildConfig.MOVIES_BASE_URL)
             .client(httpClient)
