@@ -14,12 +14,10 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "MoviesDb"
-include(":android-app")
+include(":androidApp")
 include(":core:datastore")
 include(":core:common")
 include(":core:network")
-
 include(":features:auth-feature")
 include(":features:account-feature")
-
 include(":core:database")

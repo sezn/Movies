@@ -24,7 +24,7 @@ dependencies {
     implementation(libs.okhttp.logging)
     implementation(libs.kotlinx.serialization.json)
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
-    implementation(Dependencies.gson)
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")

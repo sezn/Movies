@@ -123,11 +123,11 @@ fun HeaderView(video: Video) {
     ConstraintLayout() {
         val (image, icon) = createRefs()
 
-        AsyncImage(model = ImageRequest.Builder(LocalContext.current).data(video.getImage()).build(),
+        AsyncImage(model = ImageRequest.Builder(LocalContext.current).data(video.getBackImage()).build(),
             contentDescription = video.title,
-            contentScale = ContentScale.FillWidth,
+            contentScale = ContentScale.Crop,
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .constrainAs(image) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)

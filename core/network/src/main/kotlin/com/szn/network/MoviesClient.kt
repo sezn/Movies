@@ -52,6 +52,7 @@ class MoviesClient {
             .baseUrl(BuildConfig.MOVIES_BASE_URL)
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
+//            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
     }
 

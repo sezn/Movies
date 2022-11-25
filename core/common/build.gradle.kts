@@ -17,7 +17,7 @@ dependencies {
     implementation(libs.androidx.paging)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.room.ktx)
-    implementation(Dependencies.gson)
+    implementation( "com.squareup.retrofit2:converter-gson:2.9.0")
     implementation(libs.androidx.dataStore.core)
     implementation("com.google.protobuf:protobuf-javalite:3.18.0")
 }
