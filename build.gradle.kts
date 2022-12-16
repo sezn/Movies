@@ -11,7 +11,3 @@ plugins {
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.protobuf) apply false
 }
-
-object Versions {
-    val Android = 33
-}

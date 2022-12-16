@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    compileSdk = Versions.ANDROID
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "com.szn.movies"
         minSdk = 21
-        targetSdk = Versions.ANDROID
+        targetSdk = 33
         versionCode = 2
         versionName = "1.1"
         base.archivesName.set("Movies-${android.defaultConfig.versionName}(${android.defaultConfig.versionCode})")
